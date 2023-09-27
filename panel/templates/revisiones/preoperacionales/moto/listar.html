@@ -1,0 +1,171 @@
+{% extends '../../../index_master.html' %}
+{% block title %}
+Lista de revisiones preoperacionales
+{% endblock %}
+{% block content %}
+<div class="right_col" role="main">
+  <h1>Lista de revisiones preoperacionales</h1>
+  <div class="messages">
+    {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+      <li class="{{ message.tags }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </div>
+  <form action="" method="POST" style="float: left">
+    <div style="display: inline-block;">
+      <form action="" method="POST">
+        {% csrf_token %}
+        <input type="text" name="keyword" id="keyword" class="form-control"
+          style="width: 150px; display: inline-block;">
+        <button type="submit" name="search" class="btn btn-success"><i class="fa fa-search"></i></button>
+
+    </div>
+  </form>
+  <button name="agregarprem" class="btn btn-primary" onclick="window.location.href='agregarprem'"
+    style="display: inline-block;"><i class="fa fa-plus"></i> Nueva revisión preoperacional</button>
+  <div class="table-responsive">
+
+    <table class="table ">
+        <tr>
+          <th scope="col">ID</th>
+          {% for u in prems %}
+          <td>{{ u.id_pre }}</td>
+          {% endfor %}
+        </tr>
+
+        <tr>
+          <th scope="col">Placa</th>
+          {% for u in prems %}
+          <td>{{ u.pla_pre_id }}</td>
+          {% endfor %}
+        </tr>
+
+        <tr>
+          <th scope="col">Fecha</th>
+          {% for u in prems %}
+          <td>{{ u.fec_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Nivel de aceite</th>
+          {% for u in prems %}
+          <td>{{ u.niv_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Manillares</th>
+          {% for u in prems %}
+          <td>{{ u.man_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Direccion</th>
+          {% for u in prems %}
+          <td>{{ u.dir_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Guarda barros</th>
+          {% for u in prems %}
+          <td>{{ u.gua_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Chasis</th>
+          {% for u in prems %}
+          <td>{{ u.cha_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Suspensión</th>
+          {% for u in prems %}
+          <td>{{ u.sus_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Frenos</th>
+          {% for u in prems %}
+          <td>{{ u.fre_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Llantas</th>
+          {% for u in prems %}
+          <td>{{ u.lla_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Rines</th>
+          {% for u in prems %}
+          <td>{{ u.rin_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Tren de arrastre</th>
+          {% for u in prems %}
+          <td>{{ u.tre_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Exosto</th>
+          {% for u in prems %}
+          <td>{{ u.exo_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Retrovisores</th>
+          {% for u in prems %}
+          <td>{{ u.ret_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Mantenimiento mecánico</th>
+          {% for u in prems %}
+          <td>{{ u.man_mec_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Luces</th>
+          {% for u in prems %}
+          <td>{{ u.luc_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Direccionales y stop</th>
+          {% for u in prems %}
+          <td>{{ u.dir_stop_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Pito</th>
+          {% for u in prems %}
+          <td>{{ u.pit_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Observaciones</th>
+          {% for u in prems %}
+          <td>{{ u.obs_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Acción</th>
+          {% for u in prems %}
+          <td>
+            <button class="btn btn-warning" onclick="window.location.href='actualizarprem/{{ u.id_pre }}'"><i
+                class="fa fa-refresh"></i></i></button>
+            <button class="btn btn-danger" onclick="window.location.href='eliminarprem/{{ u.id_pre }}'"><i
+                class="fa fa-trash"></i></i></button>
+          
+          </td>
+          {% endfor %}
+        </tr>
+    </table>
+  </div>
+
+</div>
+
+{% endblock %}

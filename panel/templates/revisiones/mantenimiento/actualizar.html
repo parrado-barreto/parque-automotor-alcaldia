@@ -1,0 +1,139 @@
+{% extends '..\templates\index_master.html' %}
+{% block title %}
+Actualizar Mantenimiento
+{% endblock %}
+{% block content %}
+<div class="right_col" role="main">
+  <h1>Actualizar Mantenimiento</h1>
+
+  <form action="" method="POST">
+    <div class="messages">
+      {% if messages %}
+      <ul class="messages">
+        {% for message in messages %}
+        <li class="{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </div>
+    {% csrf_token %}
+
+    <div class="form-group row">
+
+        <label for="id_man" class="col-4 col-form-label">ID</label>
+        <div class="col-8">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <i class="fa fa-id-badge"></i>
+                    </div>
+                </div>
+                <select id="id_man" name="id_man" class="form-control">
+                    {% for i in mans %}
+                    <option value="{{i.id_man}}" {% if i.id_man == man.id_man %} selected {% endif %}> {{i.id_man}} - {{i.id_veh.pla_veh}} </option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="id_veh" class="col-4 col-form-label">Placa</label>
+      <div class="col-8">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              <i class="fa fa-hashtag"></i>
+            </div>
+          </div>
+          <input id="id_veh" name="id_veh" placeholder="Digite la placa del vehiculo" type="text"
+            class="form-control" required="required" value="{{ man.id_veh.pla_veh }}">
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="fec_man" class="col-4 col-form-label">Fecha</label>
+      <div class="col-8">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              <i class="fa fa-calendar-check-o"></i>
+            </div>
+          </div>
+          <input id="fec_man" name="fec_man" type="date" class="form-control" required="required" value="{{ man.fec_man }}">
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+        <label for="tipo_man" class="col-4 col-form-label">Tipo de mantenimiento</label>
+        <div class="col-8">
+          <select id="tipo_man" name="tipo_man" class="custom-select">
+            {% if man.tipo_man == "Preventivo" %}
+            <option selected value="Preventivo">Preventivo</option>
+            <option value="Correctivo">Correctivo</option>
+            <option value="Otro">Otro</option>
+            {% elif man.tipo_man == "Correctivo" %}
+            <option value="Preventivo">Preventivo</option>
+            <option selected value="Correctivo">Correctivo</option>
+            <option value="Otro">Otro</option>
+            {% else %}
+            <option value="Preventivo">Preventivo</option>
+            <option value="Correctivo">Correctivo</option>
+            <option selected value="Otro">Otro</option>
+            {% endif %}
+          </select>
+        </div>
+      </div>
+    
+    <div class="form-group row">
+        <label for="des_obs_man" class="col-4 col-form-label">Descripción y observaciones</label>
+        <div class="col-8">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <i class="fa fa-file-text"></i>
+              </div>
+            </div>
+            <input id="des_obs_man" name="des_obs_man" type="text" class="form-control" value="{{man.des_obs_man}}">
+          </div>
+        </div>
+      </div>
+    <div class="form-group row">
+        <label for="per_man" class="col-4 col-form-label">Realizado por</label>
+        <div class="col-8">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <i class="fa fa-user"></i>
+              </div>
+            </div>
+            <input id="per_man" name="per_man" type="text" class="form-control" required="required" value="{{ man.per_man }}">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="rec_man" class="col-4 col-form-label">Descripción y observaciones</label>
+        <div class="col-8">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <i class="fa fa-file-text"></i>
+              </div>
+            </div>
+            <input id="rec_man" name="rec_man" type="text" class="form-control" value="{{man.rec_man}}">
+          </div>
+        </div>
+      </div>
+
+    <div class="form-group row">
+      <div class="offset-4 col-8">
+        <button name="back" class="btn btn-primary" onclick="history.back(); return false;"> <i class="fa fa-arrow-left"></i>  Volver</button> 
+        <button name="submit" type="submit" class="btn btn-warning"> <i class="fa fa-user-plus"></i> Actualizar Mantenimiento</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+{% endblock %}

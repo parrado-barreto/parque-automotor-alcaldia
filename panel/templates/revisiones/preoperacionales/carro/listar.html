@@ -1,0 +1,363 @@
+{% extends '../../../index_master.html' %}
+{% block title %}
+Lista de revisiones preoperacionales
+{% endblock %}
+{% block content %}
+<div class="right_col" role="main">
+  <h1>Lista de revisiones preoperacionales de carro</h1>
+  <div class="messages">
+    {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+      <li class="{{ message.tags }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </div>
+  <form action="" method="POST" style="float: left">
+    <div style="display: inline-block;">
+      <form action="" method="POST">
+        {% csrf_token %}
+        <input type="text" name="keyword" id="keyword" class="form-control"
+          style="width: 150px; display: inline-block;">
+        <button type="submit" name="search" class="btn btn-success"><i class="fa fa-search"></i></button>
+
+    </div>
+  </form>
+  <button name="agregarprec" class="btn btn-primary" onclick="window.location.href='agregarprec'"
+    style="display: inline-block;"><i class="fa fa-plus"></i> Nueva revisión preoperacional</button>
+  <div class="table-responsive">
+
+    <table class="table ">
+        <tr>
+          <th scope="col">ID</th>
+          {% for u in precs %}
+          <td>{{ u.id_pre }}</td>
+          {% endfor %}
+        </tr>
+
+        <tr>
+          <th scope="col">Placa</th>
+          {% for u in precs %}
+          <td>{{ u.pla_pre_id }}</td>
+          {% endfor %}
+        </tr>
+
+        <tr>
+          <th scope="col">Fecha</th>
+          {% for u in precs %}
+          <td>{{ u.fec_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Direccionales delanteras</th>
+          {% for u in precs %}
+          <td>{{ u.dir_del_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Direccionales traseras</th>
+          {% for u in precs %}
+          <td>{{ u.dir_tra_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Sistema de luces bajas y altas</th>
+          {% for u in precs %}
+          <td>{{ u.sis_luc_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Luces de freno</th>
+          {% for u in precs %}
+          <td>{{ u.luc_fre_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Luces de reversa</th>
+          {% for u in precs %}
+          <td>{{ u.luc_rev_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Luces de parqueo (intermitentes)</th>
+          {% for u in precs %}
+          <td>{{ u.luc_par_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Estado general vidrio panorámico</th>
+          {% for u in precs %}
+          <td>{{ u.vpan_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Estado general vidrios laterales</th>
+          {% for u in precs %}
+          <td>{{ u.vlat_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Estado general vidrio trasero</th>
+          {% for u in precs %}
+          <td>{{ u.vtra_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Limpiabrisas (der/izq/atrás)</th>
+          {% for u in precs %}
+          <td>{{ u.limp_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Estado general espejos laterales</th>
+          {% for u in precs %}
+          <td>{{ u.elat_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Estado general espejo retrovisor</th>
+          {% for u in precs %}
+          <td>{{ u.eret_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Funcionamiento del Pito</th>
+          {% for u in precs %}
+          <td>{{ u.pit_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Funcionamiento del tacometro</th>
+          {% for u in precs %}
+          <td>{{ u.taco_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Funcionamiento del odometro (kilometraje)</th>
+          {% for u in precs %}
+          <td>{{ u.odo_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Funcionamiento del indicador de gasolina</th>
+          {% for u in precs %}
+          <td>{{ u.gas_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Funcionamiento del indicador de temperatura</th>
+          {% for u in precs %}
+          <td>{{ u.tem_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Estado de cinturones de seguridad</th>
+          {% for u in precs %}
+          <td>{{ u.cin_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Alarma sonora de  reversa</th>
+          {% for u in precs %}
+          <td>{{ u.alar_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Estado  general de las chapas de las puertas</th>
+          {% for u in precs %}
+          <td>{{ u.cha_pue_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Puerta de cierre automatico</th>
+          {% for u in precs %}
+          <td>{{ u.pue_cie_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Escaleras acceso (pasamanos)</th>
+          {% for u in precs %}
+          <td>{{ u.esc_acc_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Pasamanos techo interior</th>
+          {% for u in precs %}
+          <td>{{ u.pas_tec_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Ventana de expulsión (emergencia) </th>
+          {% for u in precs %}
+          <td>{{ u.ven_eme_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Funcionamiento del sistema de alce del volco</th>
+          {% for u in precs %}
+          <td>{{ u.alc_vol_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Funcionamiento freno principal</th>
+          {% for u in precs %}
+          <td>{{ u.fre_pri_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Funcionamiento freno de mano y/o emergencia</th>
+          {% for u in precs %}
+          <td>{{ u.fre_man_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Nivel de agua de limpiabrisas</th>
+          {% for u in precs %}
+          <td>{{ u.agu_lim_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Nivel de agua  y/o refrigerante</th>
+          {% for u in precs %}
+          <td>{{ u.agu_ref_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Nivel de aceite de motor</th>
+          {% for u in precs %}
+          <td>{{ u.ace_mot_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Nivel de liquido de frenos</th>
+          {% for u in precs %}
+          <td>{{ u.liq_fre_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Nivel de liquido de bateria y estado de bateria</th>
+          {% for u in precs %}
+          <td>{{ u.liq_bat_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Nivel de aceite hidraulico</th>
+          {% for u in precs %}
+          <td>{{ u.ace_hid_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Correas</th>
+          {% for u in precs %}
+          <td>{{ u.cor_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Mangueras</th>
+          {% for u in precs %}
+          <td>{{ u.man_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Estado de llantas</th>
+          {% for u in precs %}
+          <td>{{ u.est_lla_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Presion de las llantas</th>
+          {% for u in precs %}
+          <td>{{ u.pre_lla_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Labrado de las llantas</th>
+          {% for u in precs %}
+          <td>{{ u.lab_lla_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Llanta de respuesto</th>
+          {% for u in precs %}
+          <td>{{ u.rep_lla_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Señales reflectivas</th>
+          {% for u in precs %}
+          <td>{{ u.señ_eme_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Tacos (Dos tacos aptos para bloquear el vehiculo)</th>
+          {% for u in precs %}
+          <td>{{ u.tac_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Chaleco Reflectivo</th>
+          {% for u in precs %}
+          <td>{{ u.cha_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Gato (Con capacidad para elevar el vehiculo)</th>
+          {% for u in precs %}
+          <td>{{ u.gat_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Guantes</th>
+          {% for u in precs %}
+          <td>{{ u.gua_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Cruceta / llave de  pernos </th>
+          {% for u in precs %}
+          <td>{{ u.cru_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Caja de herramienta básica</th>
+          {% for u in precs %}
+          <td>{{ u.her_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Botiquín de primeros auxilios</th>
+          {% for u in precs %}
+          <td>{{ u.bot_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Extintor, fecha de vencimiento de carga</th>
+          {% for u in precs %}
+          <td>{{ u.ext_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Observaciones</th>
+          {% for u in precs %}
+          <td>{{ u.obs_pre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Acción</th>
+          {% for u in precs %}
+          <td>
+            <button class="btn btn-warning" onclick="window.location.href='actualizarprec/{{ u.id_pre }}'"><i
+                class="fa fa-refresh"></i></i></button>
+            <button class="btn btn-danger" onclick="window.location.href='eliminarprec/{{ u.id_pre }}'"><i
+                class="fa fa-trash"></i></i></button>
+          
+          </td>
+          {% endfor %}
+        </tr>
+    </table>
+  </div>
+
+</div>
+
+{% endblock %}

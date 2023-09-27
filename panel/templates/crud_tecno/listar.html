@@ -1,0 +1,68 @@
+{% extends '../index_master.html' %}
+{% block title %}
+Lista de Técnico mecánica
+{% endblock %}
+{% block content %}
+<div class="right_col" role="main">
+  <h1>Lista de Tecnomecánicas</h1>
+  
+  <div class="messages">
+    {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+      <li class="{{ message.tags }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </div>
+  <form action="" method="POST" style="float: left">
+    
+    <div style="display: inline-block;">
+      <form action="" method="POST">
+
+        {% csrf_token %}
+        <input type="text" name="keyword" id="keyword" class="form-control"
+          style="width: 150px; display: inline-block;">
+        <button type="submit" name="search" class="btn btn-success"><i class="fa fa-search"></i></button>
+
+    </div>
+  </form>
+  <button name="agregartec" class="btn btn-primary" onclick="window.location.href='agregartec'"
+    style="display: inline-block;"><i class="fa fa-plus"></i> Nueva Tecnomecánica</button>
+  <div class="table-responsive">
+
+    <table class="table ">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Nombre de la empresa</th>
+          <th scope="col">Fecha de expedición</th>
+          <th scope="col">Fecha de Vencimiento</th>
+          <th scope="col">Acción</th>
+
+        </tr>
+      </thead>
+      <tbody>
+
+        {% for u in tecs %}
+        <tr>
+          <th scope="row">{{ u.id_tec }}</th>
+          <td>{{ u.nom_emp_tec }}</td>
+          <td>{{ u.fec_exp_tec }}</td>
+          <td>{{ u.fec_ven_tec }}</td>
+          <td>
+            <button class="btn btn-warning" onclick="window.location.href='actualizartec/{{ u.id_tec }}'"><i
+                class="fa fa-refresh"></i></i></button>
+            <button class="btn btn-danger" onclick="window.location.href='eliminartec/{{ u.id_tec }}'"><i
+                class="fa fa-trash"></i></i></button>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+
+    </table>
+  </div>
+
+</div>
+
+{% endblock %}

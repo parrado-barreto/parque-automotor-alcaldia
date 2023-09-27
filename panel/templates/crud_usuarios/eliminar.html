@@ -1,0 +1,35 @@
+{% extends '../index_master.html' %}
+
+{% block content %}
+<div class="right_col" role="main">
+    <h1>Eliminar usuario</h1>
+    <form action="" method="POST">
+
+        {% csrf_token %}
+
+        <div class="form-group row">
+          <label for="id_per" class="col-4 col-form-label">Cédula</label> 
+          <div class="col-8">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <i class="fa fa-id-badge"></i>
+                </div>
+              </div> 
+              <select id="id_per" name="id_per">
+                {% for i in usuarios %}
+                    <option value="{{i.id_per}}" {% if i.id_per == usuario.id_per %} selected {% endif %}> {{i.id_per}} - {{i.nom_per}} {{i.ape_per}}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+            <div class="offset-4 col-8">
+              <button name="back" class="btn btn-primary" onclick="history.back(); return false;"> <i class="fa fa-arrow-left"></i>  Volver</button>
+              <button name="submit" type="submit" class="btn btn-danger"> <i class="fa fa-user-trash"></i>  Eliminar usuario</button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

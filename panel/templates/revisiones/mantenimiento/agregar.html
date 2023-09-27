@@ -1,0 +1,95 @@
+{% extends '..\templates\index_master.html' %}
+{% block title %}
+Agregar Mantenimiento
+{% endblock %}
+{% block content %}
+<div class="right_col" role="main">
+  <h1>Agregar Mantenimiento</h1>
+
+  <form action="agregarman" method="POST">
+    <div class="messages">
+      {% if messages %}
+      <ul class="messages">
+        {% for message in messages %}
+        <li class="{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </div>
+    {% csrf_token %}
+
+    <div class="form-group row">
+      <label for="id_veh" class="col-4 col-form-label">Placa</label>
+      <div class="col-8">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              <i class="fa fa-hashtag"></i>
+            </div>
+          </div>
+          <input id="id_veh" name="id_veh" placeholder="Digite la placa del vehiculo" type="text"
+            class="form-control" required="required">
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="fec_man" class="col-4 col-form-label">Fecha</label>
+      <div class="col-8">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              <i class="fa fa-calendar-check-o"></i>
+            </div>
+          </div>
+          <input id="fec_man" name="fec_man" type="date" class="form-control" required="required">
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+        <label for="tipo_man" class="col-4 col-form-label">Tipo de mantenimiento</label>
+        <div class="col-8">
+          <select id="tipo_man" name="tipo_man" class="custom-select">
+            <option value="Preventivo">Preventivo</option>
+            <option value="Correctivo">Correctivo</option>
+            <option value="Otro">Otro</option>
+          </select>
+        </div>
+      </div>
+    <div class="form-group row">
+        <label for="des_obs_man" class="col-4 col-form-label">Descripción y observaciones</label> 
+        <div class="col-8">
+          <textarea id="des_obs_man" name="des_obs_man" cols="40" rows="5" class="form-control" placeholder="Máximo 500 caracteres..."></textarea>
+        </div>
+      </div> 
+
+    <div class="form-group row">
+        <label for="per_man" class="col-4 col-form-label">Realizado por</label>
+        <div class="col-8">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <i class="fa fa-user"></i>
+              </div>
+            </div>
+            <input id="per_man" name="per_man" type="text" class="form-control" required="required" >
+          </div>
+        </div>
+      </div>
+
+    <div class="form-group row">
+        <label for="rec_man" class="col-4 col-form-label">Recomendaciones</label> 
+        <div class="col-8">
+          <textarea id="rec_man" name="rec_man" cols="40" rows="5" class="form-control"></textarea>
+        </div>
+      </div> 
+
+    <div class="form-group row">
+      <div class="offset-4 col-8">
+        <button name="back" class="btn btn-primary" onclick="history.back(); return false;"> <i class="fa fa-arrow-left"></i>  Volver</button> 
+        <button name="submit" type="submit" class="btn btn-primary"> <i class="fa fa-user-plus"></i>  Agregar Mantenimiento</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+{% endblock %}

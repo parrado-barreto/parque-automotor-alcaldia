@@ -1,0 +1,69 @@
+{% extends '../../index_master.html' %}
+{% block title %}
+Lista de mantenimientos
+{% endblock %}
+{% block content %}
+<div class="right_col" role="main">
+  <h1>Lista de mantenimientos</h1>
+  <div class="messages">
+    {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+      <li class="{{ message.tags }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </div>
+  <form action="" method="POST" style="float: left">
+    <div style="display: inline-block;">
+      <form action="" method="POST">
+        {% csrf_token %}
+        <input type="text" name="keyword" id="keyword" class="form-control"
+          style="width: 150px; display: inline-block;">
+        <button type="submit" name="search" class="btn btn-success"><i class="fa fa-search"></i></button>
+
+    </div>
+  </form>
+  <button name="agregarman" class="btn btn-primary" onclick="window.location.href='agregarman'"
+    style="display: inline-block;"><i class="fa fa-plus"></i> Nuevo mantenimiento</button>
+    <div class="table-responsive">
+    
+        <table class="table ">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Placa</th>
+              <th scope="col">Fecha</th>
+              <th scope="col">Tipo de mantenimiento</th>
+              <th scope="col">Descripción</th>
+              <th scope="col">Realizado por</th>
+              <th scope="col">Recomendaciones</th>
+              <th scope="col">Acción</th>
+    
+            </tr>
+          </thead>
+          <tbody>
+    
+            {% for u in mans %}
+              <tr>
+                <th scope="row">{{ u.id_man }}</th>
+                <td>{{ u.id_veh.pla_veh }}</td>
+                <td>{{ u.fec_man }}</td>
+                <td>{{ u.tipo_man }}</td>
+                <td>{{ u.des_obs_man }}</td>
+                <td>{{ u.per_man }}</td>
+                <td>{{ u.rec_man }}</td>
+                <td>
+                  <button class="btn btn-warning" onclick="window.location.href='actualizarman/{{ u.id_man }}'"><i class="fa fa-refresh"></i></i></button>
+                  <button class="btn btn-danger" onclick="window.location.href='eliminarman/{{ u.id_man}}'"><i class="fa fa-trash"></i></i></button>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+    
+        </table>
+      </div>
+    
+    </div>
+    
+    {% endblock %}

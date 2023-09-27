@@ -1,0 +1,85 @@
+{% extends '../index_master.html' %}
+{% block title %}
+Lista de Vehiculos
+{% endblock %}
+{% block content %}
+<div class="right_col" role="main">
+  <h1>Lista de Vehiculos</h1>
+  <div class="messages">
+    {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+      <li class="{{ message.tags }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </div>
+  <form action="" method="POST" style="float: left">
+    <div style="display: inline-block;">
+      <form action="" method="POST">
+        {% csrf_token %}
+        <input type="text" name="keyword" id="keyword" class="form-control" style="width: 150px; display: inline-block;">
+        <button type="submit" name="search"class="btn btn-success"><i class="fa fa-search"></i></button>
+      
+    </div>
+  </form>
+  <button name="agregarveh" class="btn btn-primary" onclick="window.location.href='agregarveh'" style="display: inline-block;"><i class="fa fa-plus"></i>  Nuevo Vehiculo</button>
+  <div class="table-responsive">
+    
+    <table class="table ">
+      <thead>
+        <tr>
+          <th scope="col">Placa</th>
+          <th scope="col">Número de licencia</th>
+          <th scope="col">Clase de vehiculo</th>
+          <th scope="col">Marca</th>
+          <th scope="col">Modelo</th>
+          <th scope="col">Color</th>
+          <th scope="col">Número de motor</th>
+          <th scope="col">Número de chasis</th>
+          <th scope="col">Cilindraje</th>
+          <th scope="col">Tipo de Carrocería</th>
+          <th scope="col">Dependencia</th>
+          <th scope="col">SOAT</th>
+          <th scope="col">Tecno</th>
+          <th scope="col">Observaciones</th>
+          <th scope="col">Estado</th>
+          <th scope="col">Acción</th>
+    
+
+        </tr>
+      </thead>
+      <tbody>
+
+        {% for u in vehiculos %}
+            <tr>
+              <th scope="row">{{ u.pla_veh }}</th>
+              <td>{{ u.num_lic_veh }}</td>
+              <td>{{ u.cla_veh }}</td>
+              <td>{{ u.mar_veh }}</td>
+              <td>{{ u.mod_veh }}</td>
+              <td>{{ u.col_veh }}</td>
+              <td>{{ u.num_mot_veh }}</td>
+              <td>{{ u.num_cha_veh }}</td>
+              <td>{{ u.cil_veh }}</td>
+              <td>{{ u.tip_car_veh }}</td>
+              <td>{{ u.dep_veh.nom_dep }}</td>
+              <td>{{ u.soa_veh.fec_exp_soa }}</td>
+              <td>{{ u.tec_veh.fec_exp_tec }}</td>
+              <td>{{ u.obs_veh }}</td>
+              <td>{% if u.est_veh == True %} Funcionamiento {% else %} No Funcionamiento {% endif %}</td>
+              <td>
+                <button class="btn btn-warning" onclick="window.location.href='actualizarveh/{{ u.pla_veh }}'"><i class="fa fa-refresh"></i></i></button>
+                <button class="btn btn-danger" onclick="window.location.href='eliminarveh/{{ u.pla_veh }}'"><i class="fa fa-trash"></i></i></button>
+              </td>
+            </tr>
+          
+        {% endfor %}
+      </tbody>
+
+    </table>
+  </div>
+
+</div>
+
+{% endblock %}

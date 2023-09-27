@@ -1,0 +1,49 @@
+{% extends '..\templates\index_master.html' %}
+{% block title %}
+Actualizar Mantenimiento
+{% endblock %}
+{% block content %}
+<div class="right_col" role="main">
+  <h1>Actualizar Mantenimiento</h1>
+
+  <form action="" method="POST">
+    <div class="messages">
+      {% if messages %}
+      <ul class="messages">
+        {% for message in messages %}
+        <li class="{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </div>
+    {% csrf_token %}
+
+    <div class="form-group row">
+
+        <label for="id_man" class="col-4 col-form-label">ID</label>
+        <div class="col-8">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <i class="fa fa-id-badge"></i>
+                    </div>
+                </div>
+                <select id="id_man" name="id_man" class="form-control">
+                    {% for i in mans %}
+                    <option value="{{i.id_man}}" {% if i.id_man == man.id_man %} selected {% endif %}> {{i.id_man}} - {{i.id_veh.pla_veh}} </option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="offset-4 col-8">
+          <button name="back" class="btn btn-primary" onclick="history.back(); return false;"> <i class="fa fa-arrow-left"></i>  Volver</button>
+          <button name="submit" type="submit" class="btn btn-danger"> <i class="fa fa-trash"></i>  Eliminar Mantenimiento</button>
+        </div>
+    </div>
+  </form>
+</div>
+
+{% endblock %}

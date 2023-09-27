@@ -1,0 +1,247 @@
+{% extends '../index_master.html' %}
+{% block title %}
+Actualizar Vehiculo
+{% endblock %}
+{% block content %}
+<div class="right_col" role="main">
+    <h1>Actualizar Vehiculo</h1>
+
+    <form action="" method="POST">
+        <div class="messages">
+            {% if messages %}
+            <ul class="messages">
+              {% for message in messages %}
+              <li class="{{ message.tags }}">{{ message }}</li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+          </div>
+        {% csrf_token %}
+
+        <div class="form-group row">
+
+            <label for="id" class="col-4 col-form-label">Placa</label>
+            <div class="col-8">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fa fa-automobile"></i>
+                        </div>
+                    </div>
+                    <select id="id" name="id" class="form-control">
+                        {% for i in vehiculos %}
+                        <option value="{{i.pla_veh}}" {% if i.pla_veh == vehiculo.pla_veh %} selected {% endif %}> {{i.pla_veh}} - {{i.mar_veh}} - {{i.cla_veh}} </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="num_lic_veh" class="col-4 col-form-label">Número de licencia</label>
+            <div class="col-8">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fa fa-drivers-license-o"></i>
+                        </div>
+                    </div>
+                    <input id="num_lic_veh" name="num_lic_veh" type="text" required="required" class="form-control" value="{{ vehiculo.num_lic_veh }}">
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="cla_veh" class="col-4 col-form-label">Clase de vehiculo</label>
+            <div class="col-8">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fa fa-motorcycle"></i>
+                        </div>
+                    </div>
+                    <input id="cla_veh" name="cla_veh" type="text" required="required" class="form-control" value="{{ vehiculo.cla_veh }}">
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="mar_veh" class="col-4 col-form-label">Marca</label>
+            <div class="col-8">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fa fa-bookmark-o"></i>
+                        </div>
+                    </div>
+                    <input id="mar_veh" name="mar_veh" type="text" required="required" class="form-control" value="{{ vehiculo.mar_veh }}">
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="mod_veh" class="col-4 col-form-label">Modelo</label>
+            <div class="col-8">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fa fa-calendar-o"></i>
+                        </div>
+                    </div>
+                    <input id="mod_veh" name="mod_veh" type="text" required="required" class="form-control" value="{{ vehiculo.mod_veh }}">
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="col_veh" class="col-4 col-form-label">Color</label>
+            <div class="col-8">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fa fa-eyedropper"></i>
+                        </div>
+                    </div>
+                    <input id="col_veh" name="col_veh" type="text" required="required" class="form-control" value="{{ vehiculo.col_veh }}">
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="num_mot_veh" class="col-4 col-form-label">Número de motor</label>
+            <div class="col-8">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fa fa-hashtag"></i>
+                        </div>
+                    </div>
+                    <input id="num_mot_veh" name="num_mot_veh" type="text" required="required" class="form-control" value="{{ vehiculo.num_mot_veh }}">
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="num_cha_veh" class="col-4 col-form-label">Número de chasis</label>
+            <div class="col-8">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fa fa-hashtag"></i>
+                        </div>
+                    </div>
+                    <input id="num_cha_veh" name="num_cha_veh" type="text" required="required" class="form-control" value="{{ vehiculo.num_cha_veh }}">
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="cil_veh" class="col-4 col-form-label">Cilindraje</label>
+            <div class="col-8">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fa fa-creative-commons"></i>
+                        </div>
+                    </div>
+                    <input id="cil_veh" name="cil_veh" type="number" required="required" class="form-control" value="{{ vehiculo.cil_veh }}">
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="tip_car_veh" class="col-4 col-form-label">Tipo de Carrocería</label>
+            <div class="col-8">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fa fa-bus"></i>
+                        </div>
+                    </div>
+                    <input id="tip_car_veh" name="tip_car_veh" type="text" required="required" class="form-control" value="{{ vehiculo.tip_car_veh }}">
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="dep_veh" class="col-4 col-form-label">Dependencia</label>
+            <div class="col-8">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fa fa-building"></i>
+                        </div>
+                    </div>
+                    <select id="dep_veh" name="dep_veh" class="custom-select" required="required">
+                        {% for i in dependencias %}
+                        <option value="{{i.id_dep}}" {% if i.id_dep == vehiculo.dep_veh_id %} selected {% endif %}>{{i.nom_dep}} </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="soa_veh" class="col-4 col-form-label">SOAT</label>
+            <div class="col-8">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fa fa-calendar-check-o"></i>
+                        </div>
+                    </div>
+                    <select id="soa_veh" name="soa_veh" class="custom-select" required="required" >
+                        
+                        {% for i in soats %}
+                        <option value="{{i.id_soa}}" {% if i.id_soa == vehiculo.soa_veh_id %} selected {% endif %}>ID: {{i.id_soa}} - {{i.fec_exp_soa}} </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="tec_veh" class="col-4 col-form-label">Tecnomecánica</label>
+            <div class="col-8">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fa fa-gears"></i>
+                        </div>
+                    </div>
+                    <select id="tec_veh" name="tec_veh" class="custom-select" required="required">
+                        {% for i in tecs %}
+                        <option value="{{i.id_tec}}" {% if i.id_tec == vehiculo.tec_veh_id %} selected {% endif %}>ID: {{i.id_tec}} - {{i.fec_exp_tec}} </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-4">Estado del vehiculo</label>
+            <div class="col-8">
+                <div class="custom-control custom-checkbox custom-control-inline">
+                    <input name="est_veh" id="est_veh_0" type="checkbox" class="custom-control-input" value="True">
+                    <label for="est_veh_0" class="custom-control-label">Funcionamiento</label>
+                </div>
+                <div class="custom-control custom-checkbox custom-control-inline">
+                    <input name="est_veh" id="est_veh_1" type="checkbox" class="custom-control-input" value="False">
+                    <label for="est_veh_1" class="custom-control-label">No Funcionamiento</label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="obs_veh" class="col-4 col-form-label">Observaciones</label>
+            <div class="col-8">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fa fa-file-text"></i>
+                        </div>
+                    </div>
+                    <input id="obs_veh" name="obs_veh" type="text" class="form-control" value="{{ vehiculo.obs_veh }}">
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="offset-4 col-8">
+                <button name="back" class="btn btn-primary" onclick="history.back(); return false;"> <i
+                        class="fa fa-arrow-left"></i> Volver</button>
+                <button name="submit" type="submit" class="btn btn-warning"> <i class="fa fa-refresh"></i> Actualizar
+                    Vehiculo</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,102 @@
+{% extends '../index_master.html' %}
+{% block title %}
+Actualizar SOAT
+{% endblock %}
+{% block content %}
+<div class="right_col" role="main">
+    <h1>Actualizar SOAT</h1>
+
+    <form action="" method="POST">
+        <div class="messages">
+            {% if messages %}
+            <ul class="messages">
+              {% for message in messages %}
+              <li class="{{ message.tags }}">{{ message }}</li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+          </div>
+        {% csrf_token %}
+        <div class="form-group row">
+
+            <label for="id_per" class="col-4 col-form-label">ID</label>
+            <div class="col-8">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fa fa-id-badge"></i>
+                        </div>
+                    </div>
+                    <select id="id" name="id" class="form-control">
+                        {% for i in soats %}
+                        <option value="{{i.id_soa}}" {% if i.id_soa == soat.id_soa %} selected {% endif %}> {{i.id_soa}} - {{i.nom_emp_soa}} - {{i.fec_exp_soa}} </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="nom_emp_soa" class="col-4 col-form-label">Nombre de la empresa</label>
+            <div class="col-8">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fa fa-building-o"></i>
+                        </div>
+                    </div>
+                    <input id="nom_emp_soa" name="nom_emp_soa" placeholder="Digite la empresa donde se compró el SOAT"
+                        type="text" class="form-control" required="required" value="{{ soat.nom_emp_soa }}">
+                </div>
+            </div>
+        </div>
+        <div class=" form-group row">
+            <label for="fec_exp_soa" class="col-4 col-form-label">Fecha de expedición</label>
+            <div class="col-8">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fa fa-calendar-check-o"></i>
+                        </div>
+                    </div>
+                    <input id="fec_exp_soa" name="fec_exp_soa" type="date" class="form-control" required="required" value="{{ soat.fec_exp_soa }}" >
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="fec_vig_soa" class="col-4 col-form-label">Vigencia desde las 00 horas del </label>
+            <div class="col-8">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <i class="fa fa-calendar-times-o"></i>
+                  </div>
+                </div>
+                <input id="fec_vig_soa" name="fec_vig_soa" type="date" class="form-control" value="{{ soat.fec_vig_soa }}" >
+              </div>
+            </div>
+          </div>
+        <div class=" form-group row">
+            <label for="fec_ven_soa" class="col-4 col-form-label">Fecha de vencimiento</label>
+            <div class="col-8">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fa fa-calendar-times-o"></i>
+                        </div>
+                    </div>
+                    <input id="fec_ven_soa" name="fec_ven_soa" type="date" class="form-control" value="{{ soat.fec_ven_soa }}">
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="offset-4 col-8">
+                <button name="back" class="btn btn-primary" onclick="history.back(); return false;"> <i
+                        class="fa fa-arrow-left"></i> Volver</button>
+                <button name="submit" type="submit" class="btn btn-warning"> <i class="fa fa-user-plus"></i> Actualizar SOAT</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

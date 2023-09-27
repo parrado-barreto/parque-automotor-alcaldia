@@ -1,0 +1,89 @@
+{% extends '../index_master.html' %}
+{% block title %}
+Actualizar Técnico mecánica
+{% endblock %}
+{% block content %}
+<div class="right_col" role="main">
+    <h1>Actualizar Tecnomecánica</h1>
+
+    <form action="" method="POST">
+        <div class="messages">
+            {% if messages %}
+            <ul class="messages">
+              {% for message in messages %}
+              <li class="{{ message.tags }}">{{ message }}</li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+          </div>
+        {% csrf_token %}
+        <div class="form-group row">
+
+            <label for="id_per" class="col-4 col-form-label">ID</label>
+            <div class="col-8">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fa fa-id-badge"></i>
+                        </div>
+                    </div>
+                    <select id="id" name="id" class="form-control">
+                        {% for i in tecs %}
+                        <option value="{{i.id_tec}}" {% if i.id_tec == tec.id_tec %} selected {% endif %}> {{i.id_tec}} - {{i.nom_emp_tec}} - {{i.fec_exp_tec}} </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="nom_emp_tec" class="col-4 col-form-label">Nombre de la empresa</label>
+            <div class="col-8">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fa fa-building-o"></i>
+                        </div>
+                    </div>
+                    <input id="nom_emp_tec" name="nom_emp_tec" placeholder="Digite la empresa donde se realizó la Tecnomecánica"
+                        type="text" class="form-control" required="required" value="{{ tec.nom_emp_tec }}">
+                </div>
+            </div>
+        </div>
+        <div class=" form-group row">
+            <label for="fec_exp_tec" class="col-4 col-form-label">Fecha de expedición</label>
+            <div class="col-8">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fa fa-calendar-check-o"></i>
+                        </div>
+                    </div>
+                    <input id="fec_exp_tec" name="fec_exp_tec" type="date" class="form-control" required="required" value="{{ tec.fec_exp_tec }}" >
+                </div>
+            </div>
+        </div>
+        <div class=" form-group row">
+            <label for="fec_ven_tec" class="col-4 col-form-label">Fecha de vencimiento</label>
+            <div class="col-8">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fa fa-calendar-times-o"></i>
+                        </div>
+                    </div>
+                    <input id="fec_ven_tec" name="fec_ven_tec" type="date" class="form-control" value="{{ tec.fec_ven_tec }}">
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="offset-4 col-8">
+                <button name="back" class="btn btn-primary" onclick="history.back(); return false;"> <i
+                        class="fa fa-arrow-left"></i> Volver</button>
+                <button name="submit" type="submit" class="btn btn-warning"> <i class="fa fa-refresh"></i> Actualizar Tecnomecánica</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

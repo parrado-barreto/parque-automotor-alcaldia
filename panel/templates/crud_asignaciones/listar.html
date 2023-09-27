@@ -1,0 +1,72 @@
+{% extends '../index_master.html' %}
+{% block title %}
+Lista de Asignaciones
+{% endblock %}
+{% block content %}
+<div class="right_col" role="main">
+  <h1>Lista de asignaciones</h1>
+  <div class="messages">
+    {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+      <li class="{{ message.tags }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </div>
+  <form action="" method="POST" style="float: left">
+    
+    <div style="display: inline-block;">
+      <form action="" method="POST">
+        {% csrf_token %}
+        <input type="text" name="keyword" id="keyword" class="form-control" style="width: 150px; display: inline-block;">
+        <button type="submit" name="search"class="btn btn-success"><i class="fa fa-search"></i></button>
+      
+    </div>
+  </form>
+  <button name="agregar" class="btn btn-primary" onclick="window.location.href='agregarasi'" style="display: inline-block;"><i class="fa fa-plus"></i>  Nueva asginacion</button>
+  <div class="table-responsive">
+    
+    <table class="table ">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          
+          <th scope="col">Persona encargada</th>
+          <th scope="col">Vehiculo asignado</th>
+          <th scope="col">Fecha de ingreso</th>
+          <th scope="col">Fecha de finalización</th>
+          <th scope="col">Observaciones</th>
+          <th scope="col">Acción</th>
+
+        </tr>
+      </thead>
+      <tbody>
+
+        {% for u in asignaciones %}
+          
+            <tr>
+              <th scope="row">{{ u.id }}</th>
+              <td>{{ u.id_per_id }} - {{ u.id_per.nom_per }}</td>
+              <td>{{ u.id_veh_id }} - {{ u.id_veh.mar_veh }}</td>
+              <td>{{ u.fec_ing }}</td>
+              <td>{{ u.fec_sal }}</td>
+              <td>{{ u.obs_veh_asi }}</td>
+             
+              
+
+              <td>
+                <button class="btn btn-warning" onclick="window.location.href='actualizarasi/{{ u.id }}'"><i class="fa fa-refresh"></i></i></button>
+                <button class="btn btn-danger" onclick="window.location.href='eliminarasi/{{ u.id }}'"><i class="fa fa-trash"></i></i></button>
+              </td>
+            </tr>
+          
+        {% endfor %}
+      </tbody>
+
+    </table>
+  </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,89 @@
+{% extends '../index_master.html' %}
+
+{% block content %}
+<div class="right_col" role="main">
+    <h1>Agregar Asignación</h1>
+
+    <form action="agregarasi" method="POST">
+        <div class="messages">
+            {% if messages %}
+            <ul class="messages">
+              {% for message in messages %}
+              <li class="{{ message.tags }}">{{ message }}</li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+          </div>
+        {% csrf_token %}
+        <div class="form-group row">
+
+            <label for="id_per" class="col-4 col-form-label">Usuario al que desea asignar el vehiculo</label>
+            <div class="col-8">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fa fa-user"></i>
+                        </div>
+                    </div>
+                    <select id="id_per" name="id_per" class="form-control">
+                        {% for i in usuarios %}
+                        <option value="{{i.id_per}}" {% if i.id_per == usuario.id_per %} selected {% endif %}>
+                            {{i.id_per}} - {{i.nom_per}} {{i.ape_per}} </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+
+            <label for="id_veh" class="col-4 col-form-label">Vehiculo asignado</label>
+            <div class="col-8">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fa fa-car"></i>
+                        </div>
+                    </div>
+                    <select id="id_veh" name="id_veh" class="form-control">
+                        {% for i in vehiculos %}
+                            {% if i.est_veh == True %}
+                                <option value="{{i.pla_veh}}" {% if i.pla_veh == vehiculo.pla_veh %} selected {% endif %}>
+                                    {{i.pla_veh}} - {{i.cla_veh}} - {{i.mar_veh}} - {{i.col_veh}} </option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="fec_sal" class="col-4 col-form-label">Vigencia de asignación</label> 
+            <div class="col-8">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <i class="fa fa-calendar-check-o"></i>
+                  </div>
+                </div> 
+                <input id="fec_sal" name="fec_sal" type="datetime-local" class="form-control">
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="obs_asi" class="col-4 col-form-label">Observaciones</label> 
+            <div class="col-8">
+              <textarea id="obs_asi" name="obs_asi" cols="40" rows="5" class="form-control"></textarea>
+            </div>
+          </div> 
+
+          <div class="form-group row">
+            <div class="offset-4 col-8">
+                <button name="back" class="btn btn-primary" onclick="history.back(); return false;"> <i
+                        class="fa fa-arrow-left"></i> Volver</button>
+                <button name="submit" type="submit" class="btn btn-primary"> <i class="fa fa-plus"></i> Asignar vehiculo</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

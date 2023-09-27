@@ -1,0 +1,63 @@
+{% extends '../index_master.html' %}
+{% block title %}
+Lista de seguros SOAT
+{% endblock %}
+{% block content %}
+<div class="right_col" role="main">
+  <h1>Lista de Seguros</h1>
+  <div class="messages">
+    {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+      <li class="{{ message.tags }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </div>
+  <form action="" method="POST" style="float: left">
+    <div style="display: inline-block;">
+      <form action="" method="POST">
+        {% csrf_token %}
+        <input type="text" name="keyword" id="keyword" class="form-control" style="width: 150px; display: inline-block;">
+        <button type="submit" name="search"class="btn btn-success"><i class="fa fa-search"></i></button>
+      
+    </div>
+  </form>
+  <button name="agregarsoa" class="btn btn-primary" onclick="window.location.href='agregarsoa'" style="display: inline-block;"><i class="fa fa-plus"></i>  Nuevo SOAT</button>
+  <div class="table-responsive">
+    
+    <table class="table ">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Nombre de la empresa</th>
+          <th scope="col">Fecha de expedición</th>
+          <th scope="col">Vigencia desde</th>
+          <th scope="col">hasta</th>
+          <th scope="col">Acción</th>
+
+        </tr>
+      </thead>
+      <tbody>
+
+        {% for u in soats %}
+          <tr>
+            <th scope="row">{{ u.id_soa }}</th>
+            <td>{{ u.nom_emp_soa }}</td>
+            <td>{{ u.fec_exp_soa }}</td>
+            <td>{{ u.fec_vig_soa }}</td>
+            <td>{{ u.fec_ven_soa }}</td>
+            <td>
+              <button class="btn btn-warning" onclick="window.location.href='actualizarsoa/{{ u.id_soa }}'"><i class="fa fa-refresh"></i></i></button>
+              <button class="btn btn-danger" onclick="window.location.href='eliminarsoa/{{ u.id_soa }}'"><i class="fa fa-trash"></i></i></button>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+
+    </table>
+  </div>
+
+</div>
+
+{% endblock %}

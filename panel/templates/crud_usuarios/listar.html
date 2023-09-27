@@ -1,0 +1,75 @@
+{% extends '../index_master.html' %}
+{% block title %}
+Lista de Usuarios
+{% endblock %}
+{% block content %}
+<div class="right_col" role="main">
+  <h1>Lista de usuarios</h1>
+  <div class="messages">
+    {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+      <li class="{{ message.tags }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </div>
+  <form action="" method="POST" style="float: left">
+    <div style="display: inline-block;">
+      <form action="" method="POST">
+        {% csrf_token %}
+        <input type="text" name="keyword" id="keyword" class="form-control" style="width: 150px; display: inline-block;">
+        <button type="submit" name="search"class="btn btn-success"><i class="fa fa-search"></i></button>
+      
+    </div>
+  </form>
+  <button name="agregar" class="btn btn-primary" onclick="window.location.href='agregar'" style="display: inline-block;"><i class="fa fa-plus"></i>  Nuevo usuario</button>
+  <div class="table-responsive">
+    
+    <table class="table ">
+      <thead>
+        <tr>
+          <th scope="col">Cédula</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Apellido</th>
+          <th scope="col">Teléfono</th>
+          <th scope="col">Dirección</th>
+          <th scope="col">Categoría de licencia</th>
+          <th scope="col">Vigencia de licencia</th>
+          <th scope="col">Foto de pase delantera</th>
+          <th scope="col">Dependencia</th>
+          <th scope="col">Acción</th>
+
+        </tr>
+      </thead>
+      <tbody>
+
+        {% for u in usuarios %}
+          
+            <tr>
+              <th scope="row">{{ u.id_per }}</th>
+              <td>{{ u.nom_per }}</td>
+              <td>{{ u.ape_per }}</td>
+              <td>{{ u.tel_per }}</td>
+              <td>{{ u.dir_per }}</td>
+              <td>{{ u.cat_per }}</td>
+              <td>{{ u.vig_per }}</td>
+              <td><img src="{{ u.pase_del_per }}" ></td>
+              <td>{{ u.dep_per.nom_dep }}</td>
+
+              <td>
+                <button class="btn btn-warning" onclick="window.location.href='actualizar/{{ u.id_per }}'"><i class="fa fa-refresh"></i></i></button>
+                <button class="btn btn-danger" onclick="window.location.href='eliminar/{{ u.id_per }}'"><i class="fa fa-trash"></i></i></button>
+                <button class="btn btn-primary" onclick="window.location.href='agregarasi'"><i class="fa fa-car"></i></i></button>
+              </td>
+            </tr>
+          
+        {% endfor %}
+      </tbody>
+
+    </table>
+  </div>
+
+</div>
+
+{% endblock %}
