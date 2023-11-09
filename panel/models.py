@@ -1,5 +1,5 @@
 from django.db import models
-
+#docker-compose up --build
 
 # Create your models here.
 

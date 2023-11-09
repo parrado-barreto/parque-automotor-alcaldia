@@ -7,7 +7,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('', views.index, name="index"),
+    path('panel', views.index, name="index"),
     path('listar', views.listar, name="listar"),
     path('agregar', views.agregar, name="agregar"),
     path('actualizar/<int:idUsuario>', views.actualizar, name="actualizar"),
