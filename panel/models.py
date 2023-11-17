@@ -20,8 +20,8 @@ class Usuarios(models.Model):
     dir_per = models.CharField(max_length=30, null=False)
     cat_per = models.CharField(max_length=30, null=False)
     vig_per = models.DateField(null=True)
-    pase_ade_per = models.ImageField(upload_to="imagenes", null=True)
-    pase_atr_per = models.ImageField(upload_to="imagenes", null=True)
+    pase_ade_per = models.FileField(upload_to="imagenes", null=True, blank=True)
+    pase_atr_per = models.FileField(upload_to="imagenes", null=True, blank=True)
     dep_per = models.ForeignKey(Dependencias, on_delete=models.CASCADE)
 
     class Meta:

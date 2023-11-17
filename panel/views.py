@@ -55,7 +55,7 @@ def agregar(request):
                 user.dir_per = request.POST.get('dir_per')
                 user.cat_per = request.POST.get('cat_per')
                 user.vig_per = request.POST.get('vig_per')
-                user.pase_ade_per = request.POST.get('pase_ade_per')
+                user.pase_ade_per = request.FILES['pase_ade_per']
                 user.dep_per_id = request.POST.get('dep_per')
                 user.save()
                 messages.success(request, 'El usuario {} fue agregado'.format(user.nom_per+" "+user.ape_per))
