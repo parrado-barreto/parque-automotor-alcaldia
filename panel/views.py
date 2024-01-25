@@ -56,6 +56,7 @@ def agregar(request):
                 user.cat_per = request.POST.get('cat_per')
                 user.vig_per = request.POST.get('vig_per')
                 user.pase_ade_per = request.FILES['pase_ade_per']
+                user.pase_atr_per = request.FILES['pase_atr_per']
                 user.dep_per_id = request.POST.get('dep_per')
                 user.save()
                 messages.success(request, 'El usuario {} fue agregado'.format(user.nom_per+" "+user.ape_per))
@@ -72,20 +73,25 @@ def agregar(request):
 def actualizar(request, idUsuario):
     try:
         if request.method == 'POST':
-            if request.POST.get('pas_per') and request.POST.get('nom_per') and request.POST.get('ape_per') and request.POST.get('tel_per') and request.POST.get('dir_per') and request.POST.get('cat_per') and request.POST.get('vig_per') and request.POST.get('dep_per'):
-                user = Usuarios()
-                user.id_per = request.POST.get('id')
-                user.pas_per = request.POST.get('pas_per')
-                user.nom_per = request.POST.get('nom_per')
-                user.ape_per = request.POST.get('ape_per')
-                user.tel_per = request.POST.get('tel_per')
-                user.dir_per = request.POST.get('dir_per')
-                user.cat_per = request.POST.get('cat_per')
-                user.vig_per = request.POST.get('vig_per')
-                user.dep_per_id = request.POST.get('dep_per')
-                user.save()
-                messages.success(request, 'El usuario {} fue modificado'.format(user.nom_per+" "+user.ape_per))
-                return redirect('listar')
+            user = Usuarios()
+            user.id_per = request.POST.get('id')
+            print("************************ID_USUARIO*****************************")
+            print(user.id_per)
+            user.pas_per = request.POST.get('pas_per')
+            user.nom_per = request.POST.get('nom_per')
+            user.ape_per = request.POST.get('ape_per')
+            user.tel_per = request.POST.get('tel_per')
+            user.dir_per = request.POST.get('dir_per')
+            user.cat_per = request.POST.get('cat_per')
+            user.vig_per = request.POST.get('vig_per')
+            user.dep_per_id = request.POST.get('dep_per')
+            if 'pase_ade_per' in request.FILES:
+                user.pase_ade_per = request.FILES['pase_ade_per']
+            if 'pase_atr_per' in request.FILES:
+                user.pase_atr_per = request.FILES['pase_atr_per']
+            user.save()
+            messages.success(request, 'El usuario {} fue modificado'.format(user.nom_per+" "+user.ape_per))
+            return redirect('listar')
         else:
             users = Usuarios.objects.all()
             user = Usuarios.objects.get( id_per=idUsuario )
@@ -567,7 +573,8 @@ def actualizarasi(request, idAsignacion):
                 asi_id_old = request.POST.get('id')
                 asi_old = VehiculosAsignados()
                 asi_old = VehiculosAsignados.objects.get( id=asi_id_old )
-                if( asi_old.fec_sal < request.POST.get('fec_sal')):
+                temp = date.strftime(asi_old.fec_ing, "%Y-%m-%d")
+                if( temp < request.POST.get('fec_sal')):
                     asi = VehiculosAsignados()
                     asi.id = request.POST.get('id')
                     asi.id_per_id = request.POST.get('id_per')
@@ -579,7 +586,7 @@ def actualizarasi(request, idAsignacion):
                     messages.success(request, 'La asignacion {} fue modificada'.format(asi.id))
                     return redirect('listarasi')
                 else:
-                    messages.warning(request, 'La fecha de ingreso es mayor a la de finalización.')
+                    messages.warning(request, 'No se aplicaron los cambios, la fecha de ingreso es mayor a la de finalización.')
                     return redirect('actualizarasi')
         else:
             asi = VehiculosAsignados.objects.get( id=idAsignacion )
@@ -1027,3 +1034,5 @@ def eliminarman(request, idman):
         mans = Mantenimiento.objects.all()
         datos = {'mans' : mans, 'man' : man }
         return render(request,"revisiones/mantenimiento/eliminar.html",datos)
+def soon(request):
+    return render(request,'soon.html')

@@ -3,7 +3,7 @@
 {% block content %}
 <div class="right_col" role="main">
   <h1>Actualizar usuario</h1>
-  <form action="" method="POST">
+  <form action="" method="POST" enctype="multipart/form-data">
     <div class="messages">
       {% if messages %}
       <ul class="messages">
@@ -17,7 +17,7 @@
 
     <div class="form-group row">
 
-      <label for="id_per" class="col-4 col-form-label">Cédula</label>
+      <label for="id" class="col-4 col-form-label">Cédula</label>
       <div class="col-8">
         <div class="input-group">
           <div class="input-group-prepend">
@@ -113,12 +113,11 @@
             </div>
           </div>
           <select id="cat_per" name="cat_per" class="custom-select" required="required">
-            <option value="null">Selecciona una opción</option>
-            <option value="A1,A2">A1, A2 </option>
-            <option value="B1,B2,B3">B1, B2, B3 </option>
-            <option value="C1,C2,C3">C1, C2, C3 </option>
-            <option value="A1,A2,B1,B2,B3">A1, A2, B1, B2, B3 </option>
-            <option value="A1,A2,B1,B2,B3,C1,C2,C3">A1, A2, B1, B2, B3, C1, C2, C3 </option>
+            <option value="A1,A2" {% if usuario.cat_per == "A1,A2" %} selected {% endif %}>A1, A2 </option>
+            <option value="B1,B2,B3" {% if usuario.cat_per == "B1,B2,B3" %} selected {% endif %}>B1, B2, B3 </option>
+            <option value="C1,C2,C3" {% if usuario.cat_per == "C1,C2,C3" %} selected {% endif %}>C1, C2, C3 </option>
+            <option value="A1,A2,B1,B2,B3" {% if usuario.cat_per == "A1,A2,B1,B2,B3" %} selected {% endif %}>A1, A2, B1, B2, B3 </option>
+            <option value="A1,A2,B1,B2,B3,C1,C2,C3" {% if usuario.cat_per == "A1,A2,B1,B2,B3,C1,C2,C3" %} selected {% endif %}>A1, A2, B1, B2, B3, C1, C2, C3 </option>
           </select>
         </div>
       </div>
@@ -136,8 +135,35 @@
         </div>
       </div>
     </div>
+  <div class="form-group row">
+      <label for="pase_ade_per" class="col-4 col-form-label">Foto de la licencia por la parte de adelante (.jpg, .png, .pdf)</label>
+      <div class="col-8">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              <i class="fa fa-image"></i>
+            </div>
+          </div>
+          <input type="file" class="form-control" id="pase_ade_per" name="pase_ade_per" accept="image/png, image/jpeg, .pdf"/>
+        </div>
+      </div>
+    </div>
+
+  <div class="form-group row">
+      <label for="pase_atr_per" class="col-4 col-form-label">Foto de la licencia por la parte de atrás (.jpg, .png, .pdf)</label>
+      <div class="col-8">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              <i class="fa fa-image"></i>
+            </div>
+          </div>
+          <input type="file" class="form-control" id="pase_atr_per" name="pase_atr_per" accept="image/png, image/jpeg, .pdf"/>
+        </div>
+      </div>
+    </div>
     <div class="form-group row">
-      <label for="dep_veh" class="col-4 col-form-label">Dependencia</label>
+      <label for="dep_per" class="col-4 col-form-label">Dependencia</label>
       <div class="col-8">
         <div class="input-group">
           <div class="input-group-prepend">
@@ -146,10 +172,9 @@
             </div>
           </div>
           <select id="dep_per" name="dep_per" class="custom-select" required="required">
-            <option value="null">Selecciona una opción</option>
-            {% for i in dependencias %}
-            <option value="{{i.id_dep}}"> {{i.nom_dep}} </option>
-            {% endfor %}
+                        {% for i in dependencias %}
+                        <option value="{{i.id_dep}}" {% if i.id_dep == usuario.dep_per_id %} selected {% endif %}>{{i.nom_dep}} </option>
+                        {% endfor %}
           </select>
         </div>
       </div>

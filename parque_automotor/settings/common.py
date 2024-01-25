@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+from celery.schedules import crontab
 
 
 ENVIRONMENT = os.environ.get('ENVIRONMENT', 'development')
@@ -124,3 +125,35 @@ SERVER_EMAIL = 'Server <server@parque_automotor.com>'
 # ADMINS = [('Admin', 'admin@parque_automotor.com')]
 # MANAGERS = [('Admin', 'admin@parque_automotor.com')]
 
+# Celery Configuration Options
+CELERY_TIMEZONE = "UTC"
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 30 * 60
+
+CELERY_BEAT_SCHEDULE ={
+    'run-daily': {
+        'task': 'panel.tasks.soat',
+        'schedule': crontab(),
+    },
+}
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.googlemail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'parradocristian07@gmail.com'
+EMAIL_HOST_PASSWORD = 'Nose1440'
+EMAIL_USE_TLS = True
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {"class": "logging.StreamHandler"},
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["console"],
+            "level": "INFO",
+        },
+    }
+}

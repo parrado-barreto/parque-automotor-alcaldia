@@ -37,6 +37,7 @@ Lista de Usuarios
           <th scope="col">Categoría de licencia</th>
           <th scope="col">Vigencia de licencia</th>
           <th scope="col">Foto de pase delantera</th>
+          <th scope="col">Foto de pase trasera</th>
           <th scope="col">Dependencia</th>
           <th scope="col">Acción</th>
 
@@ -54,7 +55,8 @@ Lista de Usuarios
               <td>{{ u.dir_per }}</td>
               <td>{{ u.cat_per }}</td>
               <td>{{ u.vig_per }}</td>
-              <td><img src="media/{{ u.pase_ade_per }}" ></td>
+              <td><img style="height: 50px; width: 100px;" src="media/{{ u.pase_ade_per }}" ></td>
+              <td><img style="height: 50px; width: 100px;" src="media/{{ u.pase_atr_per }}" ></td>
               <td>{{ u.dep_per.nom_dep }}</td>
 
               <td>

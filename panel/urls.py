@@ -44,4 +44,5 @@ urlpatterns = [
     path('agregarman', views.agregarman, name="agregarman"),
     path('actualizarman/<int:idman>', views.actualizarman, name="actualizarman"),
     path('eliminarman/<int:idman>', views.eliminarman, name="eliminarman"),
+    path('soon',views.soon, name="soon"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

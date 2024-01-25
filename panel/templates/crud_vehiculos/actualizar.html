@@ -45,7 +45,7 @@ Actualizar Vehiculo
                             <i class="fa fa-drivers-license-o"></i>
                         </div>
                     </div>
-                    <input id="num_lic_veh" name="num_lic_veh" type="text" required="required" class="form-control" value="{{ vehiculo.num_lic_veh }}">
+                    <input id="num_lic_veh" name="num_lic_veh" type="number" required="required" class="form-control" value="{{ vehiculo.num_lic_veh }}">
                 </div>
             </div>
         </div>
@@ -210,11 +210,11 @@ Actualizar Vehiculo
             <label class="col-4">Estado del vehiculo</label>
             <div class="col-8">
                 <div class="custom-control custom-checkbox custom-control-inline">
-                    <input name="est_veh" id="est_veh_0" type="checkbox" class="custom-control-input" value="True">
+                    <input name="est_veh" id="est_veh_0" type="radio" class="custom-control-input" value="True" {% if vehiculo.est_veh == True %} checked {% endif %} required>
                     <label for="est_veh_0" class="custom-control-label">Funcionamiento</label>
                 </div>
                 <div class="custom-control custom-checkbox custom-control-inline">
-                    <input name="est_veh" id="est_veh_1" type="checkbox" class="custom-control-input" value="False">
+                    <input name="est_veh" id="est_veh_1" type="radio" class="custom-control-input" value="False" {% if vehiculo.est_veh == False %} checked {% endif %} required>
                     <label for="est_veh_1" class="custom-control-label">No Funcionamiento</label>
                 </div>
             </div>

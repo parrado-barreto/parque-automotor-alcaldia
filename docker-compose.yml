@@ -17,8 +17,31 @@ services:
     ports:
       - "8000:8000"
 
+  celery:
+    container_name: celery
+    build: .
+    command: celery -A parque_automotor beat -l INFO
+    volumes:
+      - .:/src
+    environment:
+      - DEBUG=1
+      - DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]
+    links:
+      - rabbitmq
+    depends_on:
+      - parque_automotor
+      - rabbitmq
+
+  rabbitmq:
+    image: rabbitmq:3.12.0-management
+    container_name: broker
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+
   db:
     image: postgres:11
     container_name: parque_automotor-postgres
     environment: 
       POSTGRES_PASSWORD: postgres
+

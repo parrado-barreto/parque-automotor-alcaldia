@@ -1,5 +1,6 @@
 from .common import *
 import dj_database_url
+from celery.schedules import crontab
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'p3gm=o9o+_r(5*o$$kn#h*8#n1r)aquf^^nm_v5u0pn^qa$=4*'
@@ -44,3 +45,10 @@ else:
             'PORT': 5432,
         }
     }
+
+CELERYBEAT_SCHEDULE ={
+    'run-daily': {
+        'task': 'panel.tasks.soat',
+        'schedule': crontab(minute=1, hour=0),
+    },
+}
