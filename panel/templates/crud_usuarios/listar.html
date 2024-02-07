@@ -16,10 +16,10 @@ Lista de Usuarios
   </div>
   <form action="" method="POST" style="float: left">
     <div style="display: inline-block;">
-      <form action="" method="POST">
+      <form action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <input type="text" name="keyword" id="keyword" class="form-control" style="width: 150px; display: inline-block;">
-        <button type="submit" name="search"class="btn btn-success"><i class="fa fa-search"></i></button>
+        <button type="submit" name="search" class="btn btn-success"><i class="fa fa-search"></i></button>
       
     </div>
   </form>

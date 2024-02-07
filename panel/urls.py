@@ -45,4 +45,6 @@ urlpatterns = [
     path('actualizarman/<int:idman>', views.actualizarman, name="actualizarman"),
     path('eliminarman/<int:idman>', views.eliminarman, name="eliminarman"),
     path('soon',views.soon, name="soon"),
+    path('listarperm', views.listarperm, name="listarperm"),
+    # path('agregarperm', views.agregarperm, name="agregarperm"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

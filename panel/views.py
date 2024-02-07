@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Usuarios, Dependencias, Vehiculos, Soat, Tecnicomecanica, VehiculosAsignados, Preoperacionalesm, Preoperacionalesc, Mantenimiento
+from .models import Usuarios, Dependencias, Vehiculos, Soat, Tecnicomecanica, VehiculosAsignados, Preoperacionalesm, Preoperacionalesc, Mantenimiento, Periodicasm
 from django.db.models import Q
 from datetime import date
 from django.contrib import messages
@@ -20,17 +20,17 @@ def listar(request):
         busqueda = request.POST.get('keyword')
         lista = Usuarios.objects.all()
 
-        if busqueda is not None:
-            res_busqueda = lista.filter(
-            Q(id_per__icontains=busqueda) |
-            Q(nom_per__icontains=busqueda) |
-            Q(ape_per__icontains=busqueda) |
-            Q(tel_per__icontains=busqueda) |
-            Q(dir_per__icontains=busqueda) |
-            Q(cat_per__icontains=busqueda) |
-            Q(vig_per__icontains=busqueda) |
-            Q(dep_per__icontains=busqueda) 
-            )
+        if busqueda is not None and busqueda.strip():
+            if busqueda.isdigit():
+                res_busqueda = lista.filter(id_per=int(busqueda))
+            else:
+                res_busqueda = lista.filter(
+                    Q(nom_per__icontains=busqueda) |
+                    Q(ape_per__icontains=busqueda) |
+                    Q(tel_per__icontains=busqueda) |
+                    Q(dir_per__icontains=busqueda) |
+                    Q(cat_per__icontains=busqueda)
+                )
             datos = {'usuarios': res_busqueda}
             messages.success(request, 'Resultados encontrados por: {}'.format(busqueda))
             return render(request, "crud_usuarios/listar.html", datos)
@@ -1036,3 +1036,26 @@ def eliminarman(request, idman):
         return render(request,"revisiones/mantenimiento/eliminar.html",datos)
 def soon(request):
     return render(request,'soon.html')
+
+
+def listarperm(request):
+    if request.method == 'POST':
+        busqueda = request.POST.get('keyword')
+        lista = Periodicasm.objects.all()
+
+        if busqueda is not None:
+            res_busqueda = lista.filter(
+                Q(id_periodica__icontains=busqueda) |
+                Q(fecha__icontains=busqueda) |
+                Q(pla_pre=busqueda)
+            )
+            messages.success(request, 'Resultados encontrados por: {}'.format(busqueda))
+            datos = {'perms': res_busqueda}
+            return render(request, "revisiones/periodicas/moto/listar.html", datos)
+        else:
+            datos = {'perms': lista}
+            return render(request, "revisiones/periodicas/moto/listar.html", datos)
+    else:
+        perms = Periodicasm.objects.order_by('-id_periodica')[:10]
+        datos = {'perms': perms}
+        return render(request, "revisiones/periodicas/moto/listar.html", datos)

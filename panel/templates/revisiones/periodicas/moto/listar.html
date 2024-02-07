@@ -1,0 +1,529 @@
+{% extends 'index_master.html' %}
+{% block title %}
+Lista de revisiones periodicas
+{% endblock %}
+{% block content %}
+<div class="right_col" role="main">
+  <h1>Lista de revisiones periodicas</h1>
+  <div class="messages">
+    {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+      <li class="{{ message.tags }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </div>
+  <form action="" method="POST" style="float: left">
+    <div style="display: inline-block;">
+        {% csrf_token %}
+        <input type="text" name="keyword" id="keyword" class="form-control"
+          style="width: 150px; display: inline-block;">
+        <button type="submit" name="search" class="btn btn-success"><i class="fa fa-search"></i></button>
+
+    </div>
+  </form>
+  <button name="agregarperm" class="btn btn-primary" onclick="window.location.href='agregarperm'"
+    style="display: inline-block;"><i class="fa fa-plus"></i> Nueva revisión periodica</button>
+  <div class="table-responsive">
+
+    <table class="table ">
+        <tr>
+          <th scope="col">ID</th>
+          {% for u in perms %}
+          <td>{{ u.id_periodica }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Placa</th>
+          {% for u in perms %}
+          <td>{{ u.pla_pre_id }}</td>
+          {% endfor %}
+        </tr>
+
+        <tr>
+          <th scope="col">Fecha</th>
+          {% for u in perms %}
+          <td>{{ u.fecha }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Kilometraje</th>
+          {% for u in perms %}
+          <td>{{ u.kilometraje }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">encendido</th>
+          {% for u in perms %}
+          <td>{{ u.encendido }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">defensa</th>
+          {% for u in perms %}
+          <td>{{ u.defensa }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">llaves</th>
+          {% for u in perms %}
+          <td>{{ u.llaves }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Chasis</th>
+          {% for u in perms %}
+          <td>{{ u.carburador }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Suspensión</th>
+          {% for u in perms %}
+          <td>{{ u.autocarburador }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Frenos</th>
+          {% for u in perms %}
+          <td>{{ u.bobina_encendido }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Llantas</th>
+          {% for u in perms %}
+          <td>{{ u.bobina_alta }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Rines</th>
+          {% for u in perms %}
+          <td>{{ u.bateria }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Tren de arrastre</th>
+          {% for u in perms %}
+          <td>{{ u.bujia }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Exosto</th>
+          {% for u in perms %}
+          <td>{{ u.capuchon_bujia }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Retrovisores</th>
+          {% for u in perms %}
+          <td>{{ u.punzon }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Mantenimiento mecánico</th>
+          {% for u in perms %}
+          <td>{{ u.pata }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Luces</th>
+          {% for u in perms %}
+          <td>{{ u.kit_arrastre }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Direccionales y stop</th>
+          {% for u in perms %}
+          <td>{{ u.tapa_pinon }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Pito</th>
+          {% for u in perms %}
+          <td>{{ u.guia_cadena }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">D</th>
+          {% for u in perms %}
+          <td>{{ u.guarda_cadena }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">D</th>
+          {% for u in perms %}
+          <td>{{ u.patada_crank }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">D</th>
+          {% for u in perms %}
+          <td>{{ u.tacometro }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">D</th>
+          {% for u in perms %}
+          <td>{{ u.perilla_tacometro }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">D</th>
+          {% for u in perms %}
+          <td>{{ u.switch }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">D</th>
+          {% for u in perms %}
+          <td>{{ u.palanca_cambios }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">D</th>
+          {% for u in perms %}
+          <td>{{ u.guayas }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">D</th>
+          {% for u in perms %}
+          <td>{{ u.guardabarros }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">D</th>
+          {% for u in perms %}
+          <td>{{ u.rines }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">D</th>
+          {% for u in perms %}
+          <td>{{ u.inyeccion }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">D</th>
+          {% for u in perms %}
+          <td>{{ u.guias_aire }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">D</th>
+          {% for u in perms %}
+          <td>{{ u.tapa }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">D</th>
+          {% for u in perms %}
+          <td>{{ u.sirena }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">D</th>
+          {% for u in perms %}
+          <td>{{ u.llanta_delantera }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">D</th>
+          {% for u in perms %}
+          <td>{{ u.llanta_trasera }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">D</th>
+          {% for u in perms %}
+          <td>{{ u.manillares }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">D</th>
+          {% for u in perms %}
+          <td>{{ u.protector_manillar }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">D</th>
+          {% for u in perms %}
+          <td>{{ u.mango_acelerador }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">D</th>
+          {% for u in perms %}
+          <td>{{ u.manubrio }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">D</th>
+          {% for u in perms %}
+          <td>{{ u.mando_luces }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">D</th>
+          {% for u in perms %}
+          <td>{{ u.maniguetas }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">D</th>
+          {% for u in perms %}
+          <td>{{ u.herramientas }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">D</th>
+          {% for u in perms %}
+          <td>{{ u.pastillas_delanteras }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">D</th>
+          {% for u in perms %}
+          <td>{{ u.pastillas_traseras }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">D</th>
+          {% for u in perms %}
+          <td>{{ u.bandas }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">D</th>
+          {% for u in perms %}
+          <td>{{ u.tapas_laterales }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">D</th>
+          {% for u in perms %}
+          <td>{{ u.carenaje }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">D</th>
+          {% for u in perms %}
+          <td>{{ u.tanque }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">D</th>
+          {% for u in perms %}
+          <td>{{ u.tapa_tanque }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">D</th>
+          {% for u in perms %}
+          <td>{{ u.exhosto }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">D</th>
+          {% for u in perms %}
+          <td>{{ u.rejillas_exhosto }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">D</th>
+          {% for u in perms %}
+          <td>{{ u.telescopios }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">D</th>
+          {% for u in perms %}
+          <td>{{ u.tapa_telescopios }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">D</th>
+          {% for u in perms %}
+          <td>{{ u.cauchos_telescopios }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">D</th>
+          {% for u in perms %}
+          <td>{{ u.direccionales }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">D</th>
+          {% for u in perms %}
+          <td>{{ u.control_luces }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">D</th>
+          {% for u in perms %}
+          <td>{{ u.strober_delantero }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">D</th>
+          {% for u in perms %}
+          <td>{{ u.strober_trasero }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">D</th>
+          {% for u in perms %}
+          <td>{{ u.descargapies }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">D</th>
+          {% for u in perms %}
+          <td>{{ u.tanque_aceite }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">D</th>
+          {% for u in perms %}
+          <td>{{ u.tapa_tanque_aceite }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">D</th>
+          {% for u in perms %}
+          <td>{{ u.pastas_reflectoras }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">D</th>
+          {% for u in perms %}
+          <td>{{ u.sillin }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">D</th>
+          {% for u in perms %}
+          <td>{{ u.porta_placa }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">D</th>
+          {% for u in perms %}
+          <td>{{ u.tijera }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">D</th>
+          {% for u in perms %}
+          <td>{{ u.espejos }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">D</th>
+          {% for u in perms %}
+          <td>{{ u.farola }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">D</th>
+          {% for u in perms %}
+          <td>{{ u.rectificador_corriente }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">D</th>
+          {% for u in perms %}
+          <td>{{ u.flancher }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">D</th>
+          {% for u in perms %}
+          <td>{{ u.cdi }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">D</th>
+          {% for u in perms %}
+          <td>{{ u.stop }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">D</th>
+          {% for u in perms %}
+          <td>{{ u.monoshock }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">D</th>
+          {% for u in perms %}
+          <td>{{ u.velocimetro }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">D</th>
+          {% for u in perms %}
+          <td>{{ u.casco }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">D</th>
+          {% for u in perms %}
+          <td>{{ u.chaleco }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">D</th>
+          {% for u in perms %}
+          <td>{{ u.estado_higiene }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Foto delantera</th>
+          {% for u in perms %}
+          <td><img style="height: 50px; width: 100px;" src="media/{{ u.foto_1 }}" ></td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Foto trasera</th>
+          {% for u in perms %}
+          <td><img style="height: 50px; width: 100px;" src="media/{{ u.foto_2 }}" ></td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Foto de lado derecho</th>
+          {% for u in perms %}
+          <td><img style="height: 50px; width: 100px;" src="media/{{ u.foto_3 }}" ></td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">Foto de lado izquierdo</th>
+          {% for u in perms %}
+          <td><img style="height: 50px; width: 100px;" src="media/{{ u.foto_4 }}" ></td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope="col">observaciones</th>
+          {% for u in perms %}
+          <td>{{ u.observaciones }}</td>
+          {% endfor %}
+        </tr>
+{#        <tr>#}
+{#          <th scope="col">Acción</th>#}
+{#          {% for u in perms %}#}
+{#          <td>#}
+{#            <button class="btn btn-warning" onclick="window.location.href='actualizarprem/{{ u.id_periodica }}'"><i#}
+{#                class="fa fa-refresh"></i></button>#}
+{#            <button class="btn btn-danger" onclick="window.location.href='eliminarprem/{{ u.id_periodica }}'"><i#}
+{#                class="fa fa-trash"></i></button>#}
+{##}
+{#          </td>#}
+{#          {% endfor %}#}
+{#        </tr>#}
+    </table>
+  </div>
+
+</div>
+
+{% endblock %}
