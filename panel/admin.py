@@ -1,5 +1,5 @@
 from django.contrib import admin
-from panel.models import Dependencias, Usuarios, Soat, Tecnicomecanica, Vehiculos, VehiculosAsignados, Preoperacionalesm, Preoperacionalesc, Mantenimiento
+from panel.models import Dependencias, Usuarios, Soat, Tecnicomecanica, Vehiculos, VehiculosAsignados, Preoperacionalesm, Preoperacionalesc, Mantenimiento, Periodicasm
 
 admin.site.register(Dependencias)
 admin.site.register(Usuarios)
@@ -10,4 +10,5 @@ admin.site.register(VehiculosAsignados)
 admin.site.register(Preoperacionalesm)
 admin.site.register(Preoperacionalesc)
 admin.site.register(Mantenimiento)
+admin.site.register(Periodicasm)
 

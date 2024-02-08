@@ -5,7 +5,7 @@ Agregar revisión periodica
 {% block content %}
 <div class="right_col" role="main">
   <h1>Agregar revisión periodica para moto</h1>
-  <form action="agregarperm" method="POST">
+  <form action="agregarperm" method="POST" enctype="multipart/form-data">
     <div class="messages">
       {% if messages %}
       <ul class="messages">
@@ -25,7 +25,7 @@ Agregar revisión periodica
               <i class="fa fa-motorcycle"></i>
             </div>
           </div>
-          <input id="pla_pre" name="pla_per" type="text" class="form-control" required="required">
+          <input id="pla_per" name="pla_per" type="text" class="form-control" required="required">
         </div>
       </div>
     </div>
@@ -56,7 +56,7 @@ Agregar revisión periodica
       </div>
     </div>
     <div class="form-group row">
-      <label for="encendido" class="col-4 col-form-label">Nivel de aceite</label>
+      <label for="encendido" class="col-4 col-form-label">Encendido</label>
       <div class="col-8">
         <select id="encendido" name="encendido" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -67,7 +67,7 @@ Agregar revisión periodica
     </div>
 
     <div class="form-group row">
-      <label for="defensa" class="col-4 col-form-label">Manillares</label>
+      <label for="defensa" class="col-4 col-form-label">Defensa</label>
       <div class="col-8">
         <select id="defensa" name="defensa" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -78,7 +78,7 @@ Agregar revisión periodica
     </div>
 
     <div class="form-group row">
-      <label for="llaves" class="col-4 col-form-label">Direccion</label>
+      <label for="llaves" class="col-4 col-form-label">Llaves</label>
       <div class="col-8">
         <select id="llaves" name="llaves" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -89,7 +89,7 @@ Agregar revisión periodica
     </div>
 
     <div class="form-group row">
-      <label for="carburador" class="col-4 col-form-label">Guardabarros</label>
+      <label for="carburador" class="col-4 col-form-label">Carburador</label>
       <div class="col-8">
         <select id="carburador" name="carburador" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -100,7 +100,7 @@ Agregar revisión periodica
     </div>
 
     <div class="form-group row">
-      <label for="autocarburador" class="col-4 col-form-label">Chasis</label>
+      <label for="autocarburador" class="col-4 col-form-label">Autocarburador</label>
       <div class="col-8">
         <select id="autocarburador" name="autocarburador" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -111,7 +111,7 @@ Agregar revisión periodica
     </div>
 
     <div class="form-group row">
-      <label for="bobina_encendido" class="col-4 col-form-label">Suspensión</label>
+      <label for="bobina_encendido" class="col-4 col-form-label">Bobina encendido</label>
       <div class="col-8">
         <select id="bobina_encendido" name="bobina_encendido" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -122,7 +122,7 @@ Agregar revisión periodica
     </div>
 
     <div class="form-group row">
-      <label for="bobina_alta" class="col-4 col-form-label">Frenos</label>
+      <label for="bobina_alta" class="col-4 col-form-label">Bobina de alta</label>
       <div class="col-8">
         <select id="bobina_alta" name="bobina_alta" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -133,7 +133,7 @@ Agregar revisión periodica
     </div>
 
     <div class="form-group row">
-      <label for="bateria" class="col-4 col-form-label">Llantas</label>
+      <label for="bateria" class="col-4 col-form-label">Bateria</label>
       <div class="col-8">
         <select id="bateria" name="bateria" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -144,7 +144,7 @@ Agregar revisión periodica
     </div>
 
     <div class="form-group row">
-      <label for="bujia" class="col-4 col-form-label">Rines</label>
+      <label for="bujia" class="col-4 col-form-label">Bujia</label>
       <div class="col-8">
         <select id="bujia" name="bujia" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -155,7 +155,7 @@ Agregar revisión periodica
     </div>
 
     <div class="form-group row">
-      <label for="capuchon_bujia" class="col-4 col-form-label">Tren de arrastre</label>
+      <label for="capuchon_bujia" class="col-4 col-form-label">Capuchon Bujia</label>
       <div class="col-8">
         <select id="capuchon_bujia" name="capuchon_bujia" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -166,7 +166,7 @@ Agregar revisión periodica
     </div>
 
     <div class="form-group row">
-      <label for="punzon" class="col-4 col-form-label">Exosto</label>
+      <label for="punzon" class="col-4 col-form-label">Punzon Carburador</label>
       <div class="col-8">
         <select id="punzon" name="punzon" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -177,7 +177,7 @@ Agregar revisión periodica
     </div>
 
     <div class="form-group row">
-      <label for="pata" class="col-4 col-form-label">Retrovisores</label>
+      <label for="pata" class="col-4 col-form-label">Pata estacionamiento</label>
       <div class="col-8">
         <select id="pata" name="pata" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -188,7 +188,7 @@ Agregar revisión periodica
     </div>
 
     <div class="form-group row">
-      <label for="kit_arrastre" class="col-4 col-form-label">Mantenimiento mecánico</label>
+      <label for="kit_arrastre" class="col-4 col-form-label">Kit Arrastre</label>
       <div class="col-8">
         <select id="kit_arrastre" name="kit_arrastre" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -199,7 +199,7 @@ Agregar revisión periodica
     </div>
 
     <div class="form-group row">
-      <label for="tapa_pinon" class="col-4 col-form-label">Luces (altas y bajas)</label>
+      <label for="tapa_pinon" class="col-4 col-form-label">Tapa Piñon Arrastre</label>
       <div class="col-8">
         <select id="tapa_pinon" name="tapa_pinon" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -210,7 +210,7 @@ Agregar revisión periodica
     </div>
 
     <div class="form-group row">
-      <label for="guia_cadena" class="col-4 col-form-label">Direccionales y Stop</label>
+      <label for="guia_cadena" class="col-4 col-form-label">Guia Cadena</label>
       <div class="col-8">
         <select id="guia_cadena" name="guia_cadena" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -221,7 +221,7 @@ Agregar revisión periodica
     </div>
 
     <div class="form-group row">
-      <label for="guarda_cadena" class="col-4 col-form-label">Pito (Bocina)</label>
+      <label for="guarda_cadena" class="col-4 col-form-label">Guarda Cadena</label>
       <div class="col-8">
         <select id="guarda_cadena" name="guarda_cadena" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -231,7 +231,7 @@ Agregar revisión periodica
       </div>
     </div>
     <div class="form-group row">
-      <label for="patada_crank" class="col-4 col-form-label">Pito (Bocina)</label>
+      <label for="patada_crank" class="col-4 col-form-label">Patada Crank</label>
       <div class="col-8">
         <select id="patada_crank" name="patada_crank" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -241,7 +241,7 @@ Agregar revisión periodica
       </div>
     </div>
     <div class="form-group row">
-      <label for="tacometro" class="col-4 col-form-label">Pito (Bocina)</label>
+      <label for="tacometro" class="col-4 col-form-label">Tacometro</label>
       <div class="col-8">
         <select id="tacometro" name="tacometro" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -251,7 +251,7 @@ Agregar revisión periodica
       </div>
     </div>
     <div class="form-group row">
-      <label for="perilla_tacometro" class="col-4 col-form-label">Pito (Bocina)</label>
+      <label for="perilla_tacometro" class="col-4 col-form-label">Perilla Tacometros</label>
       <div class="col-8">
         <select id="perilla_tacometro" name="perilla_tacometro" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -261,7 +261,7 @@ Agregar revisión periodica
       </div>
     </div>
     <div class="form-group row">
-      <label for="switch" class="col-4 col-form-label">Pito (Bocina)</label>
+      <label for="switch" class="col-4 col-form-label">Switch</label>
       <div class="col-8">
         <select id="switch" name="switch" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -271,7 +271,7 @@ Agregar revisión periodica
       </div>
     </div>
     <div class="form-group row">
-      <label for="palanca_cambios" class="col-4 col-form-label">Pito (Bocina)</label>
+      <label for="palanca_cambios" class="col-4 col-form-label">Palanca Cambios</label>
       <div class="col-8">
         <select id="palanca_cambios" name="palanca_cambios" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -281,7 +281,7 @@ Agregar revisión periodica
       </div>
     </div>
     <div class="form-group row">
-      <label for="guayas" class="col-4 col-form-label">Pito (Bocina)</label>
+      <label for="guayas" class="col-4 col-form-label">Guayas Y Fondas</label>
       <div class="col-8">
         <select id="guayas" name="guayas" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -291,7 +291,7 @@ Agregar revisión periodica
       </div>
     </div>
     <div class="form-group row">
-      <label for="guardabarros" class="col-4 col-form-label">Pito (Bocina)</label>
+      <label for="guardabarros" class="col-4 col-form-label">Guardabarros</label>
       <div class="col-8">
         <select id="guardabarros" name="guardabarros" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -301,7 +301,7 @@ Agregar revisión periodica
       </div>
     </div>
     <div class="form-group row">
-      <label for="rines" class="col-4 col-form-label">Pito (Bocina)</label>
+      <label for="rines" class="col-4 col-form-label">Rines</label>
       <div class="col-8">
         <select id="rines" name="rines" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -311,7 +311,7 @@ Agregar revisión periodica
       </div>
     </div>
     <div class="form-group row">
-      <label for="inyeccion" class="col-4 col-form-label">Pito (Bocina)</label>
+      <label for="inyeccion" class="col-4 col-form-label">Sistema De Inyeccion</label>
       <div class="col-8">
         <select id="inyeccion" name="inyeccion" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -321,7 +321,7 @@ Agregar revisión periodica
       </div>
     </div>
     <div class="form-group row">
-      <label for="guias_aire" class="col-4 col-form-label">Pito (Bocina)</label>
+      <label for="guias_aire" class="col-4 col-form-label">Guias De Aire</label>
       <div class="col-8">
         <select id="guias_aire" name="guias_aire" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -331,7 +331,7 @@ Agregar revisión periodica
       </div>
     </div>
     <div class="form-group row">
-      <label for="sirena" class="col-4 col-form-label">Pito (Bocina)</label>
+      <label for="sirena" class="col-4 col-form-label">Sirena</label>
       <div class="col-8">
         <select id="sirena" name="sirena" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -341,7 +341,7 @@ Agregar revisión periodica
       </div>
     </div>
     <div class="form-group row">
-      <label for="llanta_delantera" class="col-4 col-form-label">Pito (Bocina)</label>
+      <label for="llanta_delantera" class="col-4 col-form-label">Llantas Delantera</label>
       <div class="col-8">
         <select id="llanta_delantera" name="llanta_delantera" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -351,7 +351,7 @@ Agregar revisión periodica
       </div>
     </div>
     <div class="form-group row">
-      <label for="llanta_trasera" class="col-4 col-form-label">Pito (Bocina)</label>
+      <label for="llanta_trasera" class="col-4 col-form-label">Llantas Trasera</label>
       <div class="col-8">
         <select id="llanta_trasera" name="llanta_trasera" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -361,7 +361,7 @@ Agregar revisión periodica
       </div>
     </div>
     <div class="form-group row">
-      <label for="manillares" class="col-4 col-form-label">Pito (Bocina)</label>
+      <label for="manillares" class="col-4 col-form-label">Manillares</label>
       <div class="col-8">
         <select id="manillares" name="manillares" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -371,7 +371,7 @@ Agregar revisión periodica
       </div>
     </div>
     <div class="form-group row">
-      <label for="protector_manillar" class="col-4 col-form-label">Pito (Bocina)</label>
+      <label for="protector_manillar" class="col-4 col-form-label">Protector Manillar</label>
       <div class="col-8">
         <select id="protector_manillar" name="protector_manillar" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -381,7 +381,7 @@ Agregar revisión periodica
       </div>
     </div>
     <div class="form-group row">
-      <label for="mango_acelerador" class="col-4 col-form-label">Pito (Bocina)</label>
+      <label for="mango_acelerador" class="col-4 col-form-label">Mango Acelerador</label>
       <div class="col-8">
         <select id="mango_acelerador" name="mango_acelerador" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -391,7 +391,7 @@ Agregar revisión periodica
       </div>
     </div>
     <div class="form-group row">
-      <label for="manubrio" class="col-4 col-form-label">Pito (Bocina)</label>
+      <label for="manubrio" class="col-4 col-form-label">Manubrio</label>
       <div class="col-8">
         <select id="manubrio" name="manubrio" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -401,7 +401,7 @@ Agregar revisión periodica
       </div>
     </div>
     <div class="form-group row">
-      <label for="mando_luces" class="col-4 col-form-label">Pito (Bocina)</label>
+      <label for="mando_luces" class="col-4 col-form-label">Mando Luces</label>
       <div class="col-8">
         <select id="mando_luces" name="mando_luces" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -411,7 +411,7 @@ Agregar revisión periodica
       </div>
     </div>
     <div class="form-group row">
-      <label for="maniguetas" class="col-4 col-form-label">Pito (Bocina)</label>
+      <label for="maniguetas" class="col-4 col-form-label">Maniguetas</label>
       <div class="col-8">
         <select id="maniguetas" name="maniguetas" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -421,7 +421,7 @@ Agregar revisión periodica
       </div>
     </div>
     <div class="form-group row">
-      <label for="herramientas" class="col-4 col-form-label">Pito (Bocina)</label>
+      <label for="herramientas" class="col-4 col-form-label">Herramientas Piezas</label>
       <div class="col-8">
         <select id="herramientas" name="herramientas" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -431,7 +431,7 @@ Agregar revisión periodica
       </div>
     </div>
     <div class="form-group row">
-      <label for="pastillas_delanteras" class="col-4 col-form-label">Pito (Bocina)</label>
+      <label for="pastillas_delanteras" class="col-4 col-form-label">Pastillas Delanteras</label>
       <div class="col-8">
         <select id="pastillas_delanteras" name="pastillas_delanteras" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -441,7 +441,7 @@ Agregar revisión periodica
       </div>
     </div>
     <div class="form-group row">
-      <label for="pastillas_traseras" class="col-4 col-form-label">Pito (Bocina)</label>
+      <label for="pastillas_traseras" class="col-4 col-form-label">Pastillas Traseras</label>
       <div class="col-8">
         <select id="pastillas_traseras" name="pastillas_traseras" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -451,7 +451,7 @@ Agregar revisión periodica
       </div>
     </div>
     <div class="form-group row">
-      <label for="bandas" class="col-4 col-form-label">Pito (Bocina)</label>
+      <label for="bandas" class="col-4 col-form-label">Bandas Frenos</label>
       <div class="col-8">
         <select id="bandas" name="bandas" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -461,7 +461,7 @@ Agregar revisión periodica
       </div>
     </div>
     <div class="form-group row">
-      <label for="tapas_laterales" class="col-4 col-form-label">Pito (Bocina)</label>
+      <label for="tapas_laterales" class="col-4 col-form-label">Tapas Laterales</label>
       <div class="col-8">
         <select id="tapas_laterales" name="tapas_laterales" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -471,7 +471,7 @@ Agregar revisión periodica
       </div>
     </div>
     <div class="form-group row">
-      <label for="carenaje" class="col-4 col-form-label">Pito (Bocina)</label>
+      <label for="carenaje" class="col-4 col-form-label">Carenaje</label>
       <div class="col-8">
         <select id="carenaje" name="carenaje" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -481,7 +481,7 @@ Agregar revisión periodica
       </div>
     </div>
     <div class="form-group row">
-      <label for="tanque" class="col-4 col-form-label">Pito (Bocina)</label>
+      <label for="tanque" class="col-4 col-form-label">Tanque De Gasolina</label>
       <div class="col-8">
         <select id="tanque" name="tanque" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -491,7 +491,7 @@ Agregar revisión periodica
       </div>
     </div>
     <div class="form-group row">
-      <label for="tapa_tanque" class="col-4 col-form-label">Pito (Bocina)</label>
+      <label for="tapa_tanque" class="col-4 col-form-label">Tapa Tanque Gasolina</label>
       <div class="col-8">
         <select id="tapa_tanque" name="tapa_tanque" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -501,7 +501,7 @@ Agregar revisión periodica
       </div>
     </div>
     <div class="form-group row">
-      <label for="exhosto" class="col-4 col-form-label">Pito (Bocina)</label>
+      <label for="exhosto" class="col-4 col-form-label">Exhosto</label>
       <div class="col-8">
         <select id="exhosto" name="exhosto" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -511,7 +511,7 @@ Agregar revisión periodica
       </div>
     </div>
     <div class="form-group row">
-      <label for="rejillas_exhosto" class="col-4 col-form-label">Pito (Bocina)</label>
+      <label for="rejillas_exhosto" class="col-4 col-form-label">Rejillas Exhosto</label>
       <div class="col-8">
         <select id="rejillas_exhosto" name="rejillas_exhosto" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -521,7 +521,7 @@ Agregar revisión periodica
       </div>
     </div>
     <div class="form-group row">
-      <label for="telescopios" class="col-4 col-form-label">Pito (Bocina)</label>
+      <label for="telescopios" class="col-4 col-form-label">Telescopios</label>
       <div class="col-8">
         <select id="telescopios" name="telescopios" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -531,7 +531,7 @@ Agregar revisión periodica
       </div>
     </div>
     <div class="form-group row">
-      <label for="tapa_telescopios" class="col-4 col-form-label">Pito (Bocina)</label>
+      <label for="tapa_telescopios" class="col-4 col-form-label">Tapas Telescopios</label>
       <div class="col-8">
         <select id="tapa_telescopios" name="tapa_telescopios" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -541,7 +541,7 @@ Agregar revisión periodica
       </div>
     </div>
     <div class="form-group row">
-      <label for="cauchos_telescopios" class="col-4 col-form-label">Pito (Bocina)</label>
+      <label for="cauchos_telescopios" class="col-4 col-form-label">Cauchos Telescopios</label>
       <div class="col-8">
         <select id="cauchos_telescopios" name="cauchos_telescopios" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -551,7 +551,7 @@ Agregar revisión periodica
       </div>
     </div>
     <div class="form-group row">
-      <label for="direccionales" class="col-4 col-form-label">Pito (Bocina)</label>
+      <label for="direccionales" class="col-4 col-form-label">Direccionales</label>
       <div class="col-8">
         <select id="direccionales" name="direccionales" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -561,7 +561,7 @@ Agregar revisión periodica
       </div>
     </div>
     <div class="form-group row">
-      <label for="control_luces" class="col-4 col-form-label">Pito (Bocina)</label>
+      <label for="control_luces" class="col-4 col-form-label">Control De Luces Stroboscopicas</label>
       <div class="col-8">
         <select id="control_luces" name="control_luces" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -571,7 +571,7 @@ Agregar revisión periodica
       </div>
     </div>
     <div class="form-group row">
-      <label for="strober_delantero" class="col-4 col-form-label">Pito (Bocina)</label>
+      <label for="strober_delantero" class="col-4 col-form-label">Strober Delantero</label>
       <div class="col-8">
         <select id="strober_delantero" name="strober_delantero" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -581,7 +581,7 @@ Agregar revisión periodica
       </div>
     </div>
     <div class="form-group row">
-      <label for="strober_trasero" class="col-4 col-form-label">Pito (Bocina)</label>
+      <label for="strober_trasero" class="col-4 col-form-label">Strober Trasero</label>
       <div class="col-8">
         <select id="strober_trasero" name="strober_trasero" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -591,7 +591,7 @@ Agregar revisión periodica
       </div>
     </div>
     <div class="form-group row">
-      <label for="descargapies" class="col-4 col-form-label">Pito (Bocina)</label>
+      <label for="descargapies" class="col-4 col-form-label">Descargapies</label>
       <div class="col-8">
         <select id="descargapies" name="descargapies" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -601,7 +601,7 @@ Agregar revisión periodica
       </div>
     </div>
     <div class="form-group row">
-      <label for="tanque_aceite" class="col-4 col-form-label">Pito (Bocina)</label>
+      <label for="tanque_aceite" class="col-4 col-form-label">Tanque De Aceite</label>
       <div class="col-8">
         <select id="tanque_aceite" name="tanque_aceite" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -611,7 +611,7 @@ Agregar revisión periodica
       </div>
     </div>
     <div class="form-group row">
-      <label for="tapa_tanque_aceite" class="col-4 col-form-label">Pito (Bocina)</label>
+      <label for="tapa_tanque_aceite" class="col-4 col-form-label">Tapa Tanque Aceite</label>
       <div class="col-8">
         <select id="tapa_tanque_aceite" name="tapa_tanque_aceite" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -621,7 +621,7 @@ Agregar revisión periodica
       </div>
     </div>
     <div class="form-group row">
-      <label for="pastas_reflectoras" class="col-4 col-form-label">Pito (Bocina)</label>
+      <label for="pastas_reflectoras" class="col-4 col-form-label">Pastas Reflectoras</label>
       <div class="col-8">
         <select id="pastas_reflectoras" name="pastas_reflectoras" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -631,7 +631,7 @@ Agregar revisión periodica
       </div>
     </div>
     <div class="form-group row">
-      <label for="sillin" class="col-4 col-form-label">Pito (Bocina)</label>
+      <label for="sillin" class="col-4 col-form-label">Sillin</label>
       <div class="col-8">
         <select id="sillin" name="sillin" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -641,7 +641,7 @@ Agregar revisión periodica
       </div>
     </div>
     <div class="form-group row">
-      <label for="porta_placa" class="col-4 col-form-label">Pito (Bocina)</label>
+      <label for="porta_placa" class="col-4 col-form-label">Porta Placa</label>
       <div class="col-8">
         <select id="porta_placa" name="porta_placa" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -651,7 +651,7 @@ Agregar revisión periodica
       </div>
     </div>
     <div class="form-group row">
-      <label for="tijera" class="col-4 col-form-label">Pito (Bocina)</label>
+      <label for="tijera" class="col-4 col-form-label">Tijera</label>
       <div class="col-8">
         <select id="tijera" name="tijera" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -661,7 +661,7 @@ Agregar revisión periodica
       </div>
     </div>
     <div class="form-group row">
-      <label for="espejos" class="col-4 col-form-label">Pito (Bocina)</label>
+      <label for="espejos" class="col-4 col-form-label">Espejos</label>
       <div class="col-8">
         <select id="espejos" name="espejos" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -671,7 +671,7 @@ Agregar revisión periodica
       </div>
     </div>
     <div class="form-group row">
-      <label for="farola" class="col-4 col-form-label">Pito (Bocina)</label>
+      <label for="farola" class="col-4 col-form-label">Farola</label>
       <div class="col-8">
         <select id="farola" name="farola" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -681,7 +681,7 @@ Agregar revisión periodica
       </div>
     </div>
     <div class="form-group row">
-      <label for="rectificador_corriente" class="col-4 col-form-label">Pito (Bocina)</label>
+      <label for="rectificador_corriente" class="col-4 col-form-label">Rectificador Corriente</label>
       <div class="col-8">
         <select id="rectificador_corriente" name="rectificador_corriente" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -691,7 +691,7 @@ Agregar revisión periodica
       </div>
     </div>
     <div class="form-group row">
-      <label for="flancher" class="col-4 col-form-label">Pito (Bocina)</label>
+      <label for="flancher" class="col-4 col-form-label">Flancher</label>
       <div class="col-8">
         <select id="flancher" name="flancher" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -701,7 +701,7 @@ Agregar revisión periodica
       </div>
     </div>
     <div class="form-group row">
-      <label for="cdi" class="col-4 col-form-label">Pito (Bocina)</label>
+      <label for="cdi" class="col-4 col-form-label">Cdi Cdi</label>
       <div class="col-8">
         <select id="cdi" name="cdi" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -711,7 +711,7 @@ Agregar revisión periodica
       </div>
     </div>
     <div class="form-group row">
-      <label for="stop" class="col-4 col-form-label">Pito (Bocina)</label>
+      <label for="stop" class="col-4 col-form-label">Stop</label>
       <div class="col-8">
         <select id="stop" name="stop" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -721,7 +721,7 @@ Agregar revisión periodica
       </div>
     </div>
     <div class="form-group row">
-      <label for="monoshock" class="col-4 col-form-label">Pito (Bocina)</label>
+      <label for="monoshock" class="col-4 col-form-label">Monoshock</label>
       <div class="col-8">
         <select id="monoshock" name="monoshock" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -731,7 +731,7 @@ Agregar revisión periodica
       </div>
     </div>
     <div class="form-group row">
-      <label for="velocimetro" class="col-4 col-form-label">Pito (Bocina)</label>
+      <label for="velocimetro" class="col-4 col-form-label">Velocimetro</label>
       <div class="col-8">
         <select id="velocimetro" name="velocimetro" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -741,7 +741,7 @@ Agregar revisión periodica
       </div>
     </div>
     <div class="form-group row">
-      <label for="casco" class="col-4 col-form-label">Pito (Bocina)</label>
+      <label for="casco" class="col-4 col-form-label">Casco</label>
       <div class="col-8">
         <select id="casco" name="casco" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -751,7 +751,7 @@ Agregar revisión periodica
       </div>
     </div>
     <div class="form-group row">
-      <label for="chaleco" class="col-4 col-form-label">Pito (Bocina)</label>
+      <label for="chaleco" class="col-4 col-form-label">Chaleco</label>
       <div class="col-8">
         <select id="chaleco" name="chaleco" class="custom-select">
           <option value="bueno">Bueno</option>
@@ -761,16 +761,70 @@ Agregar revisión periodica
       </div>
     </div>
     <div class="form-group row">
-      <label for="estado_higiene" class="col-4 col-form-label">Pito (Bocina)</label>
+        <label class="col-4">Estado de Higiene</label>
+        <div class="col-8">
+            <div class="custom-control custom-checkbox custom-control-inline">
+                <input name="estado_higiene" id="estado_higiene_0" type="radio" class="custom-control-input" value="True" required>
+                <label for="estado_higiene_0" class="custom-control-label">Limpio</label>
+            </div>
+            <div class="custom-control custom-checkbox custom-control-inline">
+                <input name="estado_higiene" id="estado_higiene_1" type="radio" class="custom-control-input" value="False">
+                <label for="estado_higiene_1" class="custom-control-label">Sucio</label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group row">
+      <label for="foto_1" class="col-4 col-form-label">Foto delantera</label>
       <div class="col-8">
-        <select id="estado_higiene" name="estado_higiene" class="custom-select">
-          <option value="bueno">Bueno</option>
-          <option value="regular">Regular</option>
-          <option value="malo">Malo</option>
-        </select>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              <i class="fa fa-image"></i>
+            </div>
+          </div>
+          <input type="file" class="form-control" id="foto_1" name="foto_1" required accept="image/png, image/jpeg, .pdf"/>
+        </div>
       </div>
     </div>
-
+    <div class="form-group row">
+      <label for="foto_2" class="col-4 col-form-label">Foto trasera</label>
+      <div class="col-8">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              <i class="fa fa-image"></i>
+            </div>
+          </div>
+          <input type="file" class="form-control" id="foto_2" name="foto_2" required accept="image/png, image/jpeg, .pdf"/>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="foto_3" class="col-4 col-form-label">Foto de lado derecho</label>
+      <div class="col-8">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              <i class="fa fa-image"></i>
+            </div>
+          </div>
+          <input type="file" class="form-control" id="foto_3" name="foto_3" required accept="image/png, image/jpeg, .pdf"/>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="foto_4" class="col-4 col-form-label">Foto de lado izquierdo</label>
+      <div class="col-8">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              <i class="fa fa-image"></i>
+            </div>
+          </div>
+          <input type="file" class="form-control" id="foto_4" name="foto_4" required accept="image/png, image/jpeg, .pdf"/>
+        </div>
+      </div>
+    </div>
 
     <div class="form-group row">
       <label for="observaciones" class="col-4 col-form-label">Observaciones</label>

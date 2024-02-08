@@ -44,10 +44,12 @@ def listar(request):
    
 def agregar(request):
     if request.method == 'POST':
-        if request.POST.get('pas_per') and request.POST.get('nom_per') and request.POST.get('ape_per') and request.POST.get('tel_per') and request.POST.get('dir_per') and request.POST.get('cat_per') and request.POST.get('vig_per') and request.POST.get('dep_per'):
+        id_per = request.POST.get('id_per')
+        existing_user = Usuarios.objects.filter(id_per=id_per).exists()
+        if not existing_user and request.POST.get('pas_per') and request.POST.get('nom_per') and request.POST.get('ape_per') and request.POST.get('tel_per') and request.POST.get('dir_per') and request.POST.get('cat_per') and request.POST.get('vig_per') and request.POST.get('dep_per'):
             try:
                 user = Usuarios()
-                user.id_per = request.POST.get('id_per')
+                user.id_per = id_per
                 user.pas_per = request.POST.get('pas_per')
                 user.nom_per = request.POST.get('nom_per')
                 user.ape_per = request.POST.get('ape_per')
@@ -64,6 +66,9 @@ def agregar(request):
             except:
                 messages.error(request, 'Ha ocurrido un error en los datos, intentalo nuevamente por favor')
                 return redirect('agregar')
+        else:
+            messages.error(request, 'El usuario ya existe. Intentelo nuevamente')
+            return redirect('agregar')
     else:
         users = Usuarios.objects.all()
         deps = Dependencias.objects.all()
@@ -75,8 +80,6 @@ def actualizar(request, idUsuario):
         if request.method == 'POST':
             user = Usuarios()
             user.id_per = request.POST.get('id')
-            print("************************ID_USUARIO*****************************")
-            print(user.id_per)
             user.pas_per = request.POST.get('pas_per')
             user.nom_per = request.POST.get('nom_per')
             user.ape_per = request.POST.get('ape_per')
@@ -237,26 +240,35 @@ def listarveh(request):
     
 def agregarveh(request):
     if request.method == 'POST':
-        if  request.POST.get('pla_veh') and request.POST.get('num_lic_veh') and request.POST.get('cla_veh') and request.POST.get('mar_veh') and request.POST.get('mod_veh') and request.POST.get('col_veh') and request.POST.get('num_mot_veh') and request.POST.get('num_cha_veh') and request.POST.get('cil_veh') and request.POST.get('tip_car_veh') and request.POST.get('est_veh') and request.POST.get('dep_veh') and request.POST.get('soa_veh') and request.POST.get('tec_veh'):
-            veh = Vehiculos()
-            veh.pla_veh = request.POST.get('pla_veh')
-            veh.num_lic_veh = request.POST.get('num_lic_veh')
-            veh.cla_veh = request.POST.get('cla_veh')
-            veh.mar_veh = request.POST.get('mar_veh')
-            veh.mod_veh = request.POST.get('mod_veh')
-            veh.col_veh = request.POST.get('col_veh')
-            veh.num_mot_veh = request.POST.get('num_mot_veh')
-            veh.num_cha_veh = request.POST.get('num_cha_veh')
-            veh.cil_veh = request.POST.get('cil_veh')
-            veh.tip_car_veh = request.POST.get('tip_car_veh')
-            veh.est_veh = request.POST.get('est_veh')
-            veh.obs_veh = request.POST.get('obs_veh')
-            veh.dep_veh_id = request.POST.get('dep_veh')
-            veh.soa_veh_id = request.POST.get('soa_veh')
-            veh.tec_veh_id = request.POST.get('tec_veh')
-            veh.save()
-            messages.success(request, 'El vehiculo de placas {} fue agregado'.format(veh.pla_veh))
-            return redirect('listarveh')
+        id_veh = request.POST.get('pla_veh')
+        existing_veh = Vehiculos.objects.filter(pla_veh=id_veh).exists()
+        if  not existing_veh and request.POST.get('pla_veh') and request.POST.get('num_lic_veh') and request.POST.get('cla_veh') and request.POST.get('mar_veh') and request.POST.get('mod_veh') and request.POST.get('col_veh') and request.POST.get('num_mot_veh') and request.POST.get('num_cha_veh') and request.POST.get('cil_veh') and request.POST.get('tip_car_veh') and request.POST.get('est_veh') and request.POST.get('dep_veh') and request.POST.get('soa_veh') and request.POST.get('tec_veh'):
+            try:
+                veh = Vehiculos()
+                veh.pla_veh = id_veh
+                veh.num_lic_veh = request.POST.get('num_lic_veh')
+                veh.cla_veh = request.POST.get('cla_veh')
+                veh.mar_veh = request.POST.get('mar_veh')
+                veh.mod_veh = request.POST.get('mod_veh')
+                veh.col_veh = request.POST.get('col_veh')
+                veh.num_mot_veh = request.POST.get('num_mot_veh')
+                veh.num_cha_veh = request.POST.get('num_cha_veh')
+                veh.cil_veh = request.POST.get('cil_veh')
+                veh.tip_car_veh = request.POST.get('tip_car_veh')
+                veh.est_veh = request.POST.get('est_veh')
+                veh.obs_veh = request.POST.get('obs_veh')
+                veh.dep_veh_id = request.POST.get('dep_veh')
+                veh.soa_veh_id = request.POST.get('soa_veh')
+                veh.tec_veh_id = request.POST.get('tec_veh')
+                veh.save()
+                messages.success(request, 'El vehiculo de placas {} fue agregado'.format(veh.pla_veh))
+                return redirect('listarveh')
+            except:
+                messages.error(request, 'Ha ocurrido un error en los datos, intentalo nuevamente por favor')
+                return redirect('agregarveh')
+        else:
+            messages.success(request, 'El vehiculo de placas {} ya existe'.format(id_veh))
+            return redirect('agregarveh')
     else:
         vehs = Vehiculos.objects.all()
         deps = Dependencias.objects.all()
@@ -655,8 +667,8 @@ def listarprem(request):
 def agregarprem(request):
     if request.method == 'POST':
         if request.POST.get('pla_pre'):
+            prem = Preoperacionalesm()
             try:
-                prem = Preoperacionalesm()
                 prem.niv_pre = request.POST.get('niv_pre')
                 prem.man_pre = request.POST.get('man_pre')
                 prem.dir_pre = request.POST.get('dir_pre')
@@ -732,17 +744,17 @@ def actualizarprem(request, idprem):
 
 def eliminarprem(request, idprem):   
     try:
-            if request.method=='POST':
-                if request.POST.get('id_pre'):
-                    id_a_borrar= request.POST.get('id_pre')
-                    
-                    tupla=Preoperacionalesm.objects.get(id_pre = id_a_borrar)
-                    messages.warning(request, 'La revisión preoperacional con el id {} fue eliminada.'.format(tupla.id_pre))
-                    tupla.delete()
-                    
-                    return redirect('listarprem')
-            else:
-                prem = Preoperacionalesm.objects.get( id_pre=idprem )
+        if request.method=='POST':
+            if request.POST.get('id_pre'):
+                id_a_borrar= request.POST.get('id_pre')
+
+                tupla=Preoperacionalesm.objects.get(id_pre = id_a_borrar)
+                messages.warning(request, 'La revisión preoperacional con el id {} fue eliminada.'.format(tupla.id_pre))
+                tupla.delete()
+
+                return redirect('listarprem')
+        else:
+            prem = Preoperacionalesm.objects.get( id_pre = idprem )
             prems = Preoperacionalesm.objects.all()
             datos = {'prems' : prems, 'prem' : prem }
             return render(request,"revisiones/preoperacionales/moto/eliminar.html",datos)
@@ -779,8 +791,8 @@ def listarprec(request):
 def agregarprec(request):
     if request.method == 'POST':
         if request.POST.get('pla_pre'):
+            prec = Preoperacionalesc()
             try:
-                prec = Preoperacionalesc()
                 prec.dir_del_pre = request.POST.get('dir_del_pre')
                 prec.dir_tra_pre = request.POST.get('dir_tra_pre')
                 prec.sis_luc_pre = request.POST.get('sis_luc_pre')
@@ -848,7 +860,6 @@ def actualizarprec(request, idprec):
         if request.method == 'POST':
             if request.POST.get('id_pre'):
                 asi_id_old = request.POST.get('id_pre')
-                asi_old = Preoperacionalesc()
                 asi_old = Preoperacionalesc.objects.get( id_pre=asi_id_old )
                 prec = Preoperacionalesc()
                 prec.id_pre = request.POST.get('id_pre')
@@ -967,8 +978,8 @@ def listarman(request):
 def agregarman(request):
     if request.method == 'POST':
         if request.POST.get('id_veh'):
+            man = Mantenimiento()
             try:
-                man = Mantenimiento()
                 man.fec_man = request.POST.get('fec_man')
                 man.tipo_man = request.POST.get('tipo_man')
                 man.des_obs_man = request.POST.get('des_obs_man')
@@ -1059,3 +1070,96 @@ def listarperm(request):
         perms = Periodicasm.objects.order_by('-id_periodica')[:10]
         datos = {'perms': perms}
         return render(request, "revisiones/periodicas/moto/listar.html", datos)
+
+def agregarperm(request):
+    if request.method == 'POST':
+        if request.POST.get('pla_per'):
+            try:
+                perm = Periodicasm()
+                perm.fecha = request.POST.get('fecha')
+                perm.kilometraje = request.POST.get('kilometraje')
+                perm.encendido = request.POST.get('encendido')
+                perm.defensa = request.POST.get('defensa')
+                perm.llaves = request.POST.get('llaves')
+                perm.carburador = request.POST.get('carburador')
+                perm.autocarburador = request.POST.get('autocarburador')
+                perm.bobina_encendido = request.POST.get('bobina_encendido')
+                perm.bobina_alta = request.POST.get('bobina_alta')
+                perm.bateria = request.POST.get('bateria')
+                perm.bujia = request.POST.get('bujia')
+                perm.capuchon_bujia = request.POST.get('capuchon_bujia')
+                perm.punzon = request.POST.get('punzon')
+                perm.pata = request.POST.get('pata')
+                perm.kit_arrastre = request.POST.get('kit_arrastre')
+                perm.tapa_pinon = request.POST.get('tapa_pinon')
+                perm.guia_cadena = request.POST.get('guia_cadena')
+                perm.guarda_cadena = request.POST.get('guarda_cadena')
+                perm.patada_crank = request.POST.get('patada_crank')
+                perm.tacometro = request.POST.get('tacometro')
+                perm.perilla_tacometro = request.POST.get('perilla_tacometro')
+                perm.switch = request.POST.get('switch')
+                perm.palanca_cambios = request.POST.get('palanca_cambios')
+                perm.guayas = request.POST.get('guayas')
+                perm.guardabarros = request.POST.get('guardabarros')
+                perm.rines = request.POST.get('rines')
+                perm.inyeccion = request.POST.get('inyeccion')
+                perm.guias_aire = request.POST.get('guias_aire')
+                perm.sirena = request.POST.get('sirena')
+                perm.llanta_delantera = request.POST.get('llanta_delantera')
+                perm.llanta_trasera = request.POST.get('llanta_trasera')
+                perm.manillares = request.POST.get('manillares')
+                perm.protector_manillar = request.POST.get('protector_manillar')
+                perm.mango_acelerador = request.POST.get('mango_acelerador')
+                perm.manubrio = request.POST.get('manubrio')
+                perm.mando_luces = request.POST.get('mando_luces')
+                perm.maniguetas = request.POST.get('maniguetas')
+                perm.herramientas = request.POST.get('herramientas')
+                perm.pastillas_delanteras = request.POST.get('pastillas_delanteras')
+                perm.pastillas_traseras = request.POST.get('pastillas_traseras')
+                perm.bandas = request.POST.get('bandas')
+                perm.tapas_laterales = request.POST.get('tapas_laterales')
+                perm.carenaje = request.POST.get('carenaje')
+                perm.tanque = request.POST.get('tanque')
+                perm.tapa_tanque = request.POST.get('tapa_tanque')
+                perm.exhosto = request.POST.get('exhosto')
+                perm.rejillas_exhosto = request.POST.get('rejillas_exhosto')
+                perm.telescopios = request.POST.get('telescopios')
+                perm.tapa_telescopios = request.POST.get('tapa_telescopios')
+                perm.cauchos_telescopios = request.POST.get('cauchos_telescopios')
+                perm.direccionales = request.POST.get('direccionales')
+                perm.control_luces = request.POST.get('control_luces')
+                perm.strober_delantero = request.POST.get('strober_delantero')
+                perm.strober_trasero = request.POST.get('strober_trasero')
+                perm.descargapies = request.POST.get('descargapies')
+                perm.tanque_aceite = request.POST.get('tanque_aceite')
+                perm.tapa_tanque_aceite = request.POST.get('tapa_tanque_aceite')
+                perm.pastas_reflectoras = request.POST.get('pastas_reflectoras')
+                perm.sillin = request.POST.get('sillin')
+                perm.porta_placa = request.POST.get('porta_placa')
+                perm.tijera = request.POST.get('tijera')
+                perm.espejos = request.POST.get('espejos')
+                perm.farola = request.POST.get('farola')
+                perm.rectificador_corriente = request.POST.get('rectificador_corriente')
+                perm.flancher = request.POST.get('flancher')
+                perm.cdi = request.POST.get('cdi')
+                perm.stop = request.POST.get('stop')
+                perm.monoshock = request.POST.get('monoshock')
+                perm.velocimetro = request.POST.get('velocimetro')
+                perm.casco = request.POST.get('casco')
+                perm.chaleco = request.POST.get('chaleco')
+                perm.estado_higiene = request.POST.get('estado_higiene')
+                perm.foto_1 = request.FILES['foto_1']
+                perm.foto_2 = request.FILES['foto_2']
+                perm.foto_3 = request.FILES['foto_3']
+                perm.foto_4 = request.FILES['foto_4']
+                perm.pla_per_id = request.POST.get('pla_per')
+                perm.save()
+                messages.success(request, 'La asignación quedo registrada con el id {} sastifactoriamente'.format(perm.id_periodica))
+                return redirect('listarperm')
+            except:
+                messages.error(request, 'Ha ocurrido un error en los datos o la placa del vehiculo {} no existe. Intentalo nuevamente por favor'.format(perm.pla_per_id))
+                return redirect('listarperm')
+    else:
+        perms = Periodicasm.objects.all()
+        datos = { 'perms' : perms}
+        return render(request, "revisiones/periodicas/moto/agregar.html", datos)

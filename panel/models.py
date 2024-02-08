@@ -205,7 +205,7 @@ class Periodicasm(models.Model):
     id_periodica = models.AutoField(primary_key=True)
     fecha = models.DateField(null=True)
     kilometraje = models.IntegerField(null=False)
-    pla_pre = models.ForeignKey(Vehiculos,
+    pla_per = models.ForeignKey(Vehiculos,
                                blank=True,
                                on_delete=models.CASCADE)
     encendido = models.CharField(max_length=20, null=False)
@@ -282,6 +282,6 @@ class Periodicasm(models.Model):
     foto_2 = models.FileField(upload_to="imagenes", null=True, blank=True)
     foto_3 = models.FileField(upload_to="imagenes", null=True, blank=True)
     foto_4 = models.FileField(upload_to="imagenes", null=True, blank=True)
-    observaciones = models.CharField(max_length=500)
+    observaciones = models.CharField(max_length=500, null=True)
     class Meta:
         db_table = 'periodicasm'

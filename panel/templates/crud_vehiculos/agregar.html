@@ -77,7 +77,7 @@
                             <i class="fa fa-calendar-o"></i>
                         </div>
                     </div>
-                    <input id="mod_veh" name="mod_veh" type="text" required="required" class="form-control">
+                    <input id="mod_veh" name="mod_veh" type="number" required="required" class="form-control">
                 </div>
             </div>
         </div>
@@ -156,8 +156,7 @@
                             <i class="fa fa-building"></i>
                         </div>
                     </div>
-                    <select id="dep_veh" name="dep_veh" class="custom-select" required="required">
-                        <option value="null">Selecciona una opción</option>
+                    <select id="dep_veh" name="dep_veh" class="custom-select" required>
                         {% for i in dependencias %}
                         <option value="{{i.id_dep}}"> {{i.nom_dep}} </option>
                         {% endfor %}
@@ -174,8 +173,7 @@
                             <i class="fa fa-calendar-check-o"></i>
                         </div>
                     </div>
-                    <select id="soa_veh" name="soa_veh" class="custom-select" required="required">
-                        <option value="null">Selecciona una opción</option>
+                    <select id="soa_veh" name="soa_veh" class="custom-select" required>
                         {% for i in soats %}
                         <option value="{{i.id_soa}}"> {{i.id_soa}} - {{i.fec_exp_soa}} </option>
                         {% endfor %}
@@ -192,8 +190,7 @@
                             <i class="fa fa-gears"></i>
                         </div>
                     </div>
-                    <select id="tec_veh" name="tec_veh" class="custom-select" required="required">
-                        <option value="null">Selecciona una opción</option>
+                    <select id="tec_veh" name="tec_veh" class="custom-select" required>
                         {% for i in tecs %}
                         <option value="{{i.id_tec}}"> {{i.id_tec}} - {{i.fec_exp_tec}} </option>
                         {% endfor %}
@@ -205,11 +202,11 @@
             <label class="col-4">Estado del vehiculo</label>
             <div class="col-8">
                 <div class="custom-control custom-checkbox custom-control-inline">
-                    <input name="est_veh" id="est_veh_0" type="checkbox" class="custom-control-input" value="True">
+                    <input name="est_veh" id="est_veh_0" type="radio" class="custom-control-input" value="True" required>
                     <label for="est_veh_0" class="custom-control-label">Funcionamiento</label>
                 </div>
                 <div class="custom-control custom-checkbox custom-control-inline">
-                    <input name="est_veh" id="est_veh_1" type="checkbox" class="custom-control-input" value="False">
+                    <input name="est_veh" id="est_veh_1" type="radio" class="custom-control-input" value="False">
                     <label for="est_veh_1" class="custom-control-label">No Funcionamiento</label>
                 </div>
             </div>
