@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 from django import views
 from . import views
@@ -8,6 +8,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('panel', views.index, name="index"),
+    path('accounts/', include('django.contrib.auth.urls')),
     path('listar', views.listar, name="listar"),
     path('agregar', views.agregar, name="agregar"),
     path('actualizar/<int:idUsuario>', views.actualizar, name="actualizar"),

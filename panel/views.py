@@ -5,14 +5,13 @@ from .models import Usuarios, Dependencias, Vehiculos, Soat, Tecnicomecanica, Ve
 from django.db.models import Q
 from datetime import date
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
-
 TEMPLATE_DIRS = (
     'os.path.join(BASE_DIR, "templates")'
 )
-
-
+@login_required
 def index(request):
     return render(request, "index.html")
 
