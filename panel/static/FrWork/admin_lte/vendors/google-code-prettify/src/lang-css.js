@@ -54,15 +54,15 @@
 
 // Patterns
 // ========
-// Lexers are typically implemented as a set of regular expressions.
-// The SimpleLexer function takes regular expressions, styles, and some
+// Lexers are typically implemented as a set of Regular expressions.
+// The SimpleLexer function takes Regular expressions, styles, and some
 // pragma-info and produces a lexer.  A token description looks like
-//   [STYLE_NAME, /regular-expression/, pragmas]
+//   [STYLE_NAME, /Regular-expression/, pragmas]
 
 // Initially, simple lexer's inner loop looked like:
 
 //    while sourceCode is not empty:
-//      try each regular expression in order until one matches
+//      try each Regular expression in order until one matches
 //      remove the matched portion from sourceCode
 
 // This was really slow for large files because some JS interpreters
@@ -71,9 +71,9 @@
 // The current loop now looks like
 
 //    1. use js-modules/combinePrefixPatterns.js to 
-//       combine all regular expressions into one 
-//    2. use a single global regular expresion match to extract all tokens
-//    3. for each token try regular expressions in order until one matches it
+//       combine all Regular expressions into one
+//    2. use a single global Regular expresion match to extract all tokens
+//    3. for each token try Regular expressions in order until one matches it
 //       and classify it using the associated style
 
 // This is a lot more efficient but it does mean that lookahead and lookbehind

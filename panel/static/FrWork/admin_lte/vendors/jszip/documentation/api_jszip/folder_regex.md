@@ -5,7 +5,7 @@ section: api
 ---
 
 __Description__ : Search a subdirectory in the current directory with a
-[regular expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions).
+[Regular expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions).
 The regex is tested against the relative path.
 
 __Arguments__

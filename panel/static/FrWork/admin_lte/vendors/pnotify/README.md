@@ -1,6 +1,6 @@
 [![Stories in Ready](https://badge.waffle.io/sciactive/pnotify.png?label=ready&title=Ready)](http://waffle.io/sciactive/pnotify) [![Stories in Progress](https://badge.waffle.io/sciactive/pnotify.png?label=in progress&title=In Progress)](http://waffle.io/sciactive/pnotify)
 
-PNotify is a JavaScript notification plugin, developed by SciActive. PNotify can also provide [desktop notifications](http://sciactive.com/pnotify/#web-notifications) based on the [Web Notifications spec](http://www.w3.org/TR/notifications/). If desktop notifications are not available or not allowed, PNotify will fall back to displaying the notice as a regular, in-browser notice.
+PNotify is a JavaScript notification plugin, developed by SciActive. PNotify can also provide [desktop notifications](http://sciactive.com/pnotify/#web-notifications) based on the [Web Notifications spec](http://www.w3.org/TR/notifications/). If desktop notifications are not available or not allowed, PNotify will fall back to displaying the notice as a Regular, in-browser notice.
 
 Demos
 =====
@@ -157,7 +157,7 @@ Desktop Module
 
 `desktop: {`
 * `desktop: false` - Display the notification as a desktop notification.
-* `fallback: true` - If desktop notifications are not supported or allowed, fall back to a regular notice.
+* `fallback: true` - If desktop notifications are not supported or allowed, fall back to a Regular notice.
 * `icon: null` - The URL of the icon to display. If false, no icon will show. If null, a default icon will show.
 * `tag: null` - Using a tag lets you update an existing notice, or keep from duplicating notices between tabs. If you leave tag null, one will be generated, facilitating the "update" function.
 * `text: null` - Optionally display different text for the desktop
@@ -276,7 +276,7 @@ requirejs(['pnotify', 'pnotify.nonblock', 'pnotify.desktop'], function(PNotify){
     PNotify.desktop.permission();
     new PNotify({
         title: 'Desktop Notice',
-        text: 'If you\'ve given me permission, I\'ll appear as a desktop notification. If you haven\'t, I\'ll still appear as a regular PNotify notice.',
+        text: 'If you\'ve given me permission, I\'ll appear as a desktop notification. If you haven\'t, I\'ll still appear as a Regular PNotify notice.',
         desktop: {
             desktop: true
         },

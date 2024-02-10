@@ -435,11 +435,11 @@ var IN_GLOBAL_SCOPE = false;
       
       
       /**
-       * A set of tokens that can precede a regular expression literal in
+       * A set of tokens that can precede a Regular expression literal in
        * javascript
        * http://web.archive.org/web/20070717142515/http://www.mozilla.org/js/language/js20/rationale/syntax.html
        * has the full list, but I've removed ones that might be problematic when
-       * seen in languages that don't support regular expression literals.
+       * seen in languages that don't support Regular expression literals.
        *
        * <p>Specifically, I've removed any keywords that can't precede a regexp
        * literal in a syntactically legal javascript program, and I've removed the
@@ -455,8 +455,8 @@ var IN_GLOBAL_SCOPE = false;
        */
       var REGEXP_PRECEDER_PATTERN = '(?:^^\\.?|[+-]|[!=]=?=?|\\#|%=?|&&?=?|\\(|\\*=?|[+\\-]=|->|\\/=?|::?|<<?=?|>>?>?=?|,|;|\\?|@|\\[|~|{|\\^\\^?=?|\\|\\|?=?|break|case|continue|delete|do|else|finally|instanceof|return|throw|try|typeof)\\s*';
       
-      // CAVEAT: this does not properly handle the case where a regular
-      // expression immediately follows another since a regular expression may
+      // CAVEAT: this does not properly handle the case where a Regular
+      // expression immediately follows another since a Regular expression may
       // have flags for case-sensitivity and the like.  Having regexp tokens
       // adjacent is not valid in any language I'm aware of, so I'm punting.
       // TODO: maybe style special characters inside a regexp as punctuation.
@@ -1090,7 +1090,7 @@ var IN_GLOBAL_SCOPE = false;
            * @const
            */
           var REGEX_LITERAL = (
-              // A regular expression literal starts with a slash that is
+              // A Regular expression literal starts with a slash that is
               // not followed by * or / so that it is not confused with
               // comments.
               '/(?=[^/*' + regexExcls + '])'

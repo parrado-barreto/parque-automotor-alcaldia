@@ -5581,7 +5581,7 @@ exports.clean = function(str) {
 };
 
 /**
- * Escape regular expression characters in `str`.
+ * Escape Regular expression characters in `str`.
  *
  * @param {String} str
  * @return {String}

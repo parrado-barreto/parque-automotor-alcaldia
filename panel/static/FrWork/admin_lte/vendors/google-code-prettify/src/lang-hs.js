@@ -70,7 +70,7 @@ PR['registerLangHandler'](
           null, '0123456789']
         ],
         [
-         // Haskell does not have a regular lexical grammar due to the nested
+         // Haskell does not have a Regular lexical grammar due to the nested
          // ncomment.
          // comment      ->    dashes [ any<symbol> {any}] newline
          // ncomment     ->    opencom ANYseq {ncomment ANYseq}closecom

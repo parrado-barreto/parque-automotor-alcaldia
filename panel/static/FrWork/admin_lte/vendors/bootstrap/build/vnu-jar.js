@@ -21,7 +21,7 @@ childProcess.exec('java -version', (error, stdout, stderr) => {
   const is32bitJava = !stderr.match(/64-Bit/)
 
   // vnu-jar accepts multiple ignores joined with a `|`.
-  // Also note that the ignores are regular expressions.
+  // Also note that the ignores are Regular expressions.
   const ignores = [
     // "autocomplete" is included in <button> and checkboxes and radio <input>s due to
     // Firefox's non-standard autocomplete behavior - see https://bugzilla.mozilla.org/show_bug.cgi?id=654072

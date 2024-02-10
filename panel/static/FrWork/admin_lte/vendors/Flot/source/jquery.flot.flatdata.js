@@ -1,12 +1,12 @@
 /* Support for flat 1D data series.
 
-A 1D flat data series is a data series in the form of a regular 1D array. The
+A 1D flat data series is a data series in the form of a Regular 1D array. The
 main reason for using a flat data series is that it performs better, consumes
-less memory and generates less garbage collection than the regular flot format.
+less memory and generates less garbage collection than the Regular flot format.
 
 Example:
 
-    plot.setData([[[0,0], [1,1], [2,2], [3,3]]]); // regular flot format
+    plot.setData([[[0,0], [1,1], [2,2], [3,3]]]); // Regular flot format
     plot.setData([{flatdata: true, data: [0, 1, 2, 3]}]); // flatdata format
 
 Set series.flatdata to true to enable this plugin.

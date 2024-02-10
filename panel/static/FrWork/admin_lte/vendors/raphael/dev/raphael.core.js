@@ -3301,7 +3301,7 @@ define(["eve"], function(eve) {
      = (object) Raphaël element object with type “rect”
      **
      > Usage
-     | // regular rectangle
+     | // Regular rectangle
      | var c = paper.rect(10, 10, 50, 50);
      | // rectangle with rounded corners
      | var c = paper.rect(40, 40, 50, 50, 10);

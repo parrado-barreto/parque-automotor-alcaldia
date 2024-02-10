@@ -195,7 +195,7 @@ myDefaultWhiteList.table = []
 myDefaultWhiteList.td = ['data-option']
 
 // You can push your custom regex to validate your attributes.
-// Be careful about your regular expressions being too lax
+// Be careful about your Regular expressions being too lax
 var myCustomRegex = /^data-my-app-[\w-]+/
 myDefaultWhiteList['*'].push(myCustomRegex)
 {% endhighlight %}

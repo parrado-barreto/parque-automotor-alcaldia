@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Usuarios, Dependencias, Vehiculos, Soat, Tecnicomecanica, VehiculosAsignados, Preoperacionalesm, Preoperacionalesc, Mantenimiento, Periodicasm
+from .models import Usuarios, Dependencias, Vehiculos, Soat, Tecnicomecanica, VehiculosAsignados, Preoperacionalesm, \
+    Preoperacionalesc, Mantenimiento, Periodicasm
 from django.db.models import Q
 from datetime import date
 from django.contrib import messages
@@ -11,11 +12,12 @@ TEMPLATE_DIRS = (
     'os.path.join(BASE_DIR, "templates")'
 )
 
+
 def index(request):
-    return render(request,"index.html")
+    return render(request, "index.html")
+
 
 def listar(request):
-
     if request.method == 'POST':
         busqueda = request.POST.get('keyword')
         lista = Usuarios.objects.all()
@@ -35,18 +37,21 @@ def listar(request):
             messages.success(request, 'Resultados encontrados por: {}'.format(busqueda))
             return render(request, "crud_usuarios/listar.html", datos)
         else:
-            datos = { 'usuarios' : lista }
+            datos = {'usuarios': lista}
             return render(request, "crud_usuarios/listar.html", datos)
     else:
         users = Usuarios.objects.order_by('-id_per')[:10]
-        datos = { 'usuarios' : users }
+        datos = {'usuarios': users}
         return render(request, "crud_usuarios/listar.html", datos)
-   
+
+
 def agregar(request):
     if request.method == 'POST':
         id_per = request.POST.get('id_per')
         existing_user = Usuarios.objects.filter(id_per=id_per).exists()
-        if not existing_user and request.POST.get('pas_per') and request.POST.get('nom_per') and request.POST.get('ape_per') and request.POST.get('tel_per') and request.POST.get('dir_per') and request.POST.get('cat_per') and request.POST.get('vig_per') and request.POST.get('dep_per'):
+        if not existing_user and request.POST.get('pas_per') and request.POST.get('nom_per') and request.POST.get(
+                'ape_per') and request.POST.get('tel_per') and request.POST.get('dir_per') and request.POST.get(
+                'cat_per') and request.POST.get('vig_per') and request.POST.get('dep_per'):
             try:
                 user = Usuarios()
                 user.id_per = id_per
@@ -57,11 +62,17 @@ def agregar(request):
                 user.dir_per = request.POST.get('dir_per')
                 user.cat_per = request.POST.get('cat_per')
                 user.vig_per = request.POST.get('vig_per')
-                user.pase_ade_per = request.FILES['pase_ade_per']
-                user.pase_atr_per = request.FILES['pase_atr_per']
+                if 'pase_ade_per' in request.FILES:
+                    user.pase_ade_per = request.FILES['pase_ade_per']
+                else:
+                    user.pase_ade_per = None
+                if 'pase_atr_per' in request.FILES:
+                    user.pase_atr_per = request.FILES['pase_atr_per']
+                else:
+                    user.pase_atr_per = None
                 user.dep_per_id = request.POST.get('dep_per')
                 user.save()
-                messages.success(request, 'El usuario {} fue agregado'.format(user.nom_per+" "+user.ape_per))
+                messages.success(request, 'El usuario {} fue agregado'.format(user.nom_per + " " + user.ape_per))
                 return redirect('listar')
             except:
                 messages.error(request, 'Ha ocurrido un error en los datos, intentalo nuevamente por favor')
@@ -72,8 +83,9 @@ def agregar(request):
     else:
         users = Usuarios.objects.all()
         deps = Dependencias.objects.all()
-        datos = {'usuarios' : users, 'dependencias': deps}
-        return render(request,"crud_usuarios/agregar.html",datos)
+        datos = {'usuarios': users, 'dependencias': deps}
+        return render(request, "crud_usuarios/agregar.html", datos)
+
 
 def actualizar(request, idUsuario):
     try:
@@ -93,68 +105,69 @@ def actualizar(request, idUsuario):
             if 'pase_atr_per' in request.FILES:
                 user.pase_atr_per = request.FILES['pase_atr_per']
             user.save()
-            messages.success(request, 'El usuario {} fue modificado'.format(user.nom_per+" "+user.ape_per))
+            messages.success(request, 'El usuario {} fue modificado'.format(user.nom_per + " " + user.ape_per))
             return redirect('listar')
         else:
             users = Usuarios.objects.all()
-            user = Usuarios.objects.get( id_per=idUsuario )
+            user = Usuarios.objects.get(id_per=idUsuario)
             user.vig_per = date.strftime(user.vig_per, "%Y-%m-%d")
             deps = Dependencias.objects.all()
-            datos = { 'usuarios' : users , 'usuario' : user , 'dependencias': deps}
+            datos = {'usuarios': users, 'usuario': user, 'dependencias': deps}
             return render(request, "crud_usuarios/actualizar.html", datos)
     except Usuarios.DoesNotExist:
         users = Usuarios.objects.all()
         user = None
         deps = Dependencias.objects.all()
-        datos = { 'usuarios' : users , 'usuario' : user , 'dependencias': deps}
+        datos = {'usuarios': users, 'usuario': user, 'dependencias': deps}
         return render(request, "crud_usuarios/actualizar.html", datos)
+
 
 def eliminar(request, idUsuario):
     try:
-        if request.method=='POST':
+        if request.method == 'POST':
             if request.POST.get('id_per'):
-                id_a_borrar= request.POST.get('id_per')
-                tupla=Usuarios.objects.get(id_per = id_a_borrar)
+                id_a_borrar = request.POST.get('id_per')
+                tupla = Usuarios.objects.get(id_per=id_a_borrar)
                 tupla.delete()
-                messages.warning(request, 'El usuario {} fue eliminado'.format(tupla.nom_per+" "+tupla.ape_per))
+                messages.warning(request, 'El usuario {} fue eliminado'.format(tupla.nom_per + " " + tupla.ape_per))
                 return redirect('listar')
         else:
             users = Usuarios.objects.all()
             user = Usuarios.objects.get(id_per=idUsuario)
-            datos = { 'usuarios' : users , 'usuario' : user}
+            datos = {'usuarios': users, 'usuario': user}
             return render(request, "crud_usuarios/eliminar.html", datos)
     except Usuarios.DoesNotExist:
         users = Usuarios.objects.all()
         user = None
-        datos = { 'usuarios' : users , 'usuario' : user}
+        datos = {'usuarios': users, 'usuario': user}
         return render(request, "crud_usuarios/eliminar.html", datos)
 
-def listardep(request):
 
+def listardep(request):
     if request.method == 'POST':
         busqueda = request.POST.get('keyword')
         lista = Dependencias.objects.all()
 
         if busqueda is not None:
             res_busqueda = lista.filter(
-            Q(id_dep__icontains=busqueda) |
-            Q(nom_dep__icontains=busqueda) 
+                Q(id_dep__icontains=busqueda) |
+                Q(nom_dep__icontains=busqueda)
             )
             datos = {'dependencias': res_busqueda}
             messages.success(request, 'Resultados encontrados por: {}'.format(busqueda))
             return render(request, "crud_dependencias/listar.html", datos)
         else:
-            datos = { 'dependencias' : lista }
+            datos = {'dependencias': lista}
             return render(request, "crud_dependencias/listar.html", datos)
     else:
         deps = Dependencias.objects.order_by('-id_dep')[:10]
-        datos = { 'dependencias' : deps }
+        datos = {'dependencias': deps}
         return render(request, "crud_dependencias/listar.html", datos)
+
 
 def agregardep(request):
     if request.method == 'POST':
         if request.POST.get('nom_dep'):
-            
             dep = Dependencias()
             dep.nom_dep = request.POST.get('nom_dep')
             dep.save()
@@ -162,8 +175,9 @@ def agregardep(request):
             return redirect('listardep')
     else:
         deps = Dependencias.objects.all()
-        datos = {'dependencias' : deps}
-        return render(request,"crud_dependencias/agregar.html",datos)
+        datos = {'dependencias': deps}
+        return render(request, "crud_dependencias/agregar.html", datos)
+
 
 def actualizardep(request, idDependencia):
     try:
@@ -177,72 +191,78 @@ def actualizardep(request, idDependencia):
                 return redirect('listardep')
         else:
             deps = Dependencias.objects.all()
-            dep = Dependencias.objects.get( id_dep=idDependencia )
-            datos = { 'dependencias' : deps , 'dependencia' : dep }
+            dep = Dependencias.objects.get(id_dep=idDependencia)
+            datos = {'dependencias': deps, 'dependencia': dep}
             return render(request, "crud_dependencias/actualizar.html", datos)
     except Dependencias.DoesNotExist:
         deps = Dependencias.objects.all()
         dep = None
-        datos = { 'dependencias' : deps , 'dependencia' : dep }
+        datos = {'dependencias': deps, 'dependencia': dep}
         return render(request, "crud_dependencias/actualizar.html", datos)
+
 
 def eliminardep(request, idDependencia):
     try:
-        if request.method=='POST':
+        if request.method == 'POST':
             if request.POST.get('id'):
-                id_a_borrar= request.POST.get('id')
-                tupla=Dependencias.objects.get(id_dep = id_a_borrar)
+                id_a_borrar = request.POST.get('id')
+                tupla = Dependencias.objects.get(id_dep=id_a_borrar)
                 tupla.delete()
                 messages.success(request, 'La dependencia {} fue eliminada'.format(tupla.nom_dep))
                 return redirect('listardep')
         else:
             deps = Dependencias.objects.all()
-            dep = Dependencias.objects.get( id_dep=idDependencia )
-            datos = { 'dependencias' : deps , 'dependencia' : dep }
+            dep = Dependencias.objects.get(id_dep=idDependencia)
+            datos = {'dependencias': deps, 'dependencia': dep}
             return render(request, "crud_dependencias/eliminar.html", datos)
     except Dependencias.DoesNotExist:
         deps = Dependencias.objects.all()
         dep = None
-        datos = { 'dependencias' : deps , 'dependencia' : dep }
-        return render(request, "crud_dependencias/eliminar.html", datos)    
-    
-def listarveh(request):
+        datos = {'dependencias': deps, 'dependencia': dep}
+        return render(request, "crud_dependencias/eliminar.html", datos)
 
+
+def listarveh(request):
     if request.method == 'POST':
         busqueda = request.POST.get('keyword')
         lista = Vehiculos.objects.all()
 
         if busqueda is not None:
             res_busqueda = lista.filter(
-            Q(pla_veh__icontains=busqueda) |
-            Q(num_lic_veh__icontains=busqueda) |
-            Q(cla_veh__icontains=busqueda) |
-            Q(mar_veh__icontains=busqueda) |
-            Q(mod_veh__icontains=busqueda) |
-            Q(col_veh__icontains=busqueda) |
-            Q(num_mot_veh__icontains=busqueda) |
-            Q(num_cha_veh__icontains=busqueda) |
-            Q(cil_veh__icontains=busqueda) |
-            Q(tip_car_veh__icontains=busqueda) |
-            Q(est_veh__icontains=busqueda) |
-            Q(obs_veh__icontains=busqueda) 
+                Q(pla_veh__icontains=busqueda) |
+                Q(num_lic_veh__icontains=busqueda) |
+                Q(cla_veh__icontains=busqueda) |
+                Q(mar_veh__icontains=busqueda) |
+                Q(mod_veh__icontains=busqueda) |
+                Q(col_veh__icontains=busqueda) |
+                Q(num_mot_veh__icontains=busqueda) |
+                Q(num_cha_veh__icontains=busqueda) |
+                Q(cil_veh__icontains=busqueda) |
+                Q(tip_car_veh__icontains=busqueda) |
+                Q(est_veh__icontains=busqueda) |
+                Q(obs_veh__icontains=busqueda)
             )
             datos = {'vehiculos': res_busqueda}
             messages.success(request, 'Resultados encontrados por: {}'.format(busqueda))
             return render(request, "crud_vehiculos/listar.html", datos)
         else:
-            datos = { 'vehiculos' : lista }
+            datos = {'vehiculos': lista}
             return render(request, "crud_vehiculos/listar.html", datos)
     else:
         vehs = Vehiculos.objects.order_by('-pla_veh')[:10]
-        datos = { 'vehiculos' : vehs }
+        datos = {'vehiculos': vehs}
         return render(request, "crud_vehiculos/listar.html", datos)
-    
+
+
 def agregarveh(request):
     if request.method == 'POST':
         id_veh = request.POST.get('pla_veh')
         existing_veh = Vehiculos.objects.filter(pla_veh=id_veh).exists()
-        if  not existing_veh and request.POST.get('pla_veh') and request.POST.get('num_lic_veh') and request.POST.get('cla_veh') and request.POST.get('mar_veh') and request.POST.get('mod_veh') and request.POST.get('col_veh') and request.POST.get('num_mot_veh') and request.POST.get('num_cha_veh') and request.POST.get('cil_veh') and request.POST.get('tip_car_veh') and request.POST.get('est_veh') and request.POST.get('dep_veh') and request.POST.get('soa_veh') and request.POST.get('tec_veh'):
+        if not existing_veh and request.POST.get('pla_veh') and request.POST.get('num_lic_veh') and request.POST.get(
+                'cla_veh') and request.POST.get('mar_veh') and request.POST.get('mod_veh') and request.POST.get(
+                'col_veh') and request.POST.get('num_mot_veh') and request.POST.get('num_cha_veh') and request.POST.get(
+                'cil_veh') and request.POST.get('tip_car_veh') and request.POST.get('est_veh') and request.POST.get(
+                'dep_veh') and request.POST.get('soa_veh') and request.POST.get('tec_veh'):
             try:
                 veh = Vehiculos()
                 veh.pla_veh = id_veh
@@ -274,99 +294,112 @@ def agregarveh(request):
         deps = Dependencias.objects.all()
         soats = Soat.objects.all()
         tecs = Tecnicomecanica.objects.all()
-        datos = {'vehiculos' : vehs, 'dependencias' : deps,'soats': soats, 'tecs': tecs}
-        return render(request,"crud_vehiculos/agregar.html",datos)
+        datos = {'vehiculos': vehs, 'dependencias': deps, 'soats': soats, 'tecs': tecs}
+        return render(request, "crud_vehiculos/agregar.html", datos)
+
 
 def actualizarveh(request, idVehiculo):
     try:
         if request.method == 'POST':
-           if  request.POST.get('id') and request.POST.get('num_lic_veh') and request.POST.get('cla_veh') and request.POST.get('mar_veh') and request.POST.get('mod_veh') and request.POST.get('col_veh') and request.POST.get('num_mot_veh') and request.POST.get('num_cha_veh') and request.POST.get('cil_veh') and request.POST.get('tip_car_veh') and request.POST.get('est_veh') and request.POST.get('dep_veh') and request.POST.get('soa_veh') and request.POST.get('tec_veh'):
-                veh = Vehiculos()
-                veh.pla_veh = request.POST.get('id')
-                veh.num_lic_veh = request.POST.get('num_lic_veh')
-                veh.cla_veh = request.POST.get('cla_veh')
-                veh.mar_veh = request.POST.get('mar_veh')
-                veh.mod_veh = request.POST.get('mod_veh')
-                veh.col_veh = request.POST.get('col_veh')
-                veh.num_mot_veh = request.POST.get('num_mot_veh')
-                veh.num_cha_veh = request.POST.get('num_cha_veh')
-                veh.cil_veh = request.POST.get('cil_veh')
-                veh.tip_car_veh = request.POST.get('tip_car_veh')
-                veh.est_veh = request.POST.get('est_veh')
-                veh.obs_veh = request.POST.get('obs_veh')
-                veh.dep_veh_id = request.POST.get('dep_veh')
-                veh.soa_veh_id = request.POST.get('soa_veh')
-                veh.tec_veh_id = request.POST.get('tec_veh')
-                veh.save()
-                messages.success(request, 'El vehiculo de placas {} fue modificado'.format(veh.pla_veh))
-                return redirect('listarveh')
+            if request.POST.get('id') and request.POST.get('num_lic_veh') and request.POST.get(
+                    'cla_veh') and request.POST.get('mar_veh') and request.POST.get('mod_veh') and request.POST.get(
+                    'col_veh') and request.POST.get('num_mot_veh') and request.POST.get(
+                    'num_cha_veh') and request.POST.get('cil_veh') and request.POST.get(
+                    'tip_car_veh') and request.POST.get('est_veh') and request.POST.get('dep_veh') and request.POST.get(
+                    'soa_veh') and request.POST.get('tec_veh'):
+                try:
+                    veh = Vehiculos()
+                    veh.pla_veh = request.POST.get('id')
+                    veh.num_lic_veh = request.POST.get('num_lic_veh')
+                    veh.cla_veh = request.POST.get('cla_veh')
+                    veh.mar_veh = request.POST.get('mar_veh')
+                    veh.mod_veh = request.POST.get('mod_veh')
+                    veh.col_veh = request.POST.get('col_veh')
+                    veh.num_mot_veh = request.POST.get('num_mot_veh')
+                    veh.num_cha_veh = request.POST.get('num_cha_veh')
+                    veh.cil_veh = request.POST.get('cil_veh')
+                    veh.tip_car_veh = request.POST.get('tip_car_veh')
+                    veh.est_veh = request.POST.get('est_veh')
+                    veh.obs_veh = request.POST.get('obs_veh')
+                    veh.dep_veh_id = request.POST.get('dep_veh')
+                    veh.soa_veh_id = request.POST.get('soa_veh')
+                    veh.tec_veh_id = request.POST.get('tec_veh')
+                    veh.save()
+                    messages.success(request, 'El vehiculo de placas {} fue modificado'.format(veh.pla_veh))
+                    return redirect('listarveh')
+                except:
+                    messages.error(request,
+                                   'Ha ocurrido un error en los datos. Intentalo nuevamente por favor')
+                    return redirect('listarveh')
         else:
-            veh = Vehiculos.objects.get( pla_veh=idVehiculo )
+            veh = Vehiculos.objects.get(pla_veh=idVehiculo)
             vehs = Vehiculos.objects.all()
             deps = Dependencias.objects.all()
             soats = Soat.objects.all()
             tecs = Tecnicomecanica.objects.all()
-            datos = {'vehiculos' : vehs,'vehiculo' : veh, 'dependencias' : deps,'soats': soats, 'tecs': tecs}
-            return render(request,"crud_vehiculos/actualizar.html",datos)
+            datos = {'vehiculos': vehs, 'vehiculo': veh, 'dependencias': deps, 'soats': soats, 'tecs': tecs}
+            return render(request, "crud_vehiculos/actualizar.html", datos)
     except Vehiculos.DoesNotExist:
         veh = None
         vehs = Vehiculos.objects.all()
         deps = Dependencias.objects.all()
         soats = Soat.objects.all()
         tecs = Tecnicomecanica.objects.all()
-        datos = {'vehiculos' : vehs,'vehiculo' : veh, 'dependencias' : deps,'soats': soats, 'tecs': tecs}
-        return render(request,"crud_vehiculos/actualizar.html",datos)
+        datos = {'vehiculos': vehs, 'vehiculo': veh, 'dependencias': deps, 'soats': soats, 'tecs': tecs}
+        return render(request, "crud_vehiculos/actualizar.html", datos)
+
 
 def eliminarveh(request, idVehiculo):
     try:
-        if request.method=='POST':
+        if request.method == 'POST':
             if request.POST.get('id'):
-                id_a_borrar= request.POST.get('id')
-                tupla=Vehiculos.objects.get(pla_veh = id_a_borrar)
+                id_a_borrar = request.POST.get('id')
+                tupla = Vehiculos.objects.get(pla_veh=id_a_borrar)
                 tupla.delete()
                 messages.success(request, 'El vehiculo de placas {} fue eliminado'.format(tupla.pla_veh))
                 return redirect('listarveh')
         else:
             vehs = Vehiculos.objects.all()
-            veh = Vehiculos.objects.get( pla_veh=idVehiculo )
-            datos = { 'vehiculos' : vehs , 'vehiculo' : veh }
+            veh = Vehiculos.objects.get(pla_veh=idVehiculo)
+            datos = {'vehiculos': vehs, 'vehiculo': veh}
             return render(request, "crud_vehiculos/eliminar.html", datos)
     except Vehiculos.DoesNotExist:
         vehs = Vehiculos.objects.all()
         veh = None
-        datos = { 'vehiculos' : vehs , 'vehiculo' : veh }
+        datos = {'vehiculos': vehs, 'vehiculo': veh}
         return render(request, "crud_vehiculos/eliminar.html", datos)
 
-def listarsoa(request):
 
+def listarsoa(request):
     if request.method == 'POST':
         busqueda = request.POST.get('keyword')
         lista = Soat.objects.all()
 
         if busqueda is not None:
             res_busqueda = lista.filter(
-            Q(id_soa__icontains=busqueda) |
-            Q(nom_emp_soa__icontains=busqueda) |
-            Q(fec_exp_soa__icontains=busqueda) |
-            Q(fec_vig_soa__icontains=busqueda) |
-            Q(fec_ven_soa__icontains=busqueda) 
+                Q(id_soa__icontains=busqueda) |
+                Q(nom_emp_soa__icontains=busqueda) |
+                Q(fec_exp_soa__icontains=busqueda) |
+                Q(fec_vig_soa__icontains=busqueda) |
+                Q(fec_ven_soa__icontains=busqueda)
             )
             datos = {'soats': res_busqueda}
             messages.success(request, 'Resultados encontrados por: {}'.format(busqueda))
             return render(request, "crud_soat/listar.html", datos)
         else:
-            datos = { 'soats' : lista }
+            datos = {'soats': lista}
             return render(request, "crud_soat/listar.html", datos)
     else:
         soats = Soat.objects.order_by('-id_soa')[:10]
-        datos = { 'soats' : soats }
+        datos = {'soats': soats}
         return render(request, "crud_soat/listar.html", datos)
+
 
 def agregarsoa(request):
     if request.method == 'POST':
         if request.POST.get('nom_emp_soa') and request.POST.get('fec_exp_soa'):
             if request.POST.get('fec_ven_soa') > request.POST.get('fec_exp_soa'):
-            
+
                 soat = Soat()
                 soat.id_soa = request.POST.get('id_soa')
                 soat.nom_emp_soa = request.POST.get('nom_emp_soa')
@@ -381,15 +414,16 @@ def agregarsoa(request):
                 return redirect('agregarsoa')
     else:
         soats = Soat.objects.all()
-        datos = {'dependencias' : soats}
-        return render(request,"crud_soat/agregar.html",datos)
+        datos = {'dependencias': soats}
+        return render(request, "crud_soat/agregar.html", datos)
+
 
 def actualizarsoa(request, idSoat):
     try:
         if request.method == 'POST':
             if request.POST.get('nom_emp_soa') and request.POST.get('fec_exp_soa'):
                 if request.POST.get('fec_ven_soa') > request.POST.get('fec_exp_soa'):
-            
+
                     soat = Soat()
                     soat.id_soa = request.POST.get('id')
                     soat.nom_emp_soa = request.POST.get('nom_emp_soa')
@@ -403,62 +437,64 @@ def actualizarsoa(request, idSoat):
                     messages.error(request, 'La fecha de expedición es mayor a la de vencimiento.')
                     return redirect('agregarsoa')
         else:
-            soat = Soat.objects.get( id_soa=idSoat )
+            soat = Soat.objects.get(id_soa=idSoat)
             soat.fec_exp_soa = date.strftime(soat.fec_exp_soa, "%Y-%m-%d")
             soat.fec_vig_soa = date.strftime(soat.fec_vig_soa, "%Y-%m-%d")
             soat.fec_ven_soa = date.strftime(soat.fec_ven_soa, "%Y-%m-%d")
             soats = Soat.objects.all()
-            datos = {'soats' : soats, 'soat' : soat }
-            return render(request,"crud_soat/actualizar.html",datos)
+            datos = {'soats': soats, 'soat': soat}
+            return render(request, "crud_soat/actualizar.html", datos)
     except Soat.DoesNotExist:
         soat = None
         soats = Soat.objects.all()
-        datos = {'soats' : soats, 'soat' : soat }
-        return render(request,"crud_soat/actualizar.html",datos)
+        datos = {'soats': soats, 'soat': soat}
+        return render(request, "crud_soat/actualizar.html", datos)
+
 
 def eliminarsoa(request, idSoat):
     try:
-        if request.method=='POST':
+        if request.method == 'POST':
             if request.POST.get('id'):
-                id_a_borrar= request.POST.get('id')
-                tupla=Soat.objects.get(id_soa = id_a_borrar)
+                id_a_borrar = request.POST.get('id')
+                tupla = Soat.objects.get(id_soa=id_a_borrar)
                 tupla.delete()
                 messages.success(request, 'El SOAT de {} fue eliminado'.format(tupla.nom_emp_soa))
                 return redirect('listarsoa')
         else:
             soats = Soat.objects.all()
-            soat = Soat.objects.get( id_soa=idSoat )
-            datos = {'soats' : soats, 'soat' : soat }
-            return render(request,"crud_soat/eliminar.html",datos)
+            soat = Soat.objects.get(id_soa=idSoat)
+            datos = {'soats': soats, 'soat': soat}
+            return render(request, "crud_soat/eliminar.html", datos)
     except Soat.DoesNotExist:
         soat = None
         soats = Soat.objects.all()
-        datos = {'soats' : soats, 'soat' : soat }
-        return render(request,"crud_soat/eliminar.html",datos)
-    
-def listartec(request):
+        datos = {'soats': soats, 'soat': soat}
+        return render(request, "crud_soat/eliminar.html", datos)
 
+
+def listartec(request):
     if request.method == 'POST':
         busqueda = request.POST.get('keyword')
         lista = Tecnicomecanica.objects.all()
 
         if busqueda is not None:
             res_busqueda = lista.filter(
-            Q(id_tec__icontains=busqueda) |
-            Q(nom_emp_tec__icontains=busqueda) |
-            Q(fec_exp_tec__icontains=busqueda) |
-            Q(fec_ven_tec__icontains=busqueda) 
+                Q(id_tec__icontains=busqueda) |
+                Q(nom_emp_tec__icontains=busqueda) |
+                Q(fec_exp_tec__icontains=busqueda) |
+                Q(fec_ven_tec__icontains=busqueda)
             )
             messages.success(request, 'Resultados encontrados por: {}'.format(busqueda))
             datos = {'tecs': res_busqueda}
             return render(request, "crud_tecno/listar.html", datos)
         else:
-            datos = { 'tecs' : lista }
+            datos = {'tecs': lista}
             return render(request, "crud_tecno/listar.html", datos)
     else:
         tecs = Tecnicomecanica.objects.order_by('-id_tec')[:10]
-        datos = { 'tecs' : tecs }
+        datos = {'tecs': tecs}
         return render(request, "crud_tecno/listar.html", datos)
+
 
 def agregartec(request):
     if request.method == 'POST':
@@ -477,8 +513,9 @@ def agregartec(request):
                 return redirect('agregartec')
     else:
         tecs = Tecnicomecanica.objects.all()
-        datos = {'tecs' : tecs}
-        return render(request,"crud_tecno/agregar.html",datos)
+        datos = {'tecs': tecs}
+        return render(request, "crud_tecno/agregar.html", datos)
+
 
 def actualizartec(request, idTecno):
     try:
@@ -497,69 +534,71 @@ def actualizartec(request, idTecno):
                     messages.error(request, 'La fecha de expedición es mayor a la de vencimiento.')
                     return redirect('agregartec')
         else:
-            tec = Tecnicomecanica.objects.get( id_tec=idTecno )
+            tec = Tecnicomecanica.objects.get(id_tec=idTecno)
             tec.fec_exp_tec = date.strftime(tec.fec_exp_tec, "%Y-%m-%d")
             tec.fec_ven_tec = date.strftime(tec.fec_ven_tec, "%Y-%m-%d")
             tecs = Tecnicomecanica.objects.all()
-            datos = {'tecs' : tecs, 'tec' : tec }
-            return render(request,"crud_tecno/actualizar.html",datos)
+            datos = {'tecs': tecs, 'tec': tec}
+            return render(request, "crud_tecno/actualizar.html", datos)
     except Tecnicomecanica.DoesNotExist:
         tec = None
         tecs = Tecnicomecanica.objects.all()
-        datos = {'tecs' : tecs, 'tec' : tec }
-        return render(request,"crud_tecno/actualizar.html",datos)
+        datos = {'tecs': tecs, 'tec': tec}
+        return render(request, "crud_tecno/actualizar.html", datos)
+
 
 def eliminartec(request, idTecno):
     try:
-        if request.method=='POST':
+        if request.method == 'POST':
             if request.POST.get('id'):
-                id_a_borrar= request.POST.get('id')
-                tupla=Tecnicomecanica.objects.get(id_tec = id_a_borrar)
+                id_a_borrar = request.POST.get('id')
+                tupla = Tecnicomecanica.objects.get(id_tec=id_a_borrar)
                 tupla.delete()
                 messages.success(request, 'La técnico mecánica de {} fue eliminada'.format(tupla.nom_emp_tec))
                 return redirect('listartec')
         else:
-            tec = Tecnicomecanica.objects.get( id_tec=idTecno )
+            tec = Tecnicomecanica.objects.get(id_tec=idTecno)
             tecs = Tecnicomecanica.objects.all()
-            datos = {'tecs' : tecs, 'tec' : tec }
-            return render(request,"crud_tecno/eliminar.html",datos)
+            datos = {'tecs': tecs, 'tec': tec}
+            return render(request, "crud_tecno/eliminar.html", datos)
     except Tecnicomecanica.DoesNotExist:
         tec = None
         tecs = Tecnicomecanica.objects.all()
-        datos = {'tecs' : tecs, 'tec' : tec }
-        return render(request,"crud_tecno/eliminar.html",datos)
-    
-def listarasi(request):
+        datos = {'tecs': tecs, 'tec': tec}
+        return render(request, "crud_tecno/eliminar.html", datos)
 
+
+def listarasi(request):
     if request.method == 'POST':
         busqueda = request.POST.get('keyword')
         lista = VehiculosAsignados.objects.all()
 
         if busqueda is not None:
             res_busqueda = lista.filter(
-            Q(id__icontains=busqueda) |
-            Q(fec_ing__icontains=busqueda) |
-            Q(fec_sal__icontains=busqueda) |
-            Q(obs_veh_asi__icontains=busqueda)|
-            Q(id_per=busqueda)|
-            Q(id_veh=busqueda)
+                Q(id__icontains=busqueda) |
+                Q(fec_ing__icontains=busqueda) |
+                Q(fec_sal__icontains=busqueda) |
+                Q(obs_veh_asi__icontains=busqueda) |
+                Q(id_per=busqueda) |
+                Q(id_veh=busqueda)
             )
             messages.success(request, 'Resultados encontrados por: {}'.format(busqueda))
             datos = {'asis': res_busqueda}
             return render(request, "crud_asignaciones/listar.html", datos)
         else:
-            datos = { 'asis' : lista }
+            datos = {'asis': lista}
             return render(request, "crud_asignaciones/listar.html", datos)
     else:
         asis = VehiculosAsignados.objects.order_by('-id')[:10]
         users = Usuarios.objects.all()
-        datos = { 'asignaciones' : asis, 'usuarios': users}
+        datos = {'asignaciones': asis, 'usuarios': users}
         return render(request, "crud_asignaciones/listar.html", datos)
+
 
 def agregarasi(request):
     if request.method == 'POST':
         if request.POST.get('id_per') and request.POST.get('id_veh'):
-            veh = Vehiculos.objects.get( pla_veh= request.POST.get('id_veh'))
+            veh = Vehiculos.objects.get(pla_veh=request.POST.get('id_veh'))
             asi = VehiculosAsignados()
             asi.id_per_id = request.POST.get('id_per')
             asi.id_veh_id = request.POST.get('id_veh')
@@ -568,25 +607,27 @@ def agregarasi(request):
             asi.save()
             veh.est_veh = False
             veh.save()
-            messages.success(request, 'Vehiculo de placas {} asignado al usuario {}'.format(asi.id_veh_id,asi.id_per_id))
+            messages.success(request,
+                             'Vehiculo de placas {} asignado al usuario {}'.format(asi.id_veh_id, asi.id_per_id))
             return redirect('listarasi')
     else:
         asis = VehiculosAsignados.objects.all()
         users = Usuarios.objects.all()
         vehs = Vehiculos.objects.all()
-        datos = {'asis' : asis, 'usuarios': users, 'vehiculos': vehs}
-        return render(request,"crud_asignaciones/agregar.html",datos)
+        datos = {'asis': asis, 'usuarios': users, 'vehiculos': vehs}
+        return render(request, "crud_asignaciones/agregar.html", datos)
+
 
 def actualizarasi(request, idAsignacion):
     try:
         if request.method == 'POST':
             if request.POST.get('id_per') and request.POST.get('id_veh'):
-                
+
                 asi_id_old = request.POST.get('id')
                 asi_old = VehiculosAsignados()
-                asi_old = VehiculosAsignados.objects.get( id=asi_id_old )
+                asi_old = VehiculosAsignados.objects.get(id=asi_id_old)
                 temp = date.strftime(asi_old.fec_ing, "%Y-%m-%d")
-                if( temp < request.POST.get('fec_sal')):
+                if (temp < request.POST.get('fec_sal')):
                     asi = VehiculosAsignados()
                     asi.id = request.POST.get('id')
                     asi.id_per_id = request.POST.get('id_per')
@@ -598,72 +639,75 @@ def actualizarasi(request, idAsignacion):
                     messages.success(request, 'La asignacion {} fue modificada'.format(asi.id))
                     return redirect('listarasi')
                 else:
-                    messages.warning(request, 'No se aplicaron los cambios, la fecha de ingreso es mayor a la de finalización.')
+                    messages.warning(request,
+                                     'No se aplicaron los cambios, la fecha de ingreso es mayor a la de finalización.')
                     return redirect('actualizarasi')
         else:
-            asi = VehiculosAsignados.objects.get( id=idAsignacion )
+            asi = VehiculosAsignados.objects.get(id=idAsignacion)
             asi.fec_sal = date.strftime(asi.fec_sal, "%Y-%m-%d %H:%M")
             asis = VehiculosAsignados.objects.all()
             users = Usuarios.objects.all()
             vehs = Vehiculos.objects.all()
-            datos = {'asis' : asis, 'asi' : asi, 'usuarios': users, 'vehiculos': vehs}
-            return render(request,"crud_asignaciones/actualizar.html",datos)
+            datos = {'asis': asis, 'asi': asi, 'usuarios': users, 'vehiculos': vehs}
+            return render(request, "crud_asignaciones/actualizar.html", datos)
     except VehiculosAsignados.DoesNotExist:
         asi = None
         asis = VehiculosAsignados.objects.all()
         users = Usuarios.objects.all()
         vehs = Vehiculos.objects.all()
-        datos = {'asis' : asis, 'asi' : asi, 'usuarios': users, 'vehiculos': vehs} 
-        return render(request,"crud_asignaciones/actualizar.html",datos)
+        datos = {'asis': asis, 'asi': asi, 'usuarios': users, 'vehiculos': vehs}
+        return render(request, "crud_asignaciones/actualizar.html", datos)
+
 
 def eliminarasi(request, idAsignacion):
     try:
-        if request.method=='POST':
+        if request.method == 'POST':
             if request.POST.get('id'):
-                id_a_borrar= request.POST.get('id')
-                
-                tupla=VehiculosAsignados.objects.get(id = id_a_borrar)
-                veh = Vehiculos.objects.get( pla_veh = tupla.id_veh_id )
+                id_a_borrar = request.POST.get('id')
+
+                tupla = VehiculosAsignados.objects.get(id=id_a_borrar)
+                veh = Vehiculos.objects.get(pla_veh=tupla.id_veh_id)
                 veh.est_veh = True
                 tupla.delete()
                 veh.save()
                 messages.warning(request, 'La asignación {} fue eliminada.'.format(tupla.id))
                 return redirect('listarasi')
         else:
-            asi = VehiculosAsignados.objects.get( id=idAsignacion )
+            asi = VehiculosAsignados.objects.get(id=idAsignacion)
             asis = VehiculosAsignados.objects.all()
-            datos = {'asis' : asis, 'asi' : asi }
-            return render(request,"crud_asignaciones/eliminar.html",datos)
+            datos = {'asis': asis, 'asi': asi}
+            return render(request, "crud_asignaciones/eliminar.html", datos)
     except VehiculosAsignados.DoesNotExist:
         asi = None
         asis = VehiculosAsignados.objects.all()
-        datos = {'asis' : asis, 'asi' : asi }
-        return render(request,"crud_asignaciones/eliminar.html",datos)
+        datos = {'asis': asis, 'asi': asi}
+        return render(request, "crud_asignaciones/eliminar.html", datos)
+
 
 def listarprem(request):
-
     if request.method == 'POST':
         busqueda = request.POST.get('keyword')
         lista = Preoperacionalesm.objects.all()
 
         if busqueda is not None:
             res_busqueda = lista.filter(
-            Q(id_pre__icontains=busqueda) |
-            Q(fec_pre__icontains=busqueda) |
-            Q(pla_pre=busqueda)
+                Q(id_pre__icontains=busqueda) |
+                Q(fec_pre__icontains=busqueda) |
+                Q(pla_pre=busqueda)
             )
             messages.success(request, 'Resultados encontrados por: {}'.format(busqueda))
             datos = {'prems': res_busqueda}
             return render(request, "revisiones/preoperacionales/moto/listar.html", datos)
         else:
-            datos = { 'prems' : lista }
+            datos = {'prems': lista}
             return render(request, "revisiones/preoperacionales/moto/listar.html", datos)
     else:
         prems = Preoperacionalesm.objects.order_by('-id_pre')[:10]
 
-        datos = { 'prems' : prems}
+        datos = {'prems': prems}
         return render(request, "revisiones/preoperacionales/moto/listar.html", datos)
-    
+
+
 def agregarprem(request):
     if request.method == 'POST':
         if request.POST.get('pla_pre'):
@@ -689,16 +733,18 @@ def agregarprem(request):
                 prem.fec_pre = request.POST.get('fec_pre')
                 prem.pla_pre_id = request.POST.get('pla_pre')
                 prem.save()
-                messages.success(request, 'La asignación quedo registrada con el id {} sastifactoriamente'.format(prem.id_pre))
+                messages.success(request,
+                                 'La asignación quedo registrada con el id {} sastifactoriamente'.format(prem.id_pre))
                 return redirect('listarprem')
             except:
                 messages.error(request, 'La placa de la moto {} no existe'.format(prem.pla_pre_id))
                 return redirect('agregarprem')
     else:
         prems = Preoperacionalesm.objects.all()
-        datos = { 'prems' : prems}
+        datos = {'prems': prems}
         return render(request, "revisiones/preoperacionales/moto/agregar.html", datos)
     return render(request, "revisiones/preoperacionales/moto/agregar.html")
+
 
 def actualizarprem(request, idprem):
     try:
@@ -706,7 +752,7 @@ def actualizarprem(request, idprem):
             if request.POST.get('id_pre'):
                 asi_id_old = request.POST.get('id_pre')
                 asi_old = Preoperacionalesm()
-                asi_old = Preoperacionalesm.objects.get( id_pre=asi_id_old )
+                asi_old = Preoperacionalesm.objects.get(id_pre=asi_id_old)
                 prem = Preoperacionalesm()
                 prem.id_pre = request.POST.get('id_pre')
                 prem.niv_pre = request.POST.get('niv_pre')
@@ -732,62 +778,64 @@ def actualizarprem(request, idprem):
                 messages.success(request, 'La revisión preoperacional con el id {} fue modificada'.format(prem.id_pre))
                 return redirect('listarprem')
         else:
-            prem = Preoperacionalesm.objects.get( id_pre=idprem )
+            prem = Preoperacionalesm.objects.get(id_pre=idprem)
             prems = Preoperacionalesm.objects.all()
-            datos = {'prems' : prems, 'prem' : prem }
-            return render(request,"revisiones/preoperacionales/moto/actualizar.html",datos)
+            datos = {'prems': prems, 'prem': prem}
+            return render(request, "revisiones/preoperacionales/moto/actualizar.html", datos)
     except Preoperacionalesm.DoesNotExist:
         prem = None
         prems = Preoperacionalesm.objects.all()
-        datos = {'prems' : prems, 'prem' : prem }
-        return render(request,"revisiones/preoperacionales/moto/actualizar.html",datos)
+        datos = {'prems': prems, 'prem': prem}
+        return render(request, "revisiones/preoperacionales/moto/actualizar.html", datos)
 
-def eliminarprem(request, idprem):   
+
+def eliminarprem(request, idprem):
     try:
-        if request.method=='POST':
+        if request.method == 'POST':
             if request.POST.get('id_pre'):
-                id_a_borrar= request.POST.get('id_pre')
+                id_a_borrar = request.POST.get('id_pre')
 
-                tupla=Preoperacionalesm.objects.get(id_pre = id_a_borrar)
+                tupla = Preoperacionalesm.objects.get(id_pre=id_a_borrar)
                 messages.warning(request, 'La revisión preoperacional con el id {} fue eliminada.'.format(tupla.id_pre))
                 tupla.delete()
 
                 return redirect('listarprem')
         else:
-            prem = Preoperacionalesm.objects.get( id_pre = idprem )
+            prem = Preoperacionalesm.objects.get(id_pre=idprem)
             prems = Preoperacionalesm.objects.all()
-            datos = {'prems' : prems, 'prem' : prem }
-            return render(request,"revisiones/preoperacionales/moto/eliminar.html",datos)
+            datos = {'prems': prems, 'prem': prem}
+            return render(request, "revisiones/preoperacionales/moto/eliminar.html", datos)
     except Preoperacionalesm.DoesNotExist:
         prem = None
         prems = Preoperacionalesm.objects.all()
-        datos = {'prems' : prems, 'prem' : prem }
-        return render(request,"revisiones/preoperacionales/moto/eliminar.html",datos)
+        datos = {'prems': prems, 'prem': prem}
+        return render(request, "revisiones/preoperacionales/moto/eliminar.html", datos)
+
 
 def listarprec(request):
-
     if request.method == 'POST':
         busqueda = request.POST.get('keyword')
         lista = Preoperacionalesc.objects.all()
 
         if busqueda is not None:
             res_busqueda = lista.filter(
-            Q(id_pre__icontains=busqueda) |
-            Q(fec_pre__icontains=busqueda) |
-            Q(pla_pre=busqueda)
+                Q(id_pre__icontains=busqueda) |
+                Q(fec_pre__icontains=busqueda) |
+                Q(pla_pre=busqueda)
             )
             messages.success(request, 'Resultados encontrados por: {}'.format(busqueda))
             datos = {'precs': res_busqueda}
             return render(request, "revisiones/preoperacionales/carro/listar.html", datos)
         else:
-            datos = { 'precs' : lista }
+            datos = {'precs': lista}
             return render(request, "revisiones/preoperacionales/carro/listar.html", datos)
     else:
         precs = Preoperacionalesc.objects.order_by('-id_pre')[:10]
 
-        datos = { 'precs' : precs}
+        datos = {'precs': precs}
         return render(request, "revisiones/preoperacionales/carro/listar.html", datos)
-    
+
+
 def agregarprec(request):
     if request.method == 'POST':
         if request.POST.get('pla_pre'):
@@ -845,22 +893,24 @@ def agregarprec(request):
                 prec.fec_pre = request.POST.get('fec_pre')
                 prec.pla_pre_id = request.POST.get('pla_pre')
                 prec.save()
-                messages.success(request, 'La asignación quedo registrada con el id {} sastifactoriamente'.format(prec.id_pre))
+                messages.success(request,
+                                 'La asignación quedo registrada con el id {} sastifactoriamente'.format(prec.id_pre))
                 return redirect('listarprec')
             except:
                 messages.error(request, 'La placa del vehiculo {} no existe'.format(prec.pla_pre_id))
                 return redirect('agregarprec')
     else:
         prems = Preoperacionalesm.objects.all()
-        datos = { 'prems' : prems}
+        datos = {'prems': prems}
         return render(request, "revisiones/preoperacionales/carro/agregar.html", datos)
+
 
 def actualizarprec(request, idprec):
     try:
         if request.method == 'POST':
             if request.POST.get('id_pre'):
                 asi_id_old = request.POST.get('id_pre')
-                asi_old = Preoperacionalesc.objects.get( id_pre=asi_id_old )
+                asi_old = Preoperacionalesc.objects.get(id_pre=asi_id_old)
                 prec = Preoperacionalesc()
                 prec.id_pre = request.POST.get('id_pre')
                 prec.dir_del_pre = request.POST.get('dir_del_pre')
@@ -918,62 +968,64 @@ def actualizarprec(request, idprec):
                 messages.success(request, 'La revisión preoperacional con el id {} fue modificada'.format(prec.id_pre))
                 return redirect('listarprec')
         else:
-            prec = Preoperacionalesc.objects.get( id_pre=idprec )
+            prec = Preoperacionalesc.objects.get(id_pre=idprec)
             precs = Preoperacionalesc.objects.all()
-            datos = {'precs' : precs, 'prec' : prec }
-            return render(request,"revisiones/preoperacionales/carro/actualizar.html",datos)
+            datos = {'precs': precs, 'prec': prec}
+            return render(request, "revisiones/preoperacionales/carro/actualizar.html", datos)
     except Preoperacionalesc.DoesNotExist:
         prec = None
         precs = Preoperacionalesc.objects.all()
-        datos = {'precs' : precs, 'prec' : prec }
-        return render(request,"revisiones/preoperacionales/carro/actualizar.html",datos)
+        datos = {'precs': precs, 'prec': prec}
+        return render(request, "revisiones/preoperacionales/carro/actualizar.html", datos)
 
-def eliminarprec(request, idprec):   
+
+def eliminarprec(request, idprec):
     try:
-            if request.method=='POST':
-                if request.POST.get('id_pre'):
-                    id_a_borrar= request.POST.get('id_pre')
-                    
-                    tupla=Preoperacionalesc.objects.get(id_pre = id_a_borrar)
-                    messages.warning(request, 'La revisión preoperacional con el id {} fue eliminada.'.format(tupla.id_pre))
-                    tupla.delete()
-                    
-                    return redirect('listarprec')
-            else:
-                prec = Preoperacionalesc.objects.get( id_pre = idprec )
-                precs = Preoperacionalesc.objects.all()
-                datos = {'precs' : precs, 'prec' : prec }
-                return render(request,"revisiones/preoperacionales/carro/eliminar.html",datos)
+        if request.method == 'POST':
+            if request.POST.get('id_pre'):
+                id_a_borrar = request.POST.get('id_pre')
+
+                tupla = Preoperacionalesc.objects.get(id_pre=id_a_borrar)
+                messages.warning(request, 'La revisión preoperacional con el id {} fue eliminada.'.format(tupla.id_pre))
+                tupla.delete()
+
+                return redirect('listarprec')
+        else:
+            prec = Preoperacionalesc.objects.get(id_pre=idprec)
+            precs = Preoperacionalesc.objects.all()
+            datos = {'precs': precs, 'prec': prec}
+            return render(request, "revisiones/preoperacionales/carro/eliminar.html", datos)
     except Preoperacionalesm.DoesNotExist:
         prec = None
         precs = Preoperacionalesc.objects.all()
-        datos = {'precs' : precs, 'prec' : prec }
-        return render(request,"revisiones/preoperacionales/carro/eliminar.html",datos)
+        datos = {'precs': precs, 'prec': prec}
+        return render(request, "revisiones/preoperacionales/carro/eliminar.html", datos)
+
 
 def listarman(request):
-
     if request.method == 'POST':
         busqueda = request.POST.get('keyword')
         lista = Mantenimiento.objects.all()
 
         if busqueda is not None:
             res_busqueda = lista.filter(
-            Q(id_man__icontains=busqueda) |
-            Q(id_veh=busqueda) |
-            Q(fec_man__icontains=busqueda) |
-            Q(per_man__icontains=busqueda) |
-            Q(tipo_man__icontains=busqueda)
+                Q(id_man__icontains=busqueda) |
+                Q(id_veh=busqueda) |
+                Q(fec_man__icontains=busqueda) |
+                Q(per_man__icontains=busqueda) |
+                Q(tipo_man__icontains=busqueda)
             )
             messages.success(request, 'Resultados encontrados por: {}'.format(busqueda))
             datos = {'mans': res_busqueda}
             return render(request, "revisiones/mantenimiento/listar.html", datos)
         else:
-            datos = { 'mans' : lista }
+            datos = {'mans': lista}
             return render(request, "revisiones/mantenimiento/listar.html", datos)
     else:
         mans = Mantenimiento.objects.order_by('-id_man')[:10]
-        datos = { 'mans' : mans}
+        datos = {'mans': mans}
         return render(request, "revisiones/mantenimiento/listar.html", datos)
+
 
 def agregarman(request):
     if request.method == 'POST':
@@ -987,15 +1039,17 @@ def agregarman(request):
                 man.rec_man = request.POST.get('rec_man')
                 man.id_veh_id = request.POST.get('id_veh')
                 man.save()
-                messages.success(request, 'El mantenimiendo se registro con el id {} sastifactoriamente'.format(man.id_man))
+                messages.success(request,
+                                 'El mantenimiendo se registro con el id {} sastifactoriamente'.format(man.id_man))
                 return redirect('listarman')
             except:
                 messages.error(request, 'La placa del vehiculo {} no existe'.format(man.id_veh_id))
                 return redirect('agregarman')
     else:
         mans = Mantenimiento.objects.all()
-        datos = { 'mans' : mans}
+        datos = {'mans': mans}
         return render(request, "revisiones/mantenimiento/agregar.html", datos)
+
 
 def actualizarman(request, idman):
     try:
@@ -1013,40 +1067,43 @@ def actualizarman(request, idman):
                 messages.success(request, 'El mantenimiento con el id {} fue modificado'.format(man.id_man))
                 return redirect('listarman')
         else:
-            man = Mantenimiento.objects.get( id_man=idman )
+            man = Mantenimiento.objects.get(id_man=idman)
             man.fec_man = date.strftime(man.fec_man, "%Y-%m-%d")
             mans = Mantenimiento.objects.all()
-            datos = {'mans' : mans, 'man' : man }
-            return render(request,"revisiones/mantenimiento/actualizar.html",datos)
+            datos = {'mans': mans, 'man': man}
+            return render(request, "revisiones/mantenimiento/actualizar.html", datos)
     except Mantenimiento.DoesNotExist:
         man = None
         mans = Mantenimiento.objects.all()
-        datos = {'mans' : mans, 'man' : man }
-        return render(request,"revisiones/mantenimiento/actualizar.html",datos)
+        datos = {'mans': mans, 'man': man}
+        return render(request, "revisiones/mantenimiento/actualizar.html", datos)
 
-def eliminarman(request, idman):   
+
+def eliminarman(request, idman):
     try:
-            if request.method=='POST':
-                if request.POST.get('id_man'):
-                    id_a_borrar= request.POST.get('id_man')
-                    
-                    tupla=Mantenimiento.objects.get(id_man = id_a_borrar)
-                    messages.warning(request, 'La revisión preoperacional con el id {} fue eliminada.'.format(tupla.id_man))
-                    tupla.delete()
-                    
-                    return redirect('listarman')
-            else:
-                man = Mantenimiento.objects.get( id_man = idman )
-                mans = Mantenimiento.objects.all()
-                datos = {'mans' : mans, 'man' : man }
-                return render(request,"revisiones/mantenimiento/eliminar.html",datos)
+        if request.method == 'POST':
+            if request.POST.get('id_man'):
+                id_a_borrar = request.POST.get('id_man')
+
+                tupla = Mantenimiento.objects.get(id_man=id_a_borrar)
+                messages.warning(request, 'La revisión preoperacional con el id {} fue eliminada.'.format(tupla.id_man))
+                tupla.delete()
+
+                return redirect('listarman')
+        else:
+            man = Mantenimiento.objects.get(id_man=idman)
+            mans = Mantenimiento.objects.all()
+            datos = {'mans': mans, 'man': man}
+            return render(request, "revisiones/mantenimiento/eliminar.html", datos)
     except Mantenimiento.DoesNotExist:
         man = None
         mans = Mantenimiento.objects.all()
-        datos = {'mans' : mans, 'man' : man }
-        return render(request,"revisiones/mantenimiento/eliminar.html",datos)
+        datos = {'mans': mans, 'man': man}
+        return render(request, "revisiones/mantenimiento/eliminar.html", datos)
+
+
 def soon(request):
-    return render(request,'soon.html')
+    return render(request, 'soon.html')
 
 
 def listarperm(request):
@@ -1070,6 +1127,7 @@ def listarperm(request):
         perms = Periodicasm.objects.order_by('-id_periodica')[:10]
         datos = {'perms': perms}
         return render(request, "revisiones/periodicas/moto/listar.html", datos)
+
 
 def agregarperm(request):
     if request.method == 'POST':
@@ -1148,18 +1206,158 @@ def agregarperm(request):
                 perm.casco = request.POST.get('casco')
                 perm.chaleco = request.POST.get('chaleco')
                 perm.estado_higiene = request.POST.get('estado_higiene')
-                perm.foto_1 = request.FILES['foto_1']
-                perm.foto_2 = request.FILES['foto_2']
-                perm.foto_3 = request.FILES['foto_3']
-                perm.foto_4 = request.FILES['foto_4']
+                if 'foto_1' in request.FILES:
+                    perm.foto_1 = request.FILES['foto_1']
+                else:
+                    perm.foto_1 = None
+                if 'foto_2' in request.FILES:
+                    perm.foto_2 = request.FILES['foto_2']
+                else:
+                    perm.foto_2 = None
+                if 'foto_3' in request.FILES:
+                    perm.foto_3 = request.FILES['foto_3']
+                else:
+                    perm.foto_3 = None
+                if 'foto_4' in request.FILES:
+                    perm.foto_4 = request.FILES['foto_4']
+                else:
+                    perm.foto_4 = None
+                perm.observaciones = request.POST.get('observaciones')
                 perm.pla_per_id = request.POST.get('pla_per')
                 perm.save()
-                messages.success(request, 'La asignación quedo registrada con el id {} sastifactoriamente'.format(perm.id_periodica))
+                messages.success(request, 'La asignación quedo registrada con el id {} sastifactoriamente'.format(
+                    perm.id_periodica))
                 return redirect('listarperm')
             except:
-                messages.error(request, 'Ha ocurrido un error en los datos o la placa del vehiculo {} no existe. Intentalo nuevamente por favor'.format(perm.pla_per_id))
+                messages.error(request,
+                               'Ha ocurrido un error en los datos o la placa del vehiculo {} no existe. Intentalo nuevamente por favor'.format(
+                                   perm.pla_per_id))
                 return redirect('listarperm')
     else:
         perms = Periodicasm.objects.all()
-        datos = { 'perms' : perms}
+        datos = {'perms': perms}
         return render(request, "revisiones/periodicas/moto/agregar.html", datos)
+
+
+def actualizarperm(request, idper):
+    if request.method == 'POST':
+        if request.POST.get('pla_per'):
+            try:
+                perm_id_old = request.POST.get('id_periodica')
+                perm_old = Periodicasm.objects.get(id_periodica=perm_id_old)
+                perm = Periodicasm()
+                perm.id_periodica = perm_id_old
+                perm.fecha = perm_old.fecha
+                perm.kilometraje = request.POST.get('kilometraje')
+                perm.encendido = request.POST.get('encendido')
+                perm.defensa = request.POST.get('defensa')
+                perm.llaves = request.POST.get('llaves')
+                perm.carburador = request.POST.get('carburador')
+                perm.autocarburador = request.POST.get('autocarburador')
+                perm.bobina_encendido = request.POST.get('bobina_encendido')
+                perm.bobina_alta = request.POST.get('bobina_alta')
+                perm.bateria = request.POST.get('bateria')
+                perm.bujia = request.POST.get('bujia')
+                perm.capuchon_bujia = request.POST.get('capuchon_bujia')
+                perm.punzon = request.POST.get('punzon')
+                perm.pata = request.POST.get('pata')
+                perm.kit_arrastre = request.POST.get('kit_arrastre')
+                perm.tapa_pinon = request.POST.get('tapa_pinon')
+                perm.guia_cadena = request.POST.get('guia_cadena')
+                perm.guarda_cadena = request.POST.get('guarda_cadena')
+                perm.patada_crank = request.POST.get('patada_crank')
+                perm.tacometro = request.POST.get('tacometro')
+                perm.perilla_tacometro = request.POST.get('perilla_tacometro')
+                perm.switch = request.POST.get('switch')
+                perm.palanca_cambios = request.POST.get('palanca_cambios')
+                perm.guayas = request.POST.get('guayas')
+                perm.guardabarros = request.POST.get('guardabarros')
+                perm.rines = request.POST.get('rines')
+                perm.inyeccion = request.POST.get('inyeccion')
+                perm.guias_aire = request.POST.get('guias_aire')
+                perm.sirena = request.POST.get('sirena')
+                perm.llanta_delantera = request.POST.get('llanta_delantera')
+                perm.llanta_trasera = request.POST.get('llanta_trasera')
+                perm.manillares = request.POST.get('manillares')
+                perm.protector_manillar = request.POST.get('protector_manillar')
+                perm.mango_acelerador = request.POST.get('mango_acelerador')
+                perm.manubrio = request.POST.get('manubrio')
+                perm.mando_luces = request.POST.get('mando_luces')
+                perm.maniguetas = request.POST.get('maniguetas')
+                perm.herramientas = request.POST.get('herramientas')
+                perm.pastillas_delanteras = request.POST.get('pastillas_delanteras')
+                perm.pastillas_traseras = request.POST.get('pastillas_traseras')
+                perm.bandas = request.POST.get('bandas')
+                perm.tapas_laterales = request.POST.get('tapas_laterales')
+                perm.carenaje = request.POST.get('carenaje')
+                perm.tanque = request.POST.get('tanque')
+                perm.tapa_tanque = request.POST.get('tapa_tanque')
+                perm.exhosto = request.POST.get('exhosto')
+                perm.rejillas_exhosto = request.POST.get('rejillas_exhosto')
+                perm.telescopios = request.POST.get('telescopios')
+                perm.tapa_telescopios = request.POST.get('tapa_telescopios')
+                perm.cauchos_telescopios = request.POST.get('cauchos_telescopios')
+                perm.direccionales = request.POST.get('direccionales')
+                perm.control_luces = request.POST.get('control_luces')
+                perm.strober_delantero = request.POST.get('strober_delantero')
+                perm.strober_trasero = request.POST.get('strober_trasero')
+                perm.descargapies = request.POST.get('descargapies')
+                perm.tanque_aceite = request.POST.get('tanque_aceite')
+                perm.tapa_tanque_aceite = request.POST.get('tapa_tanque_aceite')
+                perm.pastas_reflectoras = request.POST.get('pastas_reflectoras')
+                perm.sillin = request.POST.get('sillin')
+                perm.porta_placa = request.POST.get('porta_placa')
+                perm.tijera = request.POST.get('tijera')
+                perm.espejos = request.POST.get('espejos')
+                perm.farola = request.POST.get('farola')
+                perm.rectificador_corriente = request.POST.get('rectificador_corriente')
+                perm.flancher = request.POST.get('flancher')
+                perm.cdi = request.POST.get('cdi')
+                perm.stop = request.POST.get('stop')
+                perm.monoshock = request.POST.get('monoshock')
+                perm.velocimetro = request.POST.get('velocimetro')
+                perm.casco = request.POST.get('casco')
+                perm.chaleco = request.POST.get('chaleco')
+                perm.estado_higiene = request.POST.get('estado_higiene')
+                if 'foto_1' in request.FILES:
+                    perm.foto_1 = request.FILES['foto_1']
+                if 'foto_2' in request.FILES:
+                    perm.foto_2 = request.FILES['foto_2']
+                if 'foto_3' in request.FILES:
+                    perm.foto_3 = request.FILES['foto_3']
+                if 'foto_4' in request.FILES:
+                    perm.foto_4 = request.FILES['foto_4']
+                perm.observaciones = request.POST.get('observaciones')
+                perm.pla_per_id = request.POST.get('pla_per')
+                perm.save()
+                messages.success(request, 'La revision periodica con el id {} fue modificada'.format(perm.id_periodica))
+                return redirect('listarperm')
+            except:
+                messages.error(request,
+                               'Ha ocurrido un error en los datos o la placa del vehiculo {} no existe. Intentalo nuevamente por favor'.format(
+                                   perm.pla_per_id))
+                return redirect('listarperm')
+    else:
+        perm = Periodicasm.objects.get(id_periodica=idper)
+        perms = Periodicasm.objects.all()
+        datos = {'perms': perms, 'perm': perm}
+        return render(request, "revisiones/periodicas/moto/actualizar.html", datos)
+def eliminarperm(request, idperm):
+    try:
+        if request.method == 'POST':
+            if request.POST.get('id_periodica'):
+                id_a_borrar = request.POST.get('id_periodica')
+                tupla = Periodicasm.objects.get(id_periodica=id_a_borrar)
+                tupla.delete()
+                messages.success(request, 'La revision con ID = {} fue eliminada'.format(tupla.id_periodica))
+                return redirect('listarperm')
+        else:
+            perms = Periodicasm.objects.all()
+            perm = Periodicasm.objects.get(id_periodica=idperm)
+            datos = {'perms': perms, 'perm': perm}
+            return render(request, "revisiones/periodicas/moto/eliminar.html", datos)
+    except Vehiculos.DoesNotExist:
+        perms = Periodicasm.objects.all()
+        perm = None
+        datos = {'perms': perms, 'perm': perm}
+        return render(request, "revisiones/periodicas/moto/eliminar.html", datos)

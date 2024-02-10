@@ -455,7 +455,7 @@ var requirejs, require, define;
                                          name;
                     }
                 } else {
-                    //A regular module.
+                    //A Regular module.
                     normalizedName = normalize(name, parentName, applyMap);
 
                     //Normalized name may be a plugin ID due to map config

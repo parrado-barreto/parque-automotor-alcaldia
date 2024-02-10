@@ -156,7 +156,7 @@ module.exports = function(Chart) {
 				scales[scale.id] = scale;
 
 				// TODO(SB): I think we should be able to remove this custom case (options.scale)
-				// and consider it as a regular scale part of the "scales"" map only! This would
+				// and consider it as a Regular scale part of the "scales"" map only! This would
 				// make the logic easier and remove some useless? custom code.
 				if (item.isDefault) {
 					me.scale = scale;

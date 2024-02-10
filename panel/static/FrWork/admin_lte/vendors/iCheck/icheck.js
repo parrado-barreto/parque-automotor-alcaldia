@@ -360,7 +360,7 @@
       indeterminate = state == _indeterminate,
       disabled = state == _disabled,
       callback = indeterminate ? _determinate : checked ? _unchecked : 'enabled',
-      regular = option(input, callback + capitalize(node[_type])),
+      Regular = option(input, callback + capitalize(node[_type])),
       specific = option(input, state + capitalize(node[_type]));
 
     // Prevent unnecessary actions
@@ -422,8 +422,8 @@
       parent.attr('aria-' + (disabled ? _disabled : _checked), 'true');
     }
 
-    // Remove regular state class
-    parent[_remove](regular || option(input, callback) || '');
+    // Remove Regular state class
+    parent[_remove](Regular || option(input, callback) || '');
   }
 
   // Remove checked, disabled or indeterminate state
@@ -434,7 +434,7 @@
       indeterminate = state == _indeterminate,
       disabled = state == _disabled,
       callback = indeterminate ? _determinate : checked ? _unchecked : 'enabled',
-      regular = option(input, callback + capitalize(node[_type])),
+      Regular = option(input, callback + capitalize(node[_type])),
       specific = option(input, state + capitalize(node[_type]));
 
     // Prevent unnecessary actions
@@ -462,8 +462,8 @@
       parent.attr('aria-' + (disabled ? _disabled : _checked), 'false');
     }
 
-    // Add regular state class
-    parent[_add](regular || option(input, callback) || '');
+    // Add Regular state class
+    parent[_add](Regular || option(input, callback) || '');
   }
 
   // Remove all traces
@@ -485,9 +485,9 @@
   }
 
   // Get some option
-  function option(input, state, regular) {
+  function option(input, state, Regular) {
     if (input.data(_iCheck)) {
-      return input.data(_iCheck).o[state + (regular ? '' : 'Class')];
+      return input.data(_iCheck).o[state + (Regular ? '' : 'Class')];
     }
   }
 

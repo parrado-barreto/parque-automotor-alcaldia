@@ -1,413 +1,417 @@
 {% extends 'index_master.html' %}
 {% block title %}
-Actualizar revisión preoperacional
+    Actualizar revisión preoperacional
 {% endblock %}
 {% block content %}
-<div class="right_col" role="main">
-  <h1>Actualizar revisión preoperacional</h1>
+    <div class="right_col" role="main">
+        <h1>Actualizar revisión preoperacional</h1>
 
-  <form action="" method="POST">
-    <div class="messages">
-      {% if messages %}
-      <ul class="messages">
-        {% for message in messages %}
-        <li class="{{ message.tags }}">{{ message }}</li>
-        {% endfor %}
-      </ul>
-      {% endif %}
-    </div>
-    {% csrf_token %}
-
-    <div class="form-group row">
-
-      <label for="id_pre" class="col-4 col-form-label">ID</label>
-      <div class="col-8">
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <div class="input-group-text">
-              <i class="fa fa-id-badge"></i>
+        <form action="" method="POST">
+            <div class="messages">
+                {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                            <li class="{{ message.tags }}">{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
             </div>
-          </div>
-          <select id="id_pre" name="id_pre" class="form-control">
-            {% for i in prems %}
-            <option value="{{i.id_pre}}" {% if i.id_pre == prem.id_pre %} selected {% endif %}> {{i.id_pre}} - Placa {{i.pla_pre.pla_veh}}</option>
-            {% endfor %}
-          </select>
-        </div>
-      </div>
-    </div>
+            {% csrf_token %}
 
-    <div class="form-group row">
-      <label class="col-4 col-form-label" for="pla_pre">Placa</label>
-      <div class="col-8">
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <div class="input-group-text">
-              <i class="fa fa-motorcycle"></i>
+            <div class="form-group row">
+
+                <label for="id_pre" class="col-4 col-form-label">ID</label>
+                <div class="col-8">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <i class="fa fa-id-badge"></i>
+                            </div>
+                        </div>
+                        <select id="id_pre" name="id_pre" class="form-control">
+                            {% for i in prems %}
+                                <option value="{{ i.id_pre }}" {% if i.id_pre == prem.id_pre %}
+                                        selected {% endif %}> {{ i.id_pre }} - Placa {{ i.pla_pre.pla_veh }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
             </div>
-          </div>
-          <input id="pla_pre" name="pla_pre" type="text" class="form-control" required="required" value="{{ prem.pla_pre.pla_veh }}">
-        </div>
-      </div>
-    </div>
-    <div class="form-group row">
-      <label for="niv_pre" class="col-4 col-form-label">Nivel de aceite</label>
-      <div class="col-8">
-        <select id="niv_pre" name="niv_pre" class="custom-select">
-          {% if prem.niv_pre == "bueno" %}
-            <option selected value="bueno">Bueno</option>
-            <option value="regular">Regular</option>
-            <option value="malo">Malo</option>
-          {% elif prem.niv_pre == "regular" %}
-            <option value="bueno">Bueno</option>
-            <option selected value="regular">Regular</option>
-            <option value="malo">Malo</option>
-          {% else %}
-            <option value="bueno">Bueno</option>
-            <option value="regular">Regular</option>
-            <option selected value="malo">Malo</option>
-          {% endif %}
-        </select>
-      </div>
-    </div>
 
-    <div class="form-group row">
-      <label for="man_pre" class="col-4 col-form-label">Manillares</label>
-      <div class="col-8">
-        <select id="man_pre" name="man_pre" class="custom-select">
-          {% if prem.man_pre == "bueno" %}
-            <option selected value="bueno">Bueno</option>
-            <option value="regular">Regular</option>
-            <option value="malo">Malo</option>
-          {% elif prem.man_pre == "regular" %}
-            <option value="bueno">Bueno</option>
-            <option selected value="regular">Regular</option>
-            <option value="malo">Malo</option>
-          {% else %}
-            <option value="bueno">Bueno</option>
-            <option value="regular">Regular</option>
-            <option selected value="malo">Malo</option>
-          {% endif %}
-        </select>
-      </div>
-    </div>
-
-    <div class="form-group row">
-      <label for="dir_pre" class="col-4 col-form-label">Direccion</label>
-      <div class="col-8">
-        <select id="dir_pre" name="dir_pre" class="custom-select">
-          {% if prem.dir_pre == "bueno" %}
-            <option selected value="bueno">Bueno</option>
-            <option value="regular">Regular</option>
-            <option value="malo">Malo</option>
-          {% elif prem.dir_pre == "regular" %}
-            <option value="bueno">Bueno</option>
-            <option selected value="regular">Regular</option>
-            <option value="malo">Malo</option>
-          {% else %}
-            <option value="bueno">Bueno</option>
-            <option value="regular">Regular</option>
-            <option selected value="malo">Malo</option>
-          {% endif %}
-        </select>
-      </div>
-    </div>
-
-    <div class="form-group row">
-      <label for="gua_pre" class="col-4 col-form-label">Guardabarros</label>
-      <div class="col-8">
-        <select id="gua_pre" name="gua_pre" class="custom-select">
-          {% if prem.gua_pre == "bueno" %}
-            <option selected value="bueno">Bueno</option>
-            <option value="regular">Regular</option>
-            <option value="malo">Malo</option>
-          {% elif prem.gua_pre == "regular" %}
-            <option value="bueno">Bueno</option>
-            <option selected value="regular">Regular</option>
-            <option value="malo">Malo</option>
-          {% else %}
-            <option value="bueno">Bueno</option>
-            <option value="regular">Regular</option>
-            <option selected value="malo">Malo</option>
-          {% endif %}
-        </select>
-      </div>
-    </div>
-
-    <div class="form-group row">
-      <label for="cha_pre" class="col-4 col-form-label">Chasis</label>
-      <div class="col-8">
-        <select id="cha_pre" name="cha_pre" class="custom-select">
-          {% if prem.cha_pre == "bueno" %}
-            <option selected value="bueno">Bueno</option>
-            <option value="regular">Regular</option>
-            <option value="malo">Malo</option>
-          {% elif prem.cha_pre == "regular" %}
-            <option value="bueno">Bueno</option>
-            <option selected value="regular">Regular</option>
-            <option value="malo">Malo</option>
-          {% else %}
-            <option value="bueno">Bueno</option>
-            <option value="regular">Regular</option>
-            <option selected value="malo">Malo</option>
-          {% endif %}
-        </select>
-      </div>
-    </div>
-
-    <div class="form-group row">
-      <label for="sus_pre" class="col-4 col-form-label">Suspensión</label>
-      <div class="col-8">
-        <select id="sus_pre" name="sus_pre" class="custom-select">
-          {% if prem.sus_pre == "bueno" %}
-            <option selected value="bueno">Bueno</option>
-            <option value="regular">Regular</option>
-            <option value="malo">Malo</option>
-          {% elif prem.sus_pre == "regular" %}
-            <option value="bueno">Bueno</option>
-            <option selected value="regular">Regular</option>
-            <option value="malo">Malo</option>
-          {% else %}
-            <option value="bueno">Bueno</option>
-            <option value="regular">Regular</option>
-            <option selected value="malo">Malo</option>
-          {% endif %}
-        </select>
-      </div>
-    </div>
-
-    <div class="form-group row">
-      <label for="fre_pre" class="col-4 col-form-label">Frenos</label>
-      <div class="col-8">
-        <select id="fre_pre" name="fre_pre" class="custom-select">
-          {% if prem.fre_pre == "bueno" %}
-            <option selected value="bueno">Bueno</option>
-            <option value="regular">Regular</option>
-            <option value="malo">Malo</option>
-          {% elif prem.fre_pre == "regular" %}
-            <option value="bueno">Bueno</option>
-            <option selected value="regular">Regular</option>
-            <option value="malo">Malo</option>
-          {% else %}
-            <option value="bueno">Bueno</option>
-            <option value="regular">Regular</option>
-            <option selected value="malo">Malo</option>
-          {% endif %}
-        </select>
-      </div>
-    </div>
-
-    <div class="form-group row">
-      <label for="lla_pre" class="col-4 col-form-label">Llantas</label>
-      <div class="col-8">
-        <select id="lla_pre" name="lla_pre" class="custom-select">
-          {% if prem.lla_pre == "bueno" %}
-            <option selected value="bueno">Bueno</option>
-            <option value="regular">Regular</option>
-            <option value="malo">Malo</option>
-          {% elif prem.lla_pre == "regular" %}
-            <option value="bueno">Bueno</option>
-            <option selected value="regular">Regular</option>
-            <option value="malo">Malo</option>
-          {% else %}
-            <option value="bueno">Bueno</option>
-            <option value="regular">Regular</option>
-            <option selected value="malo">Malo</option>
-          {% endif %}
-        </select>
-      </div>
-    </div>
-
-    <div class="form-group row">
-      <label for="rin_pre" class="col-4 col-form-label">Rines</label>
-      <div class="col-8">
-        <select id="rin_pre" name="rin_pre" class="custom-select">
-          {% if prem.rin_pre == "bueno" %}
-            <option selected value="bueno">Bueno</option>
-            <option value="regular">Regular</option>
-            <option value="malo">Malo</option>
-          {% elif prem.rin_pre == "regular" %}
-            <option value="bueno">Bueno</option>
-            <option selected value="regular">Regular</option>
-            <option value="malo">Malo</option>
-          {% else %}
-            <option value="bueno">Bueno</option>
-            <option value="regular">Regular</option>
-            <option selected value="malo">Malo</option>
-          {% endif %}
-        </select>
-      </div>
-    </div>
-
-    <div class="form-group row">
-      <label for="tre_pre" class="col-4 col-form-label">Tren de arrastre</label>
-      <div class="col-8">
-        <select id="tre_pre" name="tre_pre" class="custom-select">
-          {% if prem.tre_pre == "bueno" %}
-            <option selected value="bueno">Bueno</option>
-            <option value="regular">Regular</option>
-            <option value="malo">Malo</option>
-          {% elif prem.tre_pre == "regular" %}
-            <option value="bueno">Bueno</option>
-            <option selected value="regular">Regular</option>
-            <option value="malo">Malo</option>
-          {% else %}
-            <option value="bueno">Bueno</option>
-            <option value="regular">Regular</option>
-            <option selected value="malo">Malo</option>
-          {% endif %}
-        </select>
-      </div>
-    </div>
-
-    <div class="form-group row">
-      <label for="exo_pre" class="col-4 col-form-label">Exosto</label>
-      <div class="col-8">
-        <select id="exo_pre" name="exo_pre" class="custom-select">
-          {% if prem.exo_pre == "bueno" %}
-            <option selected value="bueno">Bueno</option>
-            <option value="regular">Regular</option>
-            <option value="malo">Malo</option>
-          {% elif prem.exo_pre == "regular" %}
-            <option value="bueno">Bueno</option>
-            <option selected value="regular">Regular</option>
-            <option value="malo">Malo</option>
-          {% else %}
-            <option value="bueno">Bueno</option>
-            <option value="regular">Regular</option>
-            <option selected value="malo">Malo</option>
-          {% endif %}
-        </select>
-      </div>
-    </div>
-
-    <div class="form-group row">
-      <label for="ret_pre" class="col-4 col-form-label">Retrovisores</label>
-      <div class="col-8">
-        <select id="ret_pre" name="ret_pre" class="custom-select">
-          {% if prem.ret_pre == "bueno" %}
-            <option selected value="bueno">Bueno</option>
-            <option value="regular">Regular</option>
-            <option value="malo">Malo</option>
-          {% elif prem.ret_pre == "regular" %}
-            <option value="bueno">Bueno</option>
-            <option selected value="regular">Regular</option>
-            <option value="malo">Malo</option>
-          {% else %}
-            <option value="bueno">Bueno</option>
-            <option value="regular">Regular</option>
-            <option selected value="malo">Malo</option>
-          {% endif %}
-        </select>
-      </div>
-    </div>
-
-    <div class="form-group row">
-      <label for="man_mec_pre" class="col-4 col-form-label">Mantenimiento mecánico</label>
-      <div class="col-8">
-        <select id="man_mec_pre" name="man_mec_pre" class="custom-select">
-          {% if prem.man_mec_pre == "bueno" %}
-            <option selected value="bueno">Bueno</option>
-            <option value="regular">Regular</option>
-            <option value="malo">Malo</option>
-          {% elif prem.man_mec_pre == "regular" %}
-            <option value="bueno">Bueno</option>
-            <option selected value="regular">Regular</option>
-            <option value="malo">Malo</option>
-          {% else %}
-            <option value="bueno">Bueno</option>
-            <option value="regular">Regular</option>
-            <option selected value="malo">Malo</option>
-          {% endif %}
-        </select>
-      </div>
-    </div>
-
-    <div class="form-group row">
-      <label for="luc_pre" class="col-4 col-form-label">Luces (altas y bajas)</label>
-      <div class="col-8">
-        <select id="luc_pre" name="luc_pre" class="custom-select">
-          {% if prem.luc_pre == "bueno" %}
-            <option selected value="bueno">Bueno</option>
-            <option value="regular">Regular</option>
-            <option value="malo">Malo</option>
-          {% elif prem.luc_pre == "regular" %}
-            <option value="bueno">Bueno</option>
-            <option selected value="regular">Regular</option>
-            <option value="malo">Malo</option>
-          {% else %}
-            <option value="bueno">Bueno</option>
-            <option value="regular">Regular</option>
-            <option selected value="malo">Malo</option>
-          {% endif %}
-        </select>
-      </div>
-    </div>
-
-    <div class="form-group row">
-      <label for="dir_stop_pre" class="col-4 col-form-label">Direccionales y Stop</label>
-      <div class="col-8">
-        <select id="dir_stop_pre" name="dir_stop_pre" class="custom-select">
-          {% if prem.dir_stop_pre == "bueno" %}
-            <option selected value="bueno">Bueno</option>
-            <option value="regular">Regular</option>
-            <option value="malo">Malo</option>
-          {% elif prem.dir_stop_pre == "regular" %}
-            <option value="bueno">Bueno</option>
-            <option selected value="regular">Regular</option>
-            <option value="malo">Malo</option>
-          {% else %}
-            <option value="bueno">Bueno</option>
-            <option value="regular">Regular</option>
-            <option selected value="malo">Malo</option>
-          {% endif %}
-        </select>
-      </div>
-    </div>
-
-    <div class="form-group row">
-      <label for="pit_pre" class="col-4 col-form-label">Pito (Bocina)</label>
-      <div class="col-8">
-        <select id="pit_pre" name="pit_pre" class="custom-select">
-          {% if prem.pit_pre == "bueno" %}
-            <option selected value="bueno">Bueno</option>
-            <option value="regular">Regular</option>
-            <option value="malo">Malo</option>
-          {% elif prem.pit_pre == "regular" %}
-            <option value="bueno">Bueno</option>
-            <option selected value="regular">Regular</option>
-            <option value="malo">Malo</option>
-          {% else %}
-            <option value="bueno">Bueno</option>
-            <option value="regular">Regular</option>
-            <option selected value="malo">Malo</option>
-          {% endif %}
-        </select>
-      </div>
-    </div>
-
-    <div class="form-group row">
-      <label for="obs_pre" class="col-4 col-form-label">Observaciones</label>
-      <div class="col-8">
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <div class="input-group-text">
-              <i class="fa fa-file-text"></i>
+            <div class="form-group row">
+                <label class="col-4 col-form-label" for="pla_pre">Placa</label>
+                <div class="col-8">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <i class="fa fa-motorcycle"></i>
+                            </div>
+                        </div>
+                        <input id="pla_pre" name="pla_pre" type="text" class="form-control" required="required"
+                               value="{{ prem.pla_pre.pla_veh }}">
+                    </div>
+                </div>
             </div>
-          </div>
-          <input id="obs_pre" name="obs_pre" type="text" class="form-control" value="{{prem.obs_pre}}">
-        </div>
-      </div>
+            <div class="form-group row">
+                <label for="niv_pre" class="col-4 col-form-label">Nivel de aceite</label>
+                <div class="col-8">
+                    <select id="niv_pre" name="niv_pre" class="custom-select">
+                        {% if prem.niv_pre == "Bueno" %}
+                            <option selected value="Bueno">Bueno</option>
+                            <option value="Regular">Regular</option>
+                            <option value="Malo">Malo</option>
+                        {% elif prem.niv_pre == "Regular" %}
+                            <option value="Bueno">Bueno</option>
+                            <option selected value="Regular">Regular</option>
+                            <option value="Malo">Malo</option>
+                        {% else %}
+                            <option value="Bueno">Bueno</option>
+                            <option value="Regular">Regular</option>
+                            <option selected value="Malo">Malo</option>
+                        {% endif %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="man_pre" class="col-4 col-form-label">Manillares</label>
+                <div class="col-8">
+                    <select id="man_pre" name="man_pre" class="custom-select">
+                        {% if prem.man_pre == "Bueno" %}
+                            <option selected value="Bueno">Bueno</option>
+                            <option value="Regular">Regular</option>
+                            <option value="Malo">Malo</option>
+                        {% elif prem.man_pre == "Regular" %}
+                            <option value="Bueno">Bueno</option>
+                            <option selected value="Regular">Regular</option>
+                            <option value="Malo">Malo</option>
+                        {% else %}
+                            <option value="Bueno">Bueno</option>
+                            <option value="Regular">Regular</option>
+                            <option selected value="Malo">Malo</option>
+                        {% endif %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="dir_pre" class="col-4 col-form-label">Direccion</label>
+                <div class="col-8">
+                    <select id="dir_pre" name="dir_pre" class="custom-select">
+                        {% if prem.dir_pre == "Bueno" %}
+                            <option selected value="Bueno">Bueno</option>
+                            <option value="Regular">Regular</option>
+                            <option value="Malo">Malo</option>
+                        {% elif prem.dir_pre == "Regular" %}
+                            <option value="Bueno">Bueno</option>
+                            <option selected value="Regular">Regular</option>
+                            <option value="Malo">Malo</option>
+                        {% else %}
+                            <option value="Bueno">Bueno</option>
+                            <option value="Regular">Regular</option>
+                            <option selected value="Malo">Malo</option>
+                        {% endif %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="gua_pre" class="col-4 col-form-label">Guardabarros</label>
+                <div class="col-8">
+                    <select id="gua_pre" name="gua_pre" class="custom-select">
+                        {% if prem.gua_pre == "Bueno" %}
+                            <option selected value="Bueno">Bueno</option>
+                            <option value="Regular">Regular</option>
+                            <option value="Malo">Malo</option>
+                        {% elif prem.gua_pre == "Regular" %}
+                            <option value="Bueno">Bueno</option>
+                            <option selected value="Regular">Regular</option>
+                            <option value="Malo">Malo</option>
+                        {% else %}
+                            <option value="Bueno">Bueno</option>
+                            <option value="Regular">Regular</option>
+                            <option selected value="Malo">Malo</option>
+                        {% endif %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="cha_pre" class="col-4 col-form-label">Chasis</label>
+                <div class="col-8">
+                    <select id="cha_pre" name="cha_pre" class="custom-select">
+                        {% if prem.cha_pre == "Bueno" %}
+                            <option selected value="Bueno">Bueno</option>
+                            <option value="Regular">Regular</option>
+                            <option value="Malo">Malo</option>
+                        {% elif prem.cha_pre == "Regular" %}
+                            <option value="Bueno">Bueno</option>
+                            <option selected value="Regular">Regular</option>
+                            <option value="Malo">Malo</option>
+                        {% else %}
+                            <option value="Bueno">Bueno</option>
+                            <option value="Regular">Regular</option>
+                            <option selected value="Malo">Malo</option>
+                        {% endif %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="sus_pre" class="col-4 col-form-label">Suspensión</label>
+                <div class="col-8">
+                    <select id="sus_pre" name="sus_pre" class="custom-select">
+                        {% if prem.sus_pre == "Bueno" %}
+                            <option selected value="Bueno">Bueno</option>
+                            <option value="Regular">Regular</option>
+                            <option value="Malo">Malo</option>
+                        {% elif prem.sus_pre == "Regular" %}
+                            <option value="Bueno">Bueno</option>
+                            <option selected value="Regular">Regular</option>
+                            <option value="Malo">Malo</option>
+                        {% else %}
+                            <option value="Bueno">Bueno</option>
+                            <option value="Regular">Regular</option>
+                            <option selected value="Malo">Malo</option>
+                        {% endif %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="fre_pre" class="col-4 col-form-label">Frenos</label>
+                <div class="col-8">
+                    <select id="fre_pre" name="fre_pre" class="custom-select">
+                        {% if prem.fre_pre == "Bueno" %}
+                            <option selected value="Bueno">Bueno</option>
+                            <option value="Regular">Regular</option>
+                            <option value="Malo">Malo</option>
+                        {% elif prem.fre_pre == "Regular" %}
+                            <option value="Bueno">Bueno</option>
+                            <option selected value="Regular">Regular</option>
+                            <option value="Malo">Malo</option>
+                        {% else %}
+                            <option value="Bueno">Bueno</option>
+                            <option value="Regular">Regular</option>
+                            <option selected value="Malo">Malo</option>
+                        {% endif %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="lla_pre" class="col-4 col-form-label">Llantas</label>
+                <div class="col-8">
+                    <select id="lla_pre" name="lla_pre" class="custom-select">
+                        {% if prem.lla_pre == "Bueno" %}
+                            <option selected value="Bueno">Bueno</option>
+                            <option value="Regular">Regular</option>
+                            <option value="Malo">Malo</option>
+                        {% elif prem.lla_pre == "Regular" %}
+                            <option value="Bueno">Bueno</option>
+                            <option selected value="Regular">Regular</option>
+                            <option value="Malo">Malo</option>
+                        {% else %}
+                            <option value="Bueno">Bueno</option>
+                            <option value="Regular">Regular</option>
+                            <option selected value="Malo">Malo</option>
+                        {% endif %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="rin_pre" class="col-4 col-form-label">Rines</label>
+                <div class="col-8">
+                    <select id="rin_pre" name="rin_pre" class="custom-select">
+                        {% if prem.rin_pre == "Bueno" %}
+                            <option selected value="Bueno">Bueno</option>
+                            <option value="Regular">Regular</option>
+                            <option value="Malo">Malo</option>
+                        {% elif prem.rin_pre == "Regular" %}
+                            <option value="Bueno">Bueno</option>
+                            <option selected value="Regular">Regular</option>
+                            <option value="Malo">Malo</option>
+                        {% else %}
+                            <option value="Bueno">Bueno</option>
+                            <option value="Regular">Regular</option>
+                            <option selected value="Malo">Malo</option>
+                        {% endif %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="tre_pre" class="col-4 col-form-label">Tren de arrastre</label>
+                <div class="col-8">
+                    <select id="tre_pre" name="tre_pre" class="custom-select">
+                        {% if prem.tre_pre == "Bueno" %}
+                            <option selected value="Bueno">Bueno</option>
+                            <option value="Regular">Regular</option>
+                            <option value="Malo">Malo</option>
+                        {% elif prem.tre_pre == "Regular" %}
+                            <option value="Bueno">Bueno</option>
+                            <option selected value="Regular">Regular</option>
+                            <option value="Malo">Malo</option>
+                        {% else %}
+                            <option value="Bueno">Bueno</option>
+                            <option value="Regular">Regular</option>
+                            <option selected value="Malo">Malo</option>
+                        {% endif %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="exo_pre" class="col-4 col-form-label">Exosto</label>
+                <div class="col-8">
+                    <select id="exo_pre" name="exo_pre" class="custom-select">
+                        {% if prem.exo_pre == "Bueno" %}
+                            <option selected value="Bueno">Bueno</option>
+                            <option value="Regular">Regular</option>
+                            <option value="Malo">Malo</option>
+                        {% elif prem.exo_pre == "Regular" %}
+                            <option value="Bueno">Bueno</option>
+                            <option selected value="Regular">Regular</option>
+                            <option value="Malo">Malo</option>
+                        {% else %}
+                            <option value="Bueno">Bueno</option>
+                            <option value="Regular">Regular</option>
+                            <option selected value="Malo">Malo</option>
+                        {% endif %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="ret_pre" class="col-4 col-form-label">Retrovisores</label>
+                <div class="col-8">
+                    <select id="ret_pre" name="ret_pre" class="custom-select">
+                        {% if prem.ret_pre == "Bueno" %}
+                            <option selected value="Bueno">Bueno</option>
+                            <option value="Regular">Regular</option>
+                            <option value="Malo">Malo</option>
+                        {% elif prem.ret_pre == "Regular" %}
+                            <option value="Bueno">Bueno</option>
+                            <option selected value="Regular">Regular</option>
+                            <option value="Malo">Malo</option>
+                        {% else %}
+                            <option value="Bueno">Bueno</option>
+                            <option value="Regular">Regular</option>
+                            <option selected value="Malo">Malo</option>
+                        {% endif %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="man_mec_pre" class="col-4 col-form-label">Mantenimiento mecánico</label>
+                <div class="col-8">
+                    <select id="man_mec_pre" name="man_mec_pre" class="custom-select">
+                        {% if prem.man_mec_pre == "Bueno" %}
+                            <option selected value="Bueno">Bueno</option>
+                            <option value="Regular">Regular</option>
+                            <option value="Malo">Malo</option>
+                        {% elif prem.man_mec_pre == "Regular" %}
+                            <option value="Bueno">Bueno</option>
+                            <option selected value="Regular">Regular</option>
+                            <option value="Malo">Malo</option>
+                        {% else %}
+                            <option value="Bueno">Bueno</option>
+                            <option value="Regular">Regular</option>
+                            <option selected value="Malo">Malo</option>
+                        {% endif %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="luc_pre" class="col-4 col-form-label">Luces (altas y bajas)</label>
+                <div class="col-8">
+                    <select id="luc_pre" name="luc_pre" class="custom-select">
+                        {% if prem.luc_pre == "Bueno" %}
+                            <option selected value="Bueno">Bueno</option>
+                            <option value="Regular">Regular</option>
+                            <option value="Malo">Malo</option>
+                        {% elif prem.luc_pre == "Regular" %}
+                            <option value="Bueno">Bueno</option>
+                            <option selected value="Regular">Regular</option>
+                            <option value="Malo">Malo</option>
+                        {% else %}
+                            <option value="Bueno">Bueno</option>
+                            <option value="Regular">Regular</option>
+                            <option selected value="Malo">Malo</option>
+                        {% endif %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="dir_stop_pre" class="col-4 col-form-label">Direccionales y Stop</label>
+                <div class="col-8">
+                    <select id="dir_stop_pre" name="dir_stop_pre" class="custom-select">
+                        {% if prem.dir_stop_pre == "Bueno" %}
+                            <option selected value="Bueno">Bueno</option>
+                            <option value="Regular">Regular</option>
+                            <option value="Malo">Malo</option>
+                        {% elif prem.dir_stop_pre == "Regular" %}
+                            <option value="Bueno">Bueno</option>
+                            <option selected value="Regular">Regular</option>
+                            <option value="Malo">Malo</option>
+                        {% else %}
+                            <option value="Bueno">Bueno</option>
+                            <option value="Regular">Regular</option>
+                            <option selected value="Malo">Malo</option>
+                        {% endif %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="pit_pre" class="col-4 col-form-label">Pito (Bocina)</label>
+                <div class="col-8">
+                    <select id="pit_pre" name="pit_pre" class="custom-select">
+                        {% if prem.pit_pre == "Bueno" %}
+                            <option selected value="Bueno">Bueno</option>
+                            <option value="Regular">Regular</option>
+                            <option value="Malo">Malo</option>
+                        {% elif prem.pit_pre == "Regular" %}
+                            <option value="Bueno">Bueno</option>
+                            <option selected value="Regular">Regular</option>
+                            <option value="Malo">Malo</option>
+                        {% else %}
+                            <option value="Bueno">Bueno</option>
+                            <option value="Regular">Regular</option>
+                            <option selected value="Malo">Malo</option>
+                        {% endif %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="obs_pre" class="col-4 col-form-label">Observaciones</label>
+                <div class="col-8">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <i class="fa fa-file-text"></i>
+                            </div>
+                        </div>
+                        <input id="obs_pre" name="obs_pre" type="text" class="form-control" value="{{ prem.obs_pre }}">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="offset-4 col-8">
+                    <button name="back" class="btn btn-primary" onclick="history.back(); return false;"><i
+                            class="fa fa-arrow-left"></i> Volver
+                    </button>
+                    <button name="submit" type="submit" class="btn btn-warning"><i class="fa fa-refresh"></i> Actualizar
+                        revisión preoperacional
+                    </button>
+                </div>
+            </div>
+        </form>
     </div>
-    <div class="form-group row">
-      <div class="offset-4 col-8">
-        <button name="back" class="btn btn-primary" onclick="history.back(); return false;"> <i
-            class="fa fa-arrow-left"></i> Volver</button>
-        <button name="submit" type="submit" class="btn btn-warning"> <i class="fa fa-refresh"></i> Actualizar
-          revisión preoperacional</button>
-      </div>
-    </div>
-  </form>
-</div>
 
 {% endblock %}

@@ -1373,7 +1373,7 @@ in event handling speed.
  - Don't round markings to prevent sub-pixel problems. (reported by
    Dan Lipsitt)
 
- - Make the grid border act similarly to a regular CSS border, i.e. prevent
+ - Make the grid border act similarly to a Regular CSS border, i.e. prevent
    it from overlapping the plot itself. This also fixes a problem with anti-
    aliasing when the width is 1 pixel. (reported by Anthony Ettinger)
 

@@ -439,7 +439,7 @@
 		 * Filter the input based on data
 		 *  @param {string} sInput String to filter the table on
 		 *  @param {int|null} [iColumn] Column to limit filtering to
-		 *  @param {bool} [bRegex=false] Treat as regular expression or not
+		 *  @param {bool} [bRegex=false] Treat as Regular expression or not
 		 *  @param {bool} [bSmart=true] Perform smart filtering or not
 		 *  @param {bool} [bShowGlobal=true] Show the input global filter in it's input box(es)
 		 *  @param {bool} [bCaseInsensitive=true] Do case-insensitive matching (true) or not (false)
@@ -1371,7 +1371,7 @@
 	var _re_date_start = /^[\w\+\-]/;
 	var _re_date_end = /[\w\+\-]$/;
 	
-	// Escape regular expression special characters
+	// Escape Regular expression special characters
 	var _re_escape_regex = new RegExp( '(\\' + [ '/', '.', '*', '+', '?', '|', '(', ')', '[', ']', '{', '}', '\\', '$', '^', '-' ].join('|\\') + ')', 'g' );
 	
 	// http://en.wikipedia.org/wiki/Foreign_exchange_market
@@ -1400,7 +1400,7 @@
 	// Convert from a formatted number with characters other than `.` as the
 	// decimal place, to a Javascript number
 	var _numToDecimal = function ( num, decimalPoint ) {
-		// Cache created regular expressions for speed as this function is called often
+		// Cache created Regular expressions for speed as this function is called often
 		if ( ! _re_dic[ decimalPoint ] ) {
 			_re_dic[ decimalPoint ] = new RegExp( _fnEscapeRegex( decimalPoint ), 'g' );
 		}
@@ -1628,7 +1628,7 @@
 	
 	
 		/**
-		 * Escape a string such that it can be used in a regular expression
+		 * Escape a string such that it can be used in a Regular expression
 		 *
 		 *  @param {string} val string to escape
 		 *  @returns {string} escaped string
@@ -4326,7 +4326,7 @@
 	 *  @param {object} oSettings dataTables settings object
 	 *  @param {string} sInput string to filter on
 	 *  @param {int} iColumn column to filter
-	 *  @param {bool} bRegex treat search string as a regular expression or not
+	 *  @param {bool} bRegex treat search string as a Regular expression or not
 	 *  @param {bool} bSmart use smart filtering or not
 	 *  @param {bool} bCaseInsensitive Do case insenstive matching or not
 	 *  @memberof DataTable#oApi
@@ -4356,7 +4356,7 @@
 	 *  @param {object} settings dataTables settings object
 	 *  @param {string} input string to filter on
 	 *  @param {int} force optional - force a research of the master array (1) or not (undefined or 0)
-	 *  @param {bool} regex treat as a regular expression or not
+	 *  @param {bool} regex treat as a Regular expression or not
 	 *  @param {bool} smart perform smart filtering or not
 	 *  @param {bool} caseInsensitive Do case insenstive matching or not
 	 *  @memberof DataTable#oApi
@@ -4405,9 +4405,9 @@
 	
 	
 	/**
-	 * Build a regular expression object suitable for searching a table
+	 * Build a Regular expression object suitable for searching a table
 	 *  @param {string} sSearch string to search for
-	 *  @param {bool} bRegex treat as a regular expression or not
+	 *  @param {bool} bRegex treat as a Regular expression or not
 	 *  @param {bool} bSmart perform smart filtering or not
 	 *  @param {bool} bCaseInsensitive Do case insensitive matching or not
 	 *  @returns {RegExp} constructed object
@@ -4444,7 +4444,7 @@
 	
 	
 	/**
-	 * Escape a string such that it can be used in a regular expression
+	 * Escape a string such that it can be used in a Regular expression
 	 *  @param {string} sVal string to escape
 	 *  @returns {string} escaped string
 	 *  @memberof DataTable#oApi
@@ -9415,7 +9415,7 @@
 	
 		/**
 		 * Flag to indicate if the search term should be interpreted as a
-		 * regular expression (true) or not (false) and therefore and special
+		 * Regular expression (true) or not (false) and therefore and special
 		 * regex characters escaped.
 		 *  @type boolean
 		 *  @default false
@@ -11702,7 +11702,7 @@
 		 * This parameter allows you to have define the global filtering state at
 		 * initialisation time. As an object the `search` parameter must be
 		 * defined, but all other parameters are optional. When `regex` is true,
-		 * the search string will be treated as a regular expression, when false
+		 * the search string will be treated as a Regular expression, when false
 		 * (default) it will be treated as a straight string. When `smart`
 		 * DataTables will use it's smart filtering methods (to word match at
 		 * any point in the data), when false this will not be done.

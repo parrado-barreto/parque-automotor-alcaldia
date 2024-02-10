@@ -14,7 +14,7 @@ Date JS was started by Geoffrey McGill in 2007, he abandoned it on May 13th 2008
 This fork was started improve and maintain DateJS. To keep what is still the most full featured JavaScript Date library alive, maintained, and improved. Currently we're on track towards a 1.0 release - having fixed almost all the existing bugs and added several new features, improved parsing, and many other changes.
 
 ### How to Install/Use
-DateJS supports running either your regular web browser as a client library or Node.js.
+DateJS supports running either your Regular web browser as a client library or Node.js.
 
 #### In Node.js
 Installation is as easy as running:

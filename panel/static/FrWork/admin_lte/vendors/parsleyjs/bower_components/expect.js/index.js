@@ -894,7 +894,7 @@
       // equivalence is determined by ==.
     } else if (typeof actual != 'object' && typeof expected != 'object') {
       return actual == expected;
-    // If both are regular expression use the special `regExpEquiv` method
+    // If both are Regular expression use the special `regExpEquiv` method
     // to determine equivalence.
     } else if (isRegExp(actual) && isRegExp(expected)) {
       return regExpEquiv(actual, expected);
@@ -1234,7 +1234,7 @@
             });
         }
 
-    // In the second stage, we run the text against regular expressions that look
+    // In the second stage, we run the text against Regular expressions that look
     // for non-JSON patterns. We are especially concerned with '()' and 'new'
     // because they can cause invocation, and '=' because it can cause mutation.
     // But just to be safe, we want to reject all unexpected forms.

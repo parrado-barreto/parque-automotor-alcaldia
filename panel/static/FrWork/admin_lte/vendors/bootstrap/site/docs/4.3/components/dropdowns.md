@@ -146,7 +146,7 @@ The best part is you can do this with any button variant, too:
 
 Similarly, create split button dropdowns with virtually the same markup as single button dropdowns, but with the addition of `.dropdown-toggle-split` for proper spacing around the dropdown caret.
 
-We use this extra class to reduce the horizontal `padding` on either side of the caret by 25% and remove the `margin-left` that's added for regular button dropdowns. Those extra changes keep the caret centered in the split button and provide a more appropriately sized hit area next to the main button.
+We use this extra class to reduce the horizontal `padding` on either side of the caret by 25% and remove the `margin-left` that's added for Regular button dropdowns. Those extra changes keep the caret centered in the split button and provide a more appropriately sized hit area next to the main button.
 
 <div class="bd-example">
   <div class="btn-group">

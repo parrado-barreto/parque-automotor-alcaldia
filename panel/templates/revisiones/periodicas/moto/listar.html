@@ -272,7 +272,7 @@ Lista de revisiones periodicas
         <tr>
           <th scope="col">Pastillas Traseras</th>
           {% for u in perms %}
-          <td>{{ u.pastillas_delanteras }}</td>
+          <td>{{ u.pastillas_traseras }}</td>
           {% endfor %}
         </tr>
         <tr>
@@ -470,31 +470,31 @@ Lista de revisiones periodicas
         <tr>
           <th scope="col">Estado Higiene</th>
           {% for u in perms %}
-          <td>{{ u.estado_higiene }}</td>
+          <td>{% if u.estado_higiene == True %}Limpio{% else %}Sucio{% endif %}</td>
           {% endfor %}
         </tr>
         <tr>
           <th scope="col">Foto delantera</th>
           {% for u in perms %}
-          <td><img style="height: 50px; width: 100px;" src="media/{{ u.foto_1 }}" ></td>
+          <td><img style="height: 50px; width: 100px;" src="media/{{ u.foto_1 }}" alt="¡Ups! Parece que falta la imagen"></td>
           {% endfor %}
         </tr>
         <tr>
           <th scope="col">Foto trasera</th>
           {% for u in perms %}
-          <td><img style="height: 50px; width: 100px;" src="media/{{ u.foto_2 }}" ></td>
+          <td><img style="height: 50px; width: 100px;" src="media/{{ u.foto_2 }}" alt="¡Ups! Parece que falta la imagen"></td>
           {% endfor %}
         </tr>
         <tr>
           <th scope="col">Foto de lado derecho</th>
           {% for u in perms %}
-          <td><img style="height: 50px; width: 100px;" src="media/{{ u.foto_3 }}" ></td>
+          <td><img style="height: 50px; width: 100px;" src="media/{{ u.foto_3 }}" alt="¡Ups! Parece que falta la imagen"></td>
           {% endfor %}
         </tr>
         <tr>
           <th scope="col">Foto de lado izquierdo</th>
           {% for u in perms %}
-          <td><img style="height: 50px; width: 100px;" src="media/{{ u.foto_4 }}" ></td>
+          <td><img style="height: 50px; width: 100px;" src="media/{{ u.foto_4 }}" alt="¡Ups! Parece que falta la imagen"></td>
           {% endfor %}
         </tr>
         <tr>
@@ -503,18 +503,18 @@ Lista de revisiones periodicas
           <td>{{ u.observaciones }}</td>
           {% endfor %}
         </tr>
-{#        <tr>#}
-{#          <th scope="col">Acción</th>#}
-{#          {% for u in perms %}#}
-{#          <td>#}
-{#            <button class="btn btn-warning" onclick="window.location.href='actualizarprem/{{ u.id_periodica }}'"><i#}
-{#                class="fa fa-refresh"></i></button>#}
-{#            <button class="btn btn-danger" onclick="window.location.href='eliminarprem/{{ u.id_periodica }}'"><i#}
-{#                class="fa fa-trash"></i></button>#}
-{##}
-{#          </td>#}
-{#          {% endfor %}#}
-{#        </tr>#}
+        <tr>
+          <th scope="col">Acción</th>
+          {% for u in perms %}
+          <td>
+            <button class="btn btn-warning" onclick="window.location.href='actualizarperm/{{ u.id_periodica }}'"><i
+                class="fa fa-refresh"></i></button>
+            <button class="btn btn-danger" onclick="window.location.href='eliminarperm/{{ u.id_periodica }}'"><i
+                class="fa fa-trash"></i></button>
+
+          </td>
+          {% endfor %}
+        </tr>
     </table>
   </div>
 

@@ -797,7 +797,7 @@ function _xlsxToStrings( obj ) {
 			if ( _ieExcel ) {
 				// IE's XML serialiser will drop some name space attributes from
 				// from the root node, so we need to save them. Do this by
-				// replacing the namespace nodes with a regular attribute that
+				// replacing the namespace nodes with a Regular attribute that
 				// we convert back when serialised. Edge does not have this
 				// issue
 				var worksheet = val.childNodes[0];
