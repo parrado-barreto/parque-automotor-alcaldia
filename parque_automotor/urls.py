@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('panel/', include('panel.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('salir', views.salir, name="salir"),
     path('', views.index, name="index"),
     path('listar', views.listar, name="listar"),
     path('agregar', views.agregar, name="agregar"),

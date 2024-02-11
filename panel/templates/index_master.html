@@ -170,12 +170,12 @@
             <ul class=" navbar-right">
               <li class="nav-item dropdown open" style="padding-left: 15px;">
                 <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown"
-                  data-toggle="dropdown" aria-expanded="false">
-                  User conect
+                  data-toggle="dropdown" aria-expanded="false"><i class="fa fa-id-badge"></i>
                 </a>
+
                 <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="javascript:;"><i class="fa fa-gears pull-right"></i> Settings</a>
-                  <a class="dropdown-item" href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+{#                  <a class="dropdown-item" href="javascript:;"><i class="fa fa-gears pull-right"></i> Settings</a>#}
+                  <a class="dropdown-item" href="{% url 'salir' %}"><i class="fa fa-sign-out pull-right"></i> Cerrar sesion</a>
                 </div>
               </li>
 

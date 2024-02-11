@@ -6,6 +6,7 @@ from django.db.models import Q
 from datetime import date
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
 
 # Create your views here.
 TEMPLATE_DIRS = (
@@ -14,7 +15,9 @@ TEMPLATE_DIRS = (
 @login_required
 def index(request):
     return render(request, "index.html")
-
+def salir(request):
+    logout(request)
+    return redirect('/')
 
 def listar(request):
     if request.method == 'POST':

@@ -11,10 +11,11 @@
 
 <div class="login-container">
     <div class="image-container">
-        <img src="{% static 'images/login_image.png' %}" alt="Login Image">
+        <img src="{% static 'logo_alcaldia.png' %}" alt="Login Image">
     </div>
-    <h2>Iniciar sesion</h2>
+
     <form method="post">
+        <h2>Parqueadero automotor</h2>
         {% csrf_token %}
         <div class="form-group">
             <label for="username">Usuario:</label>
@@ -24,24 +25,9 @@
             <label for="password">Contraseña:</label>
             <input type="password" id="password" name="password" required>
         </div>
-        <button type="submit">Login</button>
+        <button type="submit">Iniciar sesion</button>
     </form>
 </div>
 
 </body>
 </html>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
-</head>
-<body>
-
-<div class="login-container">
-    <div class="image-container">
-        <img src="{% static 'images/login_image.png' %}" alt="Login Image">
-    </div>
