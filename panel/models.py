@@ -13,7 +13,8 @@ class Dependencias(models.Model):
 
 class Usuarios(models.Model):
     id_per = models.BigIntegerField(primary_key=True)
-    pas_per = models.CharField(max_length=30, null=False)
+    email = models.CharField(max_length=100, blank=True)
+    pas_per = models.CharField(max_length=128, null=False)
     nom_per = models.CharField(max_length=30, null=False)
     ape_per = models.CharField(max_length=30, null=False)
     tel_per = models.CharField(max_length=30, null=False)
@@ -23,7 +24,6 @@ class Usuarios(models.Model):
     pase_ade_per = models.FileField(upload_to="imagenes", null=True, blank=True)
     pase_atr_per = models.FileField(upload_to="imagenes", null=True, blank=True)
     dep_per = models.ForeignKey(Dependencias, on_delete=models.CASCADE)
-
     class Meta:
         db_table = 'usuarios'
 

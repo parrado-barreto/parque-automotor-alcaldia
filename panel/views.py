@@ -7,6 +7,7 @@ from datetime import date
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
+from django.contrib.auth.models import User
 
 # Create your views here.
 TEMPLATE_DIRS = (
@@ -30,6 +31,7 @@ def listar(request):
             else:
                 res_busqueda = lista.filter(
                     Q(nom_per__icontains=busqueda) |
+                    Q(email__icontains=busqueda) |
                     Q(ape_per__icontains=busqueda) |
                     Q(tel_per__icontains=busqueda) |
                     Q(dir_per__icontains=busqueda) |
@@ -57,6 +59,7 @@ def agregar(request):
             try:
                 user = Usuarios()
                 user.id_per = id_per
+                user.email = request.POST.get('email')
                 user.pas_per = request.POST.get('pas_per')
                 user.nom_per = request.POST.get('nom_per')
                 user.ape_per = request.POST.get('ape_per')
@@ -75,6 +78,7 @@ def agregar(request):
                 user.dep_per_id = request.POST.get('dep_per')
                 user.save()
                 messages.success(request, 'El usuario {} fue agregado'.format(user.nom_per + " " + user.ape_per))
+                user = User.objects.create_user(username=request.POST.get('email'), email=None, password=request.POST.get('pas_per'))
                 return redirect('listar')
             except:
                 messages.error(request, 'Ha ocurrido un error en los datos, intentalo nuevamente por favor')
@@ -94,6 +98,7 @@ def actualizar(request, idUsuario):
         if request.method == 'POST':
             user = Usuarios()
             user.id_per = request.POST.get('id')
+            user.email = request.POST.get('email')
             user.pas_per = request.POST.get('pas_per')
             user.nom_per = request.POST.get('nom_per')
             user.ape_per = request.POST.get('ape_per')
